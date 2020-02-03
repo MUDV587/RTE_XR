@@ -1,0 +1,9 @@
+Library
+Logs
+Temp
+bin
+obj
+
+RTE_XR/obj/
+RTE_XR/.vs/
+
