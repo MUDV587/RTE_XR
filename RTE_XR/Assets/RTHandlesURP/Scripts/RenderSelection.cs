@@ -104,8 +104,8 @@ namespace Battlehub.RTHandles.URP
                     return;
                 }
 
-                CommandBuffer cmd = CommandBufferPool.Get();
-               
+                CommandBuffer cmd = CommandBufferPool.Get("RenderSelection");
+                
                 RenderMeshesBatch[] batches = m_cache.Batches;
                 for (int i = 0; i < batches.Length; ++i)
                 {
