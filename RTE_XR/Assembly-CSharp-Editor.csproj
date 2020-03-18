@@ -831,9 +831,17 @@
       <Project>{3C5A49C2-EC1C-1788-3482-E925DEAD8FE1}</Project>
       <Name>ProBuilderIntegration</Name>
     </ProjectReference>
+    <ProjectReference Include="Battlehub.RTDeformer.csproj">
+      <Project>{8397195A-FF71-0A22-8612-DCF0D850446A}</Project>
+      <Name>Battlehub.RTDeformer</Name>
+    </ProjectReference>
     <ProjectReference Include="Battlehub.Localization.csproj">
       <Project>{BB2C46AB-D52D-B369-A548-A8EFB201FFB6}</Project>
       <Name>Battlehub.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.MeshEditor.csproj">
+      <Project>{F3646356-5CCF-33F2-FBDB-07FD3C11F20B}</Project>
+      <Name>Battlehub.MeshEditor</Name>
     </ProjectReference>
     <ProjectReference Include="Battlehub.RTEditor.csproj">
       <Project>{EBC22289-F384-A522-5237-71AFE415E919}</Project>
@@ -858,14 +866,6 @@
     <ProjectReference Include="Battlehub.Utils.csproj">
       <Project>{DC10DFF2-76BF-8A5D-D103-3CBFA262E4BA}</Project>
       <Name>Battlehub.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="Battlehub.RTDeformer.csproj">
-      <Project>{8397195A-FF71-0A22-8612-DCF0D850446A}</Project>
-      <Name>Battlehub.RTDeformer</Name>
-    </ProjectReference>
-    <ProjectReference Include="Battlehub.MeshEditor.csproj">
-      <Project>{F3646356-5CCF-33F2-FBDB-07FD3C11F20B}</Project>
-      <Name>Battlehub.MeshEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

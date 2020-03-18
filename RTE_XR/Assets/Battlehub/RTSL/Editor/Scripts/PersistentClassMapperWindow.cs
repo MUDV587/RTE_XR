@@ -1645,7 +1645,8 @@ namespace Battlehub.RTSL
                 PersistentPropertyMapping mapping = fieldMappings[i];
                 string key = mapping.MappedFullTypeName + " " + mapping.MappedName;
 
-                if (!fieldHs.Contains(key))
+                Type mappedType = mapping.MappedType;
+                if (!fieldHs.Contains(key) || mappedType == null)
                 {
                     mapping.MappedName = null;
                     mapping.MappedTypeName = null;
@@ -1660,9 +1661,9 @@ namespace Battlehub.RTSL
                 else
                 {
                     mapping.IsNonPublic = type.GetField(mapping.MappedName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly) != null;
-                    mapping.UseSurrogate = CodeGen.GetSurrogateType(mapping.MappedType, 0) != null;
-                    mapping.UseSurrogate2 = CodeGen.GetSurrogateType(mapping.MappedType, 1) != null;
-                    mapping.HasDependenciesOrIsDependencyItself = m_codeGen.HasDependencies(mapping.MappedType);
+                    mapping.UseSurrogate = CodeGen.GetSurrogateType(mappedType, 0) != null;
+                    mapping.UseSurrogate2 = CodeGen.GetSurrogateType(mappedType, 1) != null;
+                    mapping.HasDependenciesOrIsDependencyItself = m_codeGen.HasDependencies(mappedType);
                     pMappingsEnabled.Add(mapping.IsEnabled);
                 }
 
@@ -1708,7 +1709,14 @@ namespace Battlehub.RTSL
                 PersistentPropertyMapping mapping = propertyMappings[i];
                 string key = mapping.MappedFullTypeName + " " + mapping.MappedName;
 
-                if (!propertyHs.Contains(key) || mapping.MappedType == null)
+                Type mappedType = mapping.MappedType;
+                if (mappedType == null)
+                {
+                    Debug.LogWarning("Mapped Type is null " + mapping.MappedAssemblyQualifiedName);
+                }
+
+
+                if (!propertyHs.Contains(key) || mappedType == null)
                 {
                     mapping.MappedName = null;
                     mapping.MappedTypeName = null;
@@ -1723,9 +1731,9 @@ namespace Battlehub.RTSL
                 }
                 else
                 {
-                    mapping.UseSurrogate = CodeGen.GetSurrogateType(mapping.MappedType, 0) != null;
-                    mapping.UseSurrogate2 = CodeGen.GetSurrogateType(mapping.MappedType, 1) != null;
-                    mapping.HasDependenciesOrIsDependencyItself = m_codeGen.HasDependencies(mapping.MappedType);
+                    mapping.UseSurrogate = CodeGen.GetSurrogateType(mappedType, 0) != null;
+                    mapping.UseSurrogate2 = CodeGen.GetSurrogateType(mappedType, 1) != null;
+                    mapping.HasDependenciesOrIsDependencyItself = m_codeGen.HasDependencies(mappedType);
 
                     pMappingsEnabled.Add(mapping.IsEnabled);
                 }
@@ -2671,13 +2679,15 @@ namespace Battlehub.RTSL
             for (int i = 0; i < mappings.Length; ++i)
             {
                 PersistentClassMapping mapping = mappings[i];
-                mapping.MappedAssemblyName = FixAssemblyName(mapping.MappedNamespace, mapping.MappedAssemblyName);
+                mapping.MappedTypeName = FixTypeName(mapping.MappedTypeName);
+                mapping.MappedAssemblyName = FixAssemblyName(mapping.MappedAssemblyQualifiedName, mapping.MappedNamespace, mapping.MappedAssemblyName);
 
                 PersistentPropertyMapping[] properties = mapping.PropertyMappings;
                 for (int j = 0; j < properties.Length; ++j)
                 {
                     PersistentPropertyMapping property = properties[j];
-                    property.MappedAssemblyName = FixAssemblyName(property.MappedNamespace, property.MappedAssemblyName);
+                    property.MappedTypeName = FixTypeName(property.MappedTypeName);
+                    property.MappedAssemblyName = FixAssemblyName(property.MappedAssemblyQualifiedName, property.MappedNamespace, property.MappedAssemblyName);
                 }
             }
 
@@ -2686,13 +2696,64 @@ namespace Battlehub.RTSL
             DestroyImmediate(storageGO);
         }
 
-        private string FixAssemblyName(string ns, string mappedAssemblyName)
+        private string FixTypeName(string typeName)
         {
-            if(!ns.Contains("Battlehub"))
+            if (typeName.Contains("Battlehub.RTEditor"))
+            {
+                return typeName.Replace(", Assembly-CSharp]", ", Battlehub.RTEditor]");
+            }
+            else if (typeName.Contains("Battlehub.UIControls"))
+            {
+                return typeName.Replace(", Assembly-CSharp]", ", Battlehub.UIControls]");
+            }
+            else if (typeName.Contains("Battlehub.Utils"))
+            {
+                return typeName.Replace(", Assembly-CSharp]", ", Battlehub.Utils]");
+            }
+            else if (typeName.Contains("Battlehub.RTCommon"))
+            {
+                return typeName.Replace(", Assembly-CSharp]", ", Battlehub.RTCommon]");
+            }
+            else if (typeName.Contains("Battlehub.RTSL.Interface"))
+            {
+                return typeName.Replace(", Assembly-CSharp]", ", Battlehub.RTSL.Interface]");
+            }
+            else if(typeName.Contains("Battlehub.RTSL.RuntimeShaderInfo"))
+            {
+                return typeName.Replace(", Assembly-CSharp]", ", Battlehub.RTSL.Interface]");
+            }
+           
+            return typeName; 
+        }
+
+        private string FixAssemblyName(string assemblyQualifiedName, string ns, string mappedAssemblyName)
+        {
+            if(!ns.Contains("Battlehub") || ns.Contains("ProBuilderIntegration") || ns.Contains("Battlehub.RTSaveLoad"))
             {
                 return mappedAssemblyName;
             }
-            return ns;
+
+            if(ns.Contains("Battlehub.RTSL"))
+            {
+                return "Battlehub.RTSL.Interface";
+            }
+
+            if(assemblyQualifiedName.Contains("Battlehub.Utils.ObjectToTexture"))
+            {
+                return "Battlehub.ObjectToTexture";
+            }
+
+            if (assemblyQualifiedName.Contains("ColorPicker,Assembly-CSharp"))
+            {
+                return "HSVPicker";
+            }
+
+            if(assemblyQualifiedName.Contains("Battlehub.Utils.ObjectToTexture,Assembly-CSharp"))
+            {
+                return "Battlehub.Utils.ObjectToTexture,Battlehub.Tools";
+            }
+
+            return string.Join(".", ns.Split('.').Take(2));
         }
     }
 }
