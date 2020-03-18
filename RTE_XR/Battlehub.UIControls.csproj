@@ -72,6 +72,7 @@
     <Compile Include="Assets\Battlehub\UIControls\Common\RectTransformExtensions.cs" />
     <Compile Include="Assets\Battlehub\UIControls\Common\Repeater.cs" />
     <Compile Include="Assets\Battlehub\UIControls\Common\TransformChildrenChangeListener.cs" />
+    <Compile Include="Assets\Battlehub\UIControls\Common\UIStyle.cs" />
     <Compile Include="Assets\Battlehub\UIControls\Common\UnityEventHelper.cs" />
     <Compile Include="Assets\Battlehub\UIControls\Dialog\Dialog.cs" />
     <Compile Include="Assets\Battlehub\UIControls\Dialog\DialogManager.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\Battlehub\UIControls\Menu\Scripts\Menu.cs" />
     <Compile Include="Assets\Battlehub\UIControls\Menu\Scripts\MenuCreator.cs" />
     <Compile Include="Assets\Battlehub\UIControls\Menu\Scripts\MenuItem.cs" />
+    <Compile Include="Assets\Battlehub\UIControls\Menu\Scripts\UIMenuStyle.cs" />
     <Compile Include="Assets\Battlehub\UIControls\MultiToggle\Scripts\MultiToggle.cs" />
     <Compile Include="Assets\Battlehub\UIControls\MultiToggle\Scripts\MultiToggleLayer.cs" />
     <Compile Include="Assets\Battlehub\UIControls\MultiToggle\Scripts\MultiTogglePanel.cs" />

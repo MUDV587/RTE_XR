@@ -1,6 +1,4 @@
-﻿using Battlehub.RTEditor;
-using Battlehub.UIControls.MenuControl;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,33 +8,10 @@ namespace Battlehub.UIControls
     {
         public string Name;
 
-        public void ApplyMainButtonColor(Color normal, Color pointerOver, Color focused)
-        {
-            MainMenuButton mainMenuButton = GetComponent<MainMenuButton>();
-            if (mainMenuButton != null)
-            {
-                mainMenuButton.NormalColor = normal;
-                mainMenuButton.PointerOverColor = pointerOver;
-                mainMenuButton.FocusedColor = focused;
-            }
-        }
-
-        public void ApplyMenuItemColor(Color selectionColor, Color textColor, Color disabledSelectionColor, Color disabledTextColor)
-        {
-            MenuItem menuItem = GetComponent<MenuItem>();
-            if (menuItem != null)
-            {
-                menuItem.SelectionColor = selectionColor;
-                menuItem.TextColor = textColor;
-                menuItem.DisabledSelectionColor = disabledSelectionColor;
-                menuItem.DisableTextColor = disabledTextColor;
-            }
-        }
-
         public void ApplyImageColor(Color color)
         {
             Image image = GetComponent<Image>();
-            if (image != null)
+            if(image != null)
             {
                 image.color = color;
             }
@@ -45,7 +20,7 @@ namespace Battlehub.UIControls
         public void ApplyOutlineColor(Color color)
         {
             Outline outline = GetComponent<Outline>();
-            if (outline != null)
+            if(outline != null)
             {
                 outline.effectColor = color;
             }
@@ -54,14 +29,14 @@ namespace Battlehub.UIControls
         public void ApplyTextColor(Color color)
         {
             TextMeshProUGUI text = GetComponent<TextMeshProUGUI>();
-            if (text != null)
+            if(text != null)
             {
                 text.color = color;
             }
             else
             {
                 Text uitext = GetComponent<Text>();
-                if (uitext != null)
+                if(uitext != null)
                 {
                     uitext.color = color;
                 }
@@ -71,7 +46,7 @@ namespace Battlehub.UIControls
         public void ApplyInputFieldColor(Color normalColor, Color highlighedColor, Color pressedColor, Color disabledColor, Color selectedColor)
         {
             TMP_InputField inputField = GetComponent<TMP_InputField>();
-            if (inputField != null)
+            if(inputField != null)
             {
                 ColorBlock colors = inputField.colors;
                 colors.normalColor = normalColor;
@@ -100,7 +75,7 @@ namespace Battlehub.UIControls
         public void ApplySelectableColor(Color normalColor, Color highlighedColor, Color pressedColor, Color disabledColor, Color selectedColor)
         {
             Selectable selectable = GetComponent<Selectable>();
-            if (selectable != null)
+            if(selectable != null)
             {
                 ColorBlock colors = selectable.colors;
                 colors.normalColor = normalColor;
@@ -109,37 +84,7 @@ namespace Battlehub.UIControls
                 colors.disabledColor = disabledColor;
                 colors.selectedColor = highlighedColor;
                 selectable.colors = colors;
-
-            }
-        }
-
-        public void ApplyTimelineControlBackgroundColor(Color background)
-        {
-            TimelineControl timelineControl = GetComponent<TimelineControl>();
-            if(timelineControl != null)
-            {
-                timelineControl.BackgroundColor = background;
-            }
-        }
-
-        public void ApplyHierarchyColors(Color enabledItem, Color disabledItem)
-        {
-            HierarchyView hierarchy = GetComponent<HierarchyView>();
-            if (hierarchy != null)
-            {
-                hierarchy.EnabledItemColor = enabledItem;
-                hierarchy.DisabledItemColor = disabledItem;
-            }
-        }
-
-        public void ApplyToolCmdItemColor(Color normalColor, Color pointerOverColor, Color pressedColor)
-        {
-            ToolCmdItem cmdItem = GetComponent<ToolCmdItem>();
-            if(cmdItem != null)
-            {
-                cmdItem.NormalColor = normalColor;
-                cmdItem.PointerOverColor = pointerOverColor;
-                cmdItem.PressedColor = pressedColor;
+                
             }
         }
     }

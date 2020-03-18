@@ -71,6 +71,7 @@
     <Compile Include="Assets\Battlehub\RTDemoGame\Scripts\GameFerryBehavior.cs" />
     <Compile Include="Assets\Battlehub\RTDemoGame\Scripts\GameFerryButton.cs" />
     <Compile Include="Assets\Battlehub\RTDemoGame\Scripts\GameGoal.cs" />
+    <Compile Include="Assets\Battlehub\RTDemoGame\Scripts\PsAutoDestroy.cs" />
     <None Include="Assets\Battlehub\RTDemoGame\Battlehub.RTDemoGame.asmdef" />
     <Reference Include="UnityEditor.UI">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>

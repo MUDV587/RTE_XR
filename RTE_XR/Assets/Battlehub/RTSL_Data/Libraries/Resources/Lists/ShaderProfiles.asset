@@ -169,6 +169,52 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 0000000002000000000000000000000002000000000000000200000000000000000000000000000002000000000000000200000000000000020000000000000002000000020000000200000000000000020000000000000000000000000000000000000000000000
     IsHidden: 0000000000000000000000000000000000000000000001010101
+  - Name: Battlehub/LineBillboard
+    PropertyCount: 3
+    PropertyDescriptions:
+    - Color
+    - Scale
+    - _HandleZTest
+    PropertyNames:
+    - _Color
+    - _Scale
+    - _HandleZTest
+    PropertyTypes: 000000000300000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1
+      Min: 0
+      Max: 20
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 000000000000000000000000
+    IsHidden: 000000
+  - Name: Battlehub/MeshEditor/FaceHighlight
+    PropertyCount: 3
+    PropertyDescriptions:
+    - Color Tint
+    - Dithering
+    - _HandleZTest
+    PropertyNames:
+    - _Color
+    - _Dither
+    - _HandleZTest
+    PropertyTypes: 000000000200000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 000000000000000000000000
+    IsHidden: 000000
   - Name: Battlehub/RTBuilder/EdgePicker
     PropertyCount: 0
     PropertyDescriptions: []
@@ -890,6 +936,40 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 020000000000000000000000000000000000000000000000000000000000000000000000
     IsHidden: 000000000000000000
+  - Name: Battlehub/URP/OutlineBlur
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Texture
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Battlehub/URP/OutlineComposite
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Texture
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Battlehub/URP/OutlinePrepass
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
   - Name: FX/Flare
     PropertyCount: 1
     PropertyDescriptions:
@@ -970,6 +1050,19 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 0100000000000000
     IsHidden: 0000
+  - Name: Hidden/BlitNoAlpha
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Texture
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 01000000
+    IsHidden: 00
   - Name: Hidden/BlitToDepth
     PropertyCount: 2
     PropertyDescriptions:
@@ -1001,6 +1094,14 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 01000000
     IsHidden: 00
+  - Name: Hidden/Checkerboard
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
   - Name: Hidden/Compositing
     PropertyCount: 2
     PropertyDescriptions:
@@ -1640,6 +1741,204 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 020000000200000002000000000000000000000000000000000000000000000000000000000000000000000000000000
     IsHidden: 010101010101010101010101
+  - Name: Hidden/Light2D-Point
+    PropertyCount: 2
+    PropertyDescriptions:
+    - __src
+    - __dst
+    PropertyNames:
+    - _SrcBlend
+    - _DstBlend
+    PropertyTypes: 0200000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0000000000000000
+    IsHidden: 0101
+  - Name: Hidden/Light2d-Point-Volumetric
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Light2D-Shape
+    PropertyCount: 2
+    PropertyDescriptions:
+    - __src
+    - __dst
+    PropertyNames:
+    - _SrcBlend
+    - _DstBlend
+    PropertyTypes: 0200000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0000000000000000
+    IsHidden: 0101
+  - Name: Hidden/Light2D-Shape-Volumetric
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/LookDev/Compositor
+    PropertyCount: 23
+    PropertyDescriptions:
+    - Main View
+    - First View shadow mask
+    - Shadow Color for first view
+    - Second View
+    - Second View shadow mask
+    - Shadow Color for second view
+    - Blend Factor, exposure for first and second view, and current selected side
+    - Drag and drop zone and shadow multipliers
+    - Gizmo Color for first view
+    - Gizmo Color for second view
+    - Position of split view gizmo
+    - Center of Zone view gizmo
+    - 2D plane of the gizmo
+    - 2D plane orthogonal to the gizmo
+    - Gizmo Length
+    - Gizmo Thickness
+    - Gizmo extremities radius
+    - Render gizmo mode
+    - Distance on the gizmo where the blend circle stops
+    - Visual radius of the blend factor gizmo
+    - Screen ratio
+    - Parameters for neutral tonemap
+    - Parameters for neutral tonemap
+    PropertyNames:
+    - _Tex0MainView
+    - _Tex0Shadows
+    - _ShadowColor0
+    - _Tex1MainView
+    - _Tex1Shadows
+    - _ShadowColor1
+    - _CompositingParams
+    - _CompositingParams2
+    - _FirstViewColor
+    - _SecondViewColor
+    - _GizmoPosition
+    - _GizmoZoneCenter
+    - _GizmoSplitPlane
+    - _GizmoSplitPlaneOrtho
+    - _GizmoLength
+    - _GizmoThickness
+    - _GizmoCircleRadius
+    - _GizmoRenderMode
+    - _GetBlendFactorMaxGizmoDistance
+    - _BlendFactorCircleRadius
+    - _ScreenRatio
+    - _ToneMapCoeffs1
+    - _ToneMapCoeffs2
+    PropertyTypes: 0400000004000000000000000400000004000000000000000100000001000000000000000000000001000000010000000100000001000000020000000100000001000000020000000200000002000000010000000100000001000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0200000002000000000000000200000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    IsHidden: 0000000000000000000000000000000000000000000000
+  - Name: Hidden/LookDev/CubeToLatlong
+    PropertyCount: 3
+    PropertyDescriptions:
+    - Cubemap
+    - Parameters
+    - Window params
+    PropertyNames:
+    - _MainTex
+    - _CubeToLatLongParams
+    - _WindowParams
+    PropertyTypes: 040000000100000001000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 010000000000000000000000
+    IsHidden: 000000
   - Name: Hidden/Nature/Terrain/Utilities
     PropertyCount: 0
     PropertyDescriptions: []
@@ -2363,6 +2662,50 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 000000000000000000000000
     IsHidden: 000000
+  - Name: Hidden/Shader Graph/FallbackError
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Shadow2DRemoveSelf
+    PropertyCount: 2
+    PropertyDescriptions:
+    - Texture
+    - __ShadowStencilGroup
+    PropertyNames:
+    - _MainTex
+    - _ShadowStencilGroup
+    PropertyTypes: 0400000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0200000000000000
+    IsHidden: 0001
+  - Name: Hidden/ShadowGroup2D
+    PropertyCount: 2
+    PropertyDescriptions:
+    - Texture
+    - __ShadowStencilGroup
+    PropertyNames:
+    - _MainTex
+    - _ShadowStencilGroup
+    PropertyTypes: 0400000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0200000000000000
+    IsHidden: 0000
   - Name: Hidden/TerrainEngine/BillboardTree
     PropertyCount: 1
     PropertyDescriptions:
@@ -2446,6 +2789,75 @@ MonoBehaviour:
     PropertyTexDims: 01000000010000000100000001000000
     IsHidden: 00000000
   - Name: Hidden/TerrainEngine/Details/BillboardWavingDoublePass
+    PropertyCount: 4
+    PropertyDescriptions:
+    - Fade Color
+    - Base (RGB) Alpha (A)
+    - Wave and distance
+    - Cutoff
+    PropertyNames:
+    - _WavingTint
+    - _MainTex
+    - _WaveAndDistance
+    - _Cutoff
+    PropertyTypes: 00000000040000000100000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000020000000000000000000000
+    IsHidden: 00000000
+  - Name: Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
+    PropertyCount: 4
+    PropertyDescriptions:
+    - Fade Color
+    - Base (RGB) Alpha (A)
+    - Wave and distance
+    - Cutoff
+    PropertyNames:
+    - _WavingTint
+    - _MainTex
+    - _WaveAndDistance
+    - _Cutoff
+    PropertyTypes: 00000000040000000100000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000020000000000000000000000
+    IsHidden: 00000000
+  - Name: Hidden/TerrainEngine/Details/UniversalPipeline/Vertexlit
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Main Texture
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Hidden/TerrainEngine/Details/UniversalPipeline/WavingDoublePass
     PropertyCount: 4
     PropertyDescriptions:
     - Fade Color
@@ -3118,6 +3530,480 @@ MonoBehaviour:
       Max: 1
     PropertyTexDims: 0200000000000000
     IsHidden: 0000
+  - Name: Hidden/Universal Render Pipeline/Blit
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/Bloom
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Source
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Hidden/Universal Render Pipeline/BokehDepthOfField
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Source
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Hidden/Universal Render Pipeline/CameraMotionBlur
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Source
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Hidden/Universal Render Pipeline/CopyDepth
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/Editor/CurveBackground
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/Editor/Shadows Midtones Highlights Curve
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/Editor/Trackball
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/FallbackError
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/FinalPost
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/GaussianDepthOfField
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Source
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Hidden/Universal Render Pipeline/LutBuilderHdr
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/LutBuilderLdr
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/PaniniProjection
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Source
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Hidden/Universal Render Pipeline/Sampling
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Albedo
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Hidden/Universal Render Pipeline/ScreenSpaceShadows
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/Universal Render Pipeline/Stop NaN
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Source
+    PropertyNames:
+    - _MainTex
+    PropertyTypes: 04000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 02000000
+    IsHidden: 00
+  - Name: Hidden/Universal Render Pipeline/SubpixelMorphologicalAntialiasing
+    PropertyCount: 2
+    PropertyDescriptions:
+    - _StencilRef
+    - _StencilMask
+    PropertyNames:
+    - _StencilRef
+    - _StencilMask
+    PropertyTypes: 0200000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0000000000000000
+    IsHidden: 0101
+  - Name: Hidden/Universal Render Pipeline/Terrain/Lit (Add Pass)
+    PropertyCount: 25
+    PropertyDescriptions:
+    - Total Layer Count
+    - Control (RGBA)
+    - Layer 3 (A)
+    - Layer 2 (B)
+    - Layer 1 (G)
+    - Layer 0 (R)
+    - Normal 3 (A)
+    - Normal 2 (B)
+    - Normal 1 (G)
+    - Normal 0 (R)
+    - Metallic 0
+    - Metallic 1
+    - Metallic 2
+    - Metallic 3
+    - Mask 3 (A)
+    - Mask 2 (B)
+    - Mask 1 (G)
+    - Mask 0 (R)
+    - Smoothness 0
+    - Smoothness 1
+    - Smoothness 2
+    - Smoothness 3
+    - BaseMap (RGB)
+    - Main Color
+    - Holes Map (RGB)
+    PropertyNames:
+    - _NumLayersCount
+    - _Control
+    - _Splat3
+    - _Splat2
+    - _Splat1
+    - _Splat0
+    - _Normal3
+    - _Normal2
+    - _Normal1
+    - _Normal0
+    - _Metallic0
+    - _Metallic1
+    - _Metallic2
+    - _Metallic3
+    - _Mask3
+    - _Mask2
+    - _Mask1
+    - _Mask0
+    - _Smoothness0
+    - _Smoothness1
+    - _Smoothness2
+    - _Smoothness3
+    - _BaseMap
+    - _BaseColor
+    - _TerrainHolesTexture
+    PropertyTypes: 02000000040000000400000004000000040000000400000004000000040000000400000004000000030000000300000003000000030000000400000004000000040000000400000003000000030000000300000003000000040000000000000004000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000020000000200000002000000020000000200000002000000020000000200000002000000000000000000000000000000000000000200000002000000020000000200000000000000000000000000000000000000020000000000000002000000
+    IsHidden: 01010101010101010101010101010101010101010101010101
+  - Name: Hidden/Universal Render Pipeline/Terrain/Lit (Base Pass)
+    PropertyCount: 4
+    PropertyDescriptions:
+    - Color
+    - Albedo(RGB), Smoothness(A)
+    - Metallic (R)
+    - Holes Map (RGB)
+    PropertyNames:
+    - _BaseColor
+    - _MainTex
+    - _MetallicTex
+    - _TerrainHolesTexture
+    PropertyTypes: 00000000040000000400000004000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000020000000200000002000000
+    IsHidden: 00000001
+  - Name: Hidden/Universal Render Pipeline/Terrain/Lit (Basemap Gen)
+    PropertyCount: 19
+    PropertyDescriptions:
+    - Total Layer Count
+    - AlphaMap
+    - Layer 0 (R)
+    - Layer 1 (G)
+    - Layer 2 (B)
+    - Layer 3 (A)
+    - Mask 3 (A)
+    - Mask 2 (B)
+    - Mask 1 (G)
+    - Mask 0 (R)
+    - Metallic 0
+    - Metallic 1
+    - Metallic 2
+    - Metallic 3
+    - Smoothness 0
+    - Smoothness 1
+    - Smoothness 2
+    - Smoothness 3
+    - DstBlend
+    PropertyNames:
+    - _NumLayersCount
+    - _Control
+    - _Splat0
+    - _Splat1
+    - _Splat2
+    - _Splat3
+    - _Mask3
+    - _Mask2
+    - _Mask1
+    - _Mask0
+    - _Metallic0
+    - _Metallic1
+    - _Metallic2
+    - _Metallic3
+    - _Smoothness0
+    - _Smoothness1
+    - _Smoothness2
+    - _Smoothness3
+    - _DstBlend
+    PropertyTypes: 02000000040000000400000004000000040000000400000004000000040000000400000004000000030000000300000003000000030000000300000003000000030000000300000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000020000000200000002000000020000000200000002000000020000000200000002000000000000000000000000000000000000000000000000000000000000000000000000000000
+    IsHidden: 01010101010101010101010101010101010101
+  - Name: Hidden/Universal Render Pipeline/UberPost
+    PropertyCount: 0
+    PropertyDescriptions: []
+    PropertyNames: []
+    PropertyTypes: 
+    PropertyRangeLimits: []
+    PropertyTexDims: 
+    IsHidden: 
+  - Name: Hidden/UnlitTransparentColored
+    PropertyCount: 1
+    PropertyDescriptions:
+    - Main Color
+    PropertyNames:
+    - _Color
+    PropertyTypes: 00000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000
+    IsHidden: 00
   - Name: Hidden/VideoComposite
     PropertyCount: 1
     PropertyDescriptions:
@@ -4867,29 +5753,6 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 0000000000000000000000000000000002000000
     IsHidden: 0000000000
-  - Name: LineBillboard
-    PropertyCount: 3
-    PropertyDescriptions:
-    - Color
-    - Scale
-    - _HandleZTest
-    PropertyNames:
-    - _Color
-    - _Scale
-    - _HandleZTest
-    PropertyTypes: 000000000300000002000000
-    PropertyRangeLimits:
-    - Def: 0
-      Min: 0
-      Max: 0
-    - Def: 7
-      Min: 0
-      Max: 20
-    - Def: 0
-      Min: 0
-      Max: 0
-    PropertyTexDims: 000000000000000000000000
-    IsHidden: 000000
   - Name: Mobile/Bumped Diffuse
     PropertyCount: 2
     PropertyDescriptions:
@@ -5642,29 +6505,6 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 000000000200000000000000000000000000000000000000000000000000000000000000
     IsHidden: 000000000000010101
-  - Name: Particles/Priority Alpha Blended
-    PropertyCount: 3
-    PropertyDescriptions:
-    - Tint Color
-    - Particle Texture
-    - Soft Particles Factor
-    PropertyNames:
-    - _TintColor
-    - _MainTex
-    - _InvFade
-    PropertyTypes: 000000000400000003000000
-    PropertyRangeLimits:
-    - Def: 0
-      Min: 0
-      Max: 0
-    - Def: 0
-      Min: 0
-      Max: 0
-    - Def: 1
-      Min: 0.01
-      Max: 3
-    PropertyTexDims: 000000000200000000000000
-    IsHidden: 000000
   - Name: Particles/Standard Surface
     PropertyCount: 31
     PropertyDescriptions:
@@ -6089,6 +6929,368 @@ MonoBehaviour:
     PropertyRangeLimits: []
     PropertyTexDims: 
     IsHidden: 
+  - Name: Shader Graphs/ArnoldStandardSurface
+    PropertyCount: 13
+    PropertyDescriptions:
+    - BaseColor
+    - BaseColorMap
+    - Metalness
+    - MetalnessMap
+    - SpecularColor
+    - SpecularColorMap
+    - SpecularRoughness
+    - SpecularRoughnessMap
+    - SpecularIOR
+    - SpecularIORMap
+    - EmissionColor
+    - EmissionColorMap
+    - NormalMap
+    PropertyNames:
+    - _BASE_COLOR
+    - _BASE_COLOR_MAP
+    - _METALNESS
+    - _METALNESS_MAP
+    - _SPECULAR_COLOR
+    - _SPECULAR_COLOR_MAP
+    - _SPECULAR_ROUGHNESS
+    - _SPECULAR_ROUGHNESS_MAP
+    - _SPECULAR_IOR
+    - _SPECULAR_IOR_MAP
+    - _EMISSION_COLOR
+    - _EMISSION_COLOR_MAP
+    - _NORMAL_MAP
+    PropertyTypes: 00000000040000000200000004000000000000000400000002000000040000000200000004000000000000000400000004000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000020000000000000002000000000000000200000000000000020000000000000002000000000000000200000002000000
+    IsHidden: 00000000000000000000000000
+  - Name: Shader Graphs/ArnoldStandardSurfaceTransparent
+    PropertyCount: 15
+    PropertyDescriptions:
+    - BaseColor
+    - BaseColorMap
+    - Metalness
+    - MetalnessMap
+    - SpecularColor
+    - SpecularColorMap
+    - SpecularRoughness
+    - SpecularRoughnessMap
+    - SpecularIOR
+    - SpecularIORMap
+    - EmissionColor
+    - EmissionColorMap
+    - NormalMap
+    - Opacity
+    - OpacityMap
+    PropertyNames:
+    - _BASE_COLOR
+    - _BASE_COLOR_MAP
+    - _METALNESS
+    - _METALNESS_MAP
+    - _SPECULAR_COLOR
+    - _SPECULAR_COLOR_MAP
+    - _SPECULAR_ROUGHNESS
+    - _SPECULAR_ROUGHNESS_MAP
+    - _SPECULAR_IOR
+    - _SPECULAR_IOR_MAP
+    - _EMISSION_COLOR
+    - _EMISSION_COLOR_MAP
+    - _NORMAL_MAP
+    - _OPACITY
+    - _OPACITY_MAP
+    PropertyTypes: 000000000400000002000000040000000000000004000000020000000400000002000000040000000000000004000000040000000300000004000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 000000000200000000000000020000000000000002000000000000000200000000000000020000000000000002000000020000000000000002000000
+    IsHidden: 000000000000000000000000000000
+  - Name: Shader Graphs/PhysicalMaterial3DsMax
+    PropertyCount: 19
+    PropertyDescriptions:
+    - BaseColorWeight
+    - BaseColor
+    - BaseColorMap
+    - ReflectionsWeight
+    - ReflectionsColor
+    - ReflectionsColorMap
+    - ReflectionsRoughness
+    - ReflectionsRoughnessMap
+    - Metalness
+    - MetalnessMap
+    - ReflectionsIOR
+    - ReflectionsIORMap
+    - Transparency
+    - TransparencyMap
+    - EmissionWeight
+    - Emission
+    - EmissionMap
+    - BumpMapStrength
+    - BumpMap
+    PropertyNames:
+    - _BASE_COLOR_WEIGHT
+    - _BASE_COLOR
+    - _BASE_COLOR_MAP
+    - _REFLECTIONS_WEIGHT
+    - _REFLECTIONS_COLOR
+    - _REFLECTIONS_COLOR_MAP
+    - _REFLECTIONS_ROUGHNESS
+    - _REFLECTIONS_ROUGHNESS_MAP
+    - _METALNESS
+    - _METALNESS_MAP
+    - _REFLECTIONS_IOR
+    - _REFLECTIONS_IOR_MAP
+    - _TRANSPARENCY
+    - _TRANSPARENCY_MAP
+    - _EMISSION_WEIGHT
+    - _EMISSION_COLOR
+    - _EMISSION_COLOR_MAP
+    - _BUMP_MAP_STRENGTH
+    - _BUMP_MAP
+    PropertyTypes: 03000000000000000400000002000000000000000400000003000000040000000300000004000000030000000400000003000000040000000300000000000000040000000300000004000000
+    PropertyRangeLimits:
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1.52
+      Min: 0
+      Max: 50
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.3
+      Min: 0
+      Max: 10
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000000000000200000000000000000000000200000000000000020000000000000002000000000000000200000000000000020000000000000000000000020000000000000002000000
+    IsHidden: 00000000000000000000000000000000000000
+  - Name: Shader Graphs/PhysicalMaterial3DsMaxTransparent
+    PropertyCount: 19
+    PropertyDescriptions:
+    - BaseColorWeight
+    - BaseColor
+    - BaseColorMap
+    - ReflectionsWeight
+    - ReflectionsColor
+    - ReflectionsColorMap
+    - ReflectionsRoughness
+    - ReflectionsRoughnessMap
+    - Metalness
+    - MetalnessMap
+    - ReflectionsIOR
+    - ReflectionsIORMap
+    - Transparency
+    - TransparencyMap
+    - EmissionWeight
+    - Emission
+    - EmissionMap
+    - BumpMapStrength
+    - BumpMap
+    PropertyNames:
+    - _BASE_COLOR_WEIGHT
+    - _BASE_COLOR
+    - _BASE_COLOR_MAP
+    - _REFLECTIONS_WEIGHT
+    - _REFLECTIONS_COLOR
+    - _REFLECTIONS_COLOR_MAP
+    - _REFLECTIONS_ROUGHNESS
+    - _REFLECTIONS_ROUGHNESS_MAP
+    - _METALNESS
+    - _METALNESS_MAP
+    - _REFLECTIONS_IOR
+    - _REFLECTIONS_IOR_MAP
+    - _TRANSPARENCY
+    - _TRANSPARENCY_MAP
+    - _EMISSION_WEIGHT
+    - _EMISSION_COLOR
+    - _EMISSION_COLOR_MAP
+    - _BUMP_MAP_STRENGTH
+    - _BUMP_MAP
+    PropertyTypes: 03000000000000000400000002000000000000000400000003000000040000000300000004000000030000000400000003000000040000000300000000000000040000000300000004000000
+    PropertyRangeLimits:
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1.52
+      Min: 0
+      Max: 50
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.3
+      Min: 0
+      Max: 10
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000000000000200000000000000000000000200000000000000020000000000000002000000000000000200000000000000020000000000000000000000020000000000000002000000
+    IsHidden: 00000000000000000000000000000000000000
   - Name: Skybox/6 Sided
     PropertyCount: 9
     PropertyDescriptions:
@@ -9383,6 +10585,1726 @@ MonoBehaviour:
       Max: 0
     PropertyTexDims: 020000000000000000000000000000000000000000000000000000000000000000000000
     IsHidden: 000000000000000000
+  - Name: Universal Render Pipeline/2D/Sprite-Lit-Default
+    PropertyCount: 8
+    PropertyDescriptions:
+    - Diffuse
+    - Mask
+    - Normal Map
+    - Tint
+    - RendererColor
+    - Flip
+    - External Alpha
+    - Enable External Alpha
+    PropertyNames:
+    - _MainTex
+    - _MaskTex
+    - _NormalMap
+    - _Color
+    - _RendererColor
+    - _Flip
+    - _AlphaTex
+    - _EnableExternalAlpha
+    PropertyTypes: 0400000004000000040000000000000000000000010000000400000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0200000002000000020000000000000000000000000000000200000000000000
+    IsHidden: 0000000101010101
+  - Name: Universal Render Pipeline/Autodesk Interactive/Autodesk Interactive
+    PropertyCount: 18
+    PropertyDescriptions:
+    - UseColorMap
+    - BaseColor
+    - ColorMap
+    - UseNormalMap
+    - NormalMap
+    - UseMetallicMap
+    - Metallic
+    - MetallicMap
+    - UseRoughnessMap
+    - Roughness
+    - RoughnessMap
+    - UseEmissiveMap
+    - Emissive
+    - EmissiveMap
+    - UseAoMap
+    - AoMap
+    - UVOffset
+    - UVScale
+    PropertyNames:
+    - _UseColorMap
+    - _Color
+    - _MainTex
+    - _UseNormalMap
+    - _BumpMap
+    - _UseMetallicMap
+    - _Metallic
+    - _MetallicGlossMap
+    - _UseRoughnessMap
+    - _Glossiness
+    - _SpecGlossMap
+    - _UseEmissiveMap
+    - _EmissionColor
+    - _EmissionMap
+    - _UseAoMap
+    - _OcclusionMap
+    - _UvOffset
+    - _UvTiling
+    PropertyTypes: 020000000000000004000000020000000400000002000000020000000400000002000000020000000400000002000000000000000400000002000000040000000100000001000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 000000000000000002000000000000000200000000000000000000000200000000000000000000000200000000000000000000000200000000000000020000000000000000000000
+    IsHidden: 000000000000000000000000000000000000
+  - Name: Universal Render Pipeline/Autodesk Interactive/Autodesk Interactive Masked
+    PropertyCount: 19
+    PropertyDescriptions:
+    - UseColorMap
+    - BaseColor
+    - ColorMap
+    - UseNormalMap
+    - NormalMap
+    - UseMetallicMap
+    - Metallic
+    - MetallicMap
+    - UseRoughnessMap
+    - Roughness
+    - RoughnessMap
+    - UseEmissiveMap
+    - Emissive
+    - EmissiveMap
+    - UseOpacityMap
+    - MaskMap
+    - MaskThreshold
+    - UVOffset
+    - UVScale
+    PropertyNames:
+    - _UseColorMap
+    - _Color
+    - _MainTex
+    - _UseNormalMap
+    - _BumpMap
+    - _UseMetallicMap
+    - _Metallic
+    - _MetallicGlossMap
+    - _UseRoughnessMap
+    - _Glossiness
+    - _SpecGlossMap
+    - _UseEmissiveMap
+    - _EmissionColor
+    - _EmissionMap
+    - Boolean_8A2B8817
+    - _OcclusionMap
+    - _OpacityThreshold
+    - _UvOffset
+    - _UvTiling
+    PropertyTypes: 02000000000000000400000002000000040000000200000002000000040000000200000002000000040000000200000000000000040000000200000004000000020000000100000001000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000000000000200000000000000020000000000000000000000020000000000000000000000020000000000000000000000020000000000000002000000000000000000000000000000
+    IsHidden: 00000000000000000000000000000000000000
+  - Name: Universal Render Pipeline/Autodesk Interactive/Autodesk Interactive Transparent
+    PropertyCount: 18
+    PropertyDescriptions:
+    - UseColorMap
+    - BaseColor
+    - ColorMap
+    - UseNormalMap
+    - NormalMap
+    - UseMetallicMap
+    - Metallic
+    - MetallicMap
+    - UseRoughnessMap
+    - Roughness
+    - RoughnessMap
+    - UseEmissiveMap
+    - Emissive
+    - EmissiveMap
+    - UseOpacityMap
+    - Opacity
+    - UVOffset
+    - UVScale
+    PropertyNames:
+    - _UseColorMap
+    - _Color
+    - _MainTex
+    - _UseNormalMap
+    - _BumpMap
+    - _UseMetallicMap
+    - _Metallic
+    - _MetallicGlossMap
+    - _UseRoughnessMap
+    - _Glossiness
+    - _SpecGlossMap
+    - _UseEmissiveMap
+    - _EmissionColor
+    - _EmissionMap
+    - _UseOpacityMap
+    - _Opacity
+    - _UvOffset
+    - _UvTiling
+    PropertyTypes: 020000000000000004000000020000000400000002000000020000000400000002000000020000000400000002000000000000000400000002000000020000000100000001000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 000000000000000002000000000000000200000000000000000000000200000000000000000000000200000000000000000000000200000000000000000000000000000000000000
+    IsHidden: 000000000000000000000000000000000000
+  - Name: Universal Render Pipeline/Baked Lit
+    PropertyCount: 12
+    PropertyDescriptions:
+    - Texture
+    - Color
+    - AlphaCutout
+    - Normal Map
+    - __surface
+    - __blend
+    - __clip
+    - Src
+    - Dst
+    - ZWrite
+    - __cull
+    - Queue offset
+    PropertyNames:
+    - _BaseMap
+    - _BaseColor
+    - _Cutoff
+    - _BumpMap
+    - _Surface
+    - _Blend
+    - _AlphaClip
+    - _SrcBlend
+    - _DstBlend
+    - _ZWrite
+    - _Cull
+    - _QueueOffset
+    PropertyTypes: 040000000000000003000000040000000200000002000000020000000200000002000000020000000200000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 020000000000000000000000020000000000000000000000000000000000000000000000000000000000000000000000
+    IsHidden: 000000000101010101010101
+  - Name: Universal Render Pipeline/Lit
+    PropertyCount: 33
+    PropertyDescriptions:
+    - WorkflowMode
+    - Color
+    - Albedo
+    - Alpha Cutoff
+    - Smoothness
+    - Smoothness Scale
+    - Smoothness texture channel
+    - Metallic
+    - Metallic
+    - Specular
+    - Specular
+    - Specular Highlights
+    - Environment Reflections
+    - Scale
+    - Normal Map
+    - Strength
+    - Occlusion
+    - Color
+    - Emission
+    - __surface
+    - __blend
+    - __clip
+    - __src
+    - __dst
+    - __zw
+    - __cull
+    - Receive Shadows
+    - Queue offset
+    - BaseMap
+    - Base Color
+    - Smoothness
+    - Smoothness
+    - EnvironmentReflections
+    PropertyNames:
+    - _WorkflowMode
+    - _BaseColor
+    - _BaseMap
+    - _Cutoff
+    - _Smoothness
+    - _GlossMapScale
+    - _SmoothnessTextureChannel
+    - _Metallic
+    - _MetallicGlossMap
+    - _SpecColor
+    - _SpecGlossMap
+    - _SpecularHighlights
+    - _EnvironmentReflections
+    - _BumpScale
+    - _BumpMap
+    - _OcclusionStrength
+    - _OcclusionMap
+    - _EmissionColor
+    - _EmissionMap
+    - _Surface
+    - _Blend
+    - _AlphaClip
+    - _SrcBlend
+    - _DstBlend
+    - _ZWrite
+    - _Cull
+    - _ReceiveShadows
+    - _QueueOffset
+    - _MainTex
+    - _Color
+    - _GlossMapScale
+    - _Glossiness
+    - _GlossyReflections
+    PropertyTypes: 020000000000000004000000030000000300000003000000020000000300000004000000000000000400000002000000020000000200000004000000030000000400000000000000040000000200000002000000020000000200000002000000020000000200000002000000020000000400000000000000020000000200000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 1
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 000000000000000002000000000000000000000000000000000000000000000002000000000000000200000000000000000000000000000002000000000000000200000000000000020000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000
+    IsHidden: 010000000000000000000000000000000000000101010101010100010101010101
+  - Name: Universal Render Pipeline/Nature/SpeedTree7
+    PropertyCount: 8
+    PropertyDescriptions:
+    - Main Color
+    - Hue Variation
+    - Base (RGB) Trans (A)
+    - Detail
+    - Normal Map
+    - Alpha Cutoff
+    - Cull
+    - Wind Quality
+    PropertyNames:
+    - _Color
+    - _HueVariation
+    - _MainTex
+    - _DetailTex
+    - _BumpMap
+    - _Cutoff
+    - _Cull
+    - _WindQuality
+    PropertyTypes: 0000000000000000040000000400000004000000030000000200000003000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.333
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 5
+    PropertyTexDims: 0000000000000000020000000200000002000000000000000000000000000000
+    IsHidden: 0000000000000000
+  - Name: Universal Render Pipeline/Nature/SpeedTree7 Billboard
+    PropertyCount: 6
+    PropertyDescriptions:
+    - Main Color
+    - Hue Variation
+    - Base (RGB) Trans (A)
+    - Normal Map
+    - Alpha Cutoff
+    - Wind Quality
+    PropertyNames:
+    - _Color
+    - _HueVariation
+    - _MainTex
+    - _BumpMap
+    - _Cutoff
+    - _WindQuality
+    PropertyTypes: 000000000000000004000000040000000300000003000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.333
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    PropertyTexDims: 000000000000000002000000020000000000000000000000
+    IsHidden: 000000000000
+  - Name: Universal Render Pipeline/Nature/SpeedTree8
+    PropertyCount: 17
+    PropertyDescriptions:
+    - Base (RGB) Transparency (A)
+    - Color
+    - Hue Variation
+    - Hue Variation Color
+    - Normal Mapping
+    - Normal Map
+    - Smoothness (R), Metallic (G), AO (B)
+    - Smoothness
+    - Metallic
+    - Subsurface
+    - Subsurface (RGB)
+    - Subsurface Color
+    - Subsurface Indirect
+    - Billboard
+    - Billboard Shadow Fade
+    - Two Sided
+    - Wind Quality
+    PropertyNames:
+    - _MainTex
+    - _Color
+    - _HueVariationKwToggle
+    - _HueVariationColor
+    - _NormalMapKwToggle
+    - _BumpMap
+    - _ExtraTex
+    - _Glossiness
+    - _Metallic
+    - _SubsurfaceKwToggle
+    - _SubsurfaceTex
+    - _SubsurfaceColor
+    - _SubsurfaceIndirect
+    - _BillboardKwToggle
+    - _BillboardShadowFade
+    - _TwoSided
+    - _WindQuality
+    PropertyTypes: 0400000000000000020000000000000002000000040000000400000003000000030000000200000004000000000000000300000002000000030000000200000003000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.25
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 5
+    PropertyTexDims: 0200000000000000000000000000000000000000020000000200000000000000000000000000000002000000000000000000000000000000000000000000000000000000
+    IsHidden: 0000000000000000000000000000000000
+  - Name: Universal Render Pipeline/Particles/Lit
+    PropertyCount: 39
+    PropertyDescriptions:
+    - Base Map
+    - Base Color
+    - Alpha Cutoff
+    - Metallic Map
+    - Metallic
+    - Smoothness
+    - Scale
+    - Normal Map
+    - Color
+    - Emission
+    - Receive Shadows
+    - Soft Particles Near Fade
+    - Soft Particles Far Fade
+    - Camera Near Fade
+    - Camera Far Fade
+    - Distortion Blend
+    - Distortion Strength
+    - __surface
+    - __mode
+    - __clip
+    - __blendop
+    - __src
+    - __dst
+    - __zw
+    - __cull
+    - _ColorMode
+    - _ColorMode
+    - __flipbookblending
+    - __softparticlesenabled
+    - __camerafadingenabled
+    - __softparticlefadeparams
+    - __camerafadeparams
+    - __distortionenabled
+    - Distortion Strength Scaled
+    - Queue offset
+    - flipbook
+    - gloss
+    - mode
+    - color
+    PropertyNames:
+    - _BaseMap
+    - _BaseColor
+    - _Cutoff
+    - _MetallicGlossMap
+    - _Metallic
+    - _Smoothness
+    - _BumpScale
+    - _BumpMap
+    - _EmissionColor
+    - _EmissionMap
+    - _ReceiveShadows
+    - _SoftParticlesNearFadeDistance
+    - _SoftParticlesFarFadeDistance
+    - _CameraNearFadeDistance
+    - _CameraFarFadeDistance
+    - _DistortionBlend
+    - _DistortionStrength
+    - _Surface
+    - _Blend
+    - _AlphaClip
+    - _BlendOp
+    - _SrcBlend
+    - _DstBlend
+    - _ZWrite
+    - _Cull
+    - _ColorMode
+    - _BaseColorAddSubDiff
+    - _FlipbookBlending
+    - _SoftParticlesEnabled
+    - _CameraFadingEnabled
+    - _SoftParticleFadeParams
+    - _CameraFadeParams
+    - _DistortionEnabled
+    - _DistortionStrengthScaled
+    - _QueueOffset
+    - _FlipbookMode
+    - _Glossiness
+    - _Mode
+    - _Color
+    PropertyTypes: 040000000000000003000000040000000300000003000000020000000400000000000000040000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000001000000020000000200000002000000010000000100000002000000020000000200000002000000020000000200000000000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 020000000000000000000000020000000000000000000000000000000200000000000000020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    IsHidden: 000000000000000000000000000000000001010101010101010101000101010101010101010101
+  - Name: Universal Render Pipeline/Particles/Simple Lit
+    PropertyCount: 41
+    PropertyDescriptions:
+    - Base Map
+    - Base Color
+    - Alpha Cutoff
+    - Specular
+    - Specular
+    - Smoothness
+    - Scale
+    - Normal Map
+    - Color
+    - Emission
+    - Smoothness Source
+    - Specular Highlights
+    - Receive Shadows
+    - Soft Particles Near Fade
+    - Soft Particles Far Fade
+    - Camera Near Fade
+    - Camera Far Fade
+    - Distortion Blend
+    - Distortion Strength
+    - __surface
+    - __mode
+    - __clip
+    - __blendop
+    - __src
+    - __dst
+    - __zw
+    - __cull
+    - _ColorMode
+    - _ColorMode
+    - __flipbookblending
+    - __softparticlesenabled
+    - __camerafadingenabled
+    - __softparticlefadeparams
+    - __camerafadeparams
+    - __distortionenabled
+    - Distortion Strength Scaled
+    - Queue offset
+    - flipbook
+    - gloss
+    - mode
+    - color
+    PropertyNames:
+    - _BaseMap
+    - _BaseColor
+    - _Cutoff
+    - _SpecGlossMap
+    - _SpecColor
+    - _Smoothness
+    - _BumpScale
+    - _BumpMap
+    - _EmissionColor
+    - _EmissionMap
+    - _SmoothnessSource
+    - _SpecularHighlights
+    - _ReceiveShadows
+    - _SoftParticlesNearFadeDistance
+    - _SoftParticlesFarFadeDistance
+    - _CameraNearFadeDistance
+    - _CameraFarFadeDistance
+    - _DistortionBlend
+    - _DistortionStrength
+    - _Surface
+    - _Blend
+    - _AlphaClip
+    - _BlendOp
+    - _SrcBlend
+    - _DstBlend
+    - _ZWrite
+    - _Cull
+    - _ColorMode
+    - _BaseColorAddSubDiff
+    - _FlipbookBlending
+    - _SoftParticlesEnabled
+    - _CameraFadingEnabled
+    - _SoftParticleFadeParams
+    - _CameraFadeParams
+    - _DistortionEnabled
+    - _DistortionStrengthScaled
+    - _QueueOffset
+    - _FlipbookMode
+    - _Glossiness
+    - _Mode
+    - _Color
+    PropertyTypes: 0400000000000000030000000400000000000000030000000200000004000000000000000400000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000001000000020000000200000002000000010000000100000002000000020000000200000002000000020000000200000000000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0200000000000000000000000200000000000000000000000000000002000000000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    IsHidden: 0000000000000000000001000000000000000001010101010101010101000101010101010101010101
+  - Name: Universal Render Pipeline/Particles/Unlit
+    PropertyCount: 33
+    PropertyDescriptions:
+    - Base Map
+    - Base Color
+    - Alpha Cutoff
+    - Normal Map
+    - Color
+    - Emission
+    - Soft Particles Near Fade
+    - Soft Particles Far Fade
+    - Camera Near Fade
+    - Camera Far Fade
+    - Distortion Blend
+    - Distortion Strength
+    - __surface
+    - __mode
+    - __clip
+    - __blendop
+    - __src
+    - __dst
+    - __zw
+    - __cull
+    - _ColorMode
+    - _ColorMode
+    - __flipbookblending
+    - __softparticlesenabled
+    - __camerafadingenabled
+    - __softparticlefadeparams
+    - __camerafadeparams
+    - __distortionenabled
+    - Distortion Strength Scaled
+    - Queue offset
+    - flipbook
+    - mode
+    - color
+    PropertyNames:
+    - _BaseMap
+    - _BaseColor
+    - _Cutoff
+    - _BumpMap
+    - _EmissionColor
+    - _EmissionMap
+    - _SoftParticlesNearFadeDistance
+    - _SoftParticlesFarFadeDistance
+    - _CameraNearFadeDistance
+    - _CameraFarFadeDistance
+    - _DistortionBlend
+    - _DistortionStrength
+    - _Surface
+    - _Blend
+    - _AlphaClip
+    - _BlendOp
+    - _SrcBlend
+    - _DstBlend
+    - _ZWrite
+    - _Cull
+    - _ColorMode
+    - _BaseColorAddSubDiff
+    - _FlipbookBlending
+    - _SoftParticlesEnabled
+    - _CameraFadingEnabled
+    - _SoftParticleFadeParams
+    - _CameraFadeParams
+    - _DistortionEnabled
+    - _DistortionStrengthScaled
+    - _QueueOffset
+    - _FlipbookMode
+    - _Mode
+    - _Color
+    PropertyTypes: 040000000000000003000000040000000000000004000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000010000000200000002000000020000000100000001000000020000000200000002000000020000000200000000000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 020000000000000000000000020000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    IsHidden: 000000000000000000000000010101010101010101010001010101010101010101
+  - Name: Universal Render Pipeline/Simple Lit
+    PropertyCount: 26
+    PropertyDescriptions:
+    - Base Color
+    - Base Map (RGB) Smoothness / Alpha (A)
+    - Alpha Clipping
+    - Specular Color
+    - Specular Map
+    - Smoothness Source
+    - Specular Highlights
+    - Scale
+    - Normal Map
+    - Emission Color
+    - Emission Map
+    - __surface
+    - __blend
+    - __clip
+    - __src
+    - __dst
+    - __zw
+    - __cull
+    - Receive Shadows
+    - Queue offset
+    - SMoothness
+    - BaseMap
+    - Base Color
+    - Smoothness
+    - GlossinessSource
+    - SpecularHighlights
+    PropertyNames:
+    - _BaseColor
+    - _BaseMap
+    - _Cutoff
+    - _SpecColor
+    - _SpecGlossMap
+    - _SmoothnessSource
+    - _SpecularHighlights
+    - _BumpScale
+    - _BumpMap
+    - _EmissionColor
+    - _EmissionMap
+    - _Surface
+    - _Blend
+    - _AlphaClip
+    - _SrcBlend
+    - _DstBlend
+    - _ZWrite
+    - _Cull
+    - _ReceiveShadows
+    - _QueueOffset
+    - _Smoothness
+    - _MainTex
+    - _Color
+    - _Shininess
+    - _GlossinessSource
+    - _SpecSource
+    PropertyTypes: 0000000004000000030000000000000004000000020000000200000002000000040000000000000004000000020000000200000002000000020000000200000002000000020000000200000002000000020000000400000000000000020000000200000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0000000002000000000000000000000002000000000000000000000000000000020000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000
+    IsHidden: 0000000000000001000000010101010101010001010101010101
+  - Name: Universal Render Pipeline/Terrain/Lit
+    PropertyCount: 28
+    PropertyDescriptions:
+    - EnableHeightBlend
+    - Height Transition
+    - Total Layer Count
+    - Control (RGBA)
+    - Layer 3 (A)
+    - Layer 2 (B)
+    - Layer 1 (G)
+    - Layer 0 (R)
+    - Normal 3 (A)
+    - Normal 2 (B)
+    - Normal 1 (G)
+    - Normal 0 (R)
+    - Mask 3 (A)
+    - Mask 2 (B)
+    - Mask 1 (G)
+    - Mask 0 (R)
+    - Metallic 0
+    - Metallic 1
+    - Metallic 2
+    - Metallic 3
+    - Smoothness 0
+    - Smoothness 1
+    - Smoothness 2
+    - Smoothness 3
+    - BaseMap (RGB)
+    - Main Color
+    - Holes Map (RGB)
+    - Enable Instanced per-pixel normal
+    PropertyNames:
+    - _EnableHeightBlend
+    - _HeightTransition
+    - _NumLayersCount
+    - _Control
+    - _Splat3
+    - _Splat2
+    - _Splat1
+    - _Splat0
+    - _Normal3
+    - _Normal2
+    - _Normal1
+    - _Normal0
+    - _Mask3
+    - _Mask2
+    - _Mask1
+    - _Mask0
+    - _Metallic0
+    - _Metallic1
+    - _Metallic2
+    - _Metallic3
+    - _Smoothness0
+    - _Smoothness1
+    - _Smoothness2
+    - _Smoothness3
+    - _MainTex
+    - _BaseColor
+    - _TerrainHolesTexture
+    - _EnableInstancedPerPixelNormal
+    PropertyTypes: 02000000030000000200000004000000040000000400000004000000040000000400000004000000040000000400000004000000040000000400000004000000030000000300000003000000030000000300000003000000030000000300000004000000000000000400000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 1
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 00000000000000000000000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000000000000000000000000000000000000000000000000000000000000000000002000000000000000200000000000000
+    IsHidden: 01000101010101010101010101010101010101010101010101010100
+  - Name: Universal Render Pipeline/Unlit
+    PropertyCount: 14
+    PropertyDescriptions:
+    - Texture
+    - Color
+    - AlphaCutout
+    - __surface
+    - __blend
+    - __clip
+    - Src
+    - Dst
+    - ZWrite
+    - __cull
+    - Queue offset
+    - BaseMap
+    - Base Color
+    - SampleGI
+    PropertyNames:
+    - _BaseMap
+    - _BaseColor
+    - _Cutoff
+    - _Surface
+    - _Blend
+    - _AlphaClip
+    - _SrcBlend
+    - _DstBlend
+    - _ZWrite
+    - _Cull
+    - _QueueOffset
+    - _MainTex
+    - _Color
+    - _SampleGI
+    PropertyTypes: 0400000000000000030000000200000002000000020000000200000002000000020000000200000002000000040000000000000002000000
+    PropertyRangeLimits:
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0.5
+      Min: 0
+      Max: 1
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    - Def: 0
+      Min: 0
+      Max: 0
+    PropertyTexDims: 0200000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000
+    IsHidden: 0000000101010101010101010101
   - Name: Unlit/Color
     PropertyCount: 1
     PropertyDescriptions:

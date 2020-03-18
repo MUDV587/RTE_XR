@@ -1183,8 +1183,6 @@ namespace Battlehub.RTEditor
                 return false;
             }
 
-            Debug.Log("Activate window " + content.name);
-
             Region region = content.GetComponentInParent<Region>();
             if (region != null)
             {

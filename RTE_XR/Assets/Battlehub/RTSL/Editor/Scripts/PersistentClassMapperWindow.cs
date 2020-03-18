@@ -1709,11 +1709,6 @@ namespace Battlehub.RTSL
                 string key = mapping.MappedFullTypeName + " " + mapping.MappedName;
 
                 Type mappedType = mapping.MappedType;
-                if (mappedType == null)
-                {
-                    Debug.LogWarning("Mapped Type is null " + mapping.MappedAssemblyQualifiedName);
-                }
-
                 if (!propertyHs.Contains(key) || mappedType == null)
                 {
                     mapping.MappedName = null;

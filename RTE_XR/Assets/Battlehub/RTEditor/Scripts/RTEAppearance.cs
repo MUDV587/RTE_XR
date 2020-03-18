@@ -551,10 +551,10 @@ namespace Battlehub.RTEditor
                         style.ApplyImageColor(Colors.MainMenuBar);
                         break;
                     case "MainMenuButtonColor":
-                        style.ApplyMainButtonColor(Colors.MainMenuButton.Normal, Colors.MainMenuButton.Highlight, Colors.MainMenuButton.Pressed);
+                        UIMenuStyle.ApplyMainButtonColor(style, Colors.MainMenuButton.Normal, Colors.MainMenuButton.Highlight, Colors.MainMenuButton.Pressed);
                         break;
                     case "MenuItemColor":
-                        style.ApplyMenuItemColor(Colors.MenuItem.SelectionColor, Colors.MenuItem.TextColor, Colors.MenuItem.DisabledSelectionColor, Colors.MenuItem.DisabledTextColor);
+                        UIMenuStyle.ApplyMenuItemColor(style, Colors.MenuItem.SelectionColor, Colors.MenuItem.TextColor, Colors.MenuItem.DisabledSelectionColor, Colors.MenuItem.DisabledTextColor);
                         break;
                     case "ToolsToggleColor":
                         style.ApplyImageColor(Colors.ToolsToggle);
@@ -563,7 +563,7 @@ namespace Battlehub.RTEditor
                         style.ApplyImageColor(Colors.Footer);
                         break;
                     case "HierarchyColor":
-                        style.ApplyHierarchyColors(Colors.Hierarchy.NormalItem, Colors.Hierarchy.DisabledItem);
+                        UIEditorStyle.ApplyHierarchyColors(style, Colors.Hierarchy.NormalItem, Colors.Hierarchy.DisabledItem);
                         break;
                     case "ProjectFolderColor":
                         style.ApplyImageColor(Colors.ProjectFolder);
@@ -602,10 +602,10 @@ namespace Battlehub.RTEditor
                         style.ApplySelectableColor(Colors.Dropdown.Normal, Colors.Dropdown.Highlight, Colors.Dropdown.Pressed, Colors.Dropdown.Disabled, Colors.Dropdown.Selected);
                         break;
                     case "ToolCmdItemColor":
-                        style.ApplyToolCmdItemColor(Colors.ToolCmdItem.Normal, Colors.ToolCmdItem.Highlight, Colors.ToolCmdItem.Pressed);
+                        UIEditorStyle.ApplyToolCmdItemColor(style, Colors.ToolCmdItem.Normal, Colors.ToolCmdItem.Highlight, Colors.ToolCmdItem.Pressed);
                         break;
                     case "TimlineControlBackgroundColor":
-                        style.ApplyTimelineControlBackgroundColor(Colors.Secondary);
+                        UIEditorStyle.ApplyTimelineControlBackgroundColor(style, Colors.Secondary);
                         break;
                         
                 }

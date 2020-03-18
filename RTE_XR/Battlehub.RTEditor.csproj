@@ -219,7 +219,7 @@
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\UIControls\TMP_InputFieldLayoutFix.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\UIControls\TMP_InputFieldScrollFix.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\UIControls\ToolCmdItem.cs" />
-    <Compile Include="Assets\Battlehub\RTEditor\Scripts\UIControls\UIStyle.cs" />
+    <Compile Include="Assets\Battlehub\RTEditor\Scripts\UIControls\UIEditorStyle.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\WindowManager.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\WindowOverlay.cs" />
     <None Include="Assets\Battlehub\RTEditor\Demo\BundledObject\NewSurfaceShader.shader" />
