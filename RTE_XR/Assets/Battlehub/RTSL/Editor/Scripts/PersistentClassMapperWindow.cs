@@ -1670,7 +1670,6 @@ namespace Battlehub.RTSL
                 pMappings.Add(mapping);
             }
 
-
             for (int f = 0; f < fields.Length; ++f)
             {
                 FieldInfo fInfo = fields[f];
@@ -1714,7 +1713,6 @@ namespace Battlehub.RTSL
                 {
                     Debug.LogWarning("Mapped Type is null " + mapping.MappedAssemblyQualifiedName);
                 }
-
 
                 if (!propertyHs.Contains(key) || mappedType == null)
                 {
