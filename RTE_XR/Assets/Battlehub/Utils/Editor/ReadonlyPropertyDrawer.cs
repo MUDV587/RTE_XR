@@ -5,7 +5,7 @@ using UnityEditor;
 namespace Battlehub.Utils
 {
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    public class ReadOnlyDrawer : PropertyDrawer
+    public class ReadOnlyPropertyDrawer : PropertyDrawer
     {
         public override float GetPropertyHeight(SerializedProperty property,
                                                 GUIContent label)

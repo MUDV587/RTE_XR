@@ -209,6 +209,8 @@ namespace Battlehub.RTCommon
         void Delete(GameObject[] go);
         void Close();
 
+        void AddGameObjectToHierarchy(GameObject go, bool scaleStays = true);
+
         Coroutine StartCoroutine(IEnumerator method);
     }
 
@@ -223,11 +225,11 @@ namespace Battlehub.RTCommon
         [SerializeField]
         protected EventSystem m_eventSystem;
 
-        //[SerializeField]
-        //private ComponentEditorSettings m_componentEditorSettings = new ComponentEditorSettings(true, true, true, true);
-
         [SerializeField]
         private CameraLayerSettings m_cameraLayerSettings = new CameraLayerSettings(20, 21, 4, 17, 18, 19, 16);
+        [SerializeField]
+        private bool m_createHierarchyRoot = false;
+                
         [SerializeField]
         private bool m_useBuiltinUndo = true;
 
@@ -537,7 +539,22 @@ namespace Battlehub.RTCommon
             get { return transform; }
         }
 
-        private static RTEBase m_instance;
+        private static IRTE Instance
+        {
+            get { return IOC.Resolve<IRTE>("Instance"); }
+            set
+            {
+                if(value != null)
+                {
+                    IOC.Register<IRTE>("Instance", value);
+                }
+                else
+                {
+                    IOC.Unregister<IRTE>("Instance", value);
+                }
+            }
+        }
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void Init()
         {
@@ -545,15 +562,15 @@ namespace Battlehub.RTCommon
             IOC.RegisterFallback<IRTE>(RegisterRTE);
         }
 
-        private static RTEBase RegisterRTE()
+        private static IRTE RegisterRTE()
         {
-            if (m_instance == null)
+            if (Instance == null)
             {
                 GameObject editor = new GameObject("RTE");
-                editor.AddComponent<RTEBase>();
-                m_instance.BuildUp(editor);
+                RTEBase instance = editor.AddComponent<RTEBase>();
+                instance.BuildUp(editor);
             }
-            return m_instance;
+            return Instance;
         }
 
         protected virtual void BuildUp(GameObject editor)
@@ -564,7 +581,7 @@ namespace Battlehub.RTCommon
             ui.transform.SetParent(editor.transform);
 
             Canvas canvas = ui.AddComponent<Canvas>();
-            if (m_instance.IsVR)
+            if (IsVR)
             {
                 canvas.renderMode = RenderMode.WorldSpace;
                 canvas.worldCamera = Camera.main;
@@ -599,11 +616,9 @@ namespace Battlehub.RTCommon
             if (eventSystem == null)
             {
                 eventSystem = editor.AddComponent<EventSystem>();
-                if (m_instance.IsVR)
+                if (IsVR)
                 {
-                    //RTEVRInputModule inputModule = editor.AddComponent<RTEVRInputModule>();
-                    //inputModule.rayTransform = sceneView.Camera.transform;
-                    //inputModule.Editor = this;
+                    //
                 }
                 else
                 {
@@ -611,10 +626,10 @@ namespace Battlehub.RTCommon
                 }
             }
 
-           
             RectTransform rectTransform = sceneView.GetComponent<RectTransform>();
             if (rectTransform != null)
             {
+
                 RectTransform parentTransform = rectTransform.parent as RectTransform;
                 if (parentTransform != null)
                 {
@@ -626,19 +641,15 @@ namespace Battlehub.RTCommon
                 }
             }
 
-            if (m_instance.IsVR)
+            if (IsVR)
             {
                 gameObject.AddComponent<VRTracker>();
-
-                //RTEVRGraphicsRaycaster raycaster = ui.AddComponent<RTEVRGraphicsRaycaster>();
-                //raycaster.SceneWindow = sceneView;
-                //m_instance.m_raycaster = raycaster;
             }
             else
             {
-                m_instance.m_raycaster = ui.AddComponent<GraphicRaycaster>();
+                m_raycaster = ui.AddComponent<GraphicRaycaster>();
             }
-            m_instance.m_eventSystem = eventSystem;
+            m_eventSystem = eventSystem;
         }
 
         private bool m_isPaused;
@@ -668,7 +679,7 @@ namespace Battlehub.RTCommon
 
         protected virtual void Awake()
         {
-            if (m_instance != null)
+            if (Instance != null)
             {
                 Debug.LogWarning("Another instance of RTE exists");
                 return;
@@ -694,11 +705,22 @@ namespace Battlehub.RTCommon
             m_disabledInput = new DisabledInput();
             m_activeInput = m_disabledInput;
 
-            m_instance = this;
-
+            Instance = this;
+            
             bool isOpened = m_isOpened;
             m_isOpened = !isOpened;
             IsOpened = isOpened;
+
+            if(m_createHierarchyRoot)
+            {
+                GameObject hierarchyRoot = GameObject.FindGameObjectWithTag(ExposeToEditor.HierarchyRootTag);
+                if(hierarchyRoot == null)
+                {
+                    hierarchyRoot = new GameObject("HierarchyRoot");
+                }
+                hierarchyRoot.transform.position = Vector3.zero;
+                hierarchyRoot.tag = ExposeToEditor.HierarchyRootTag;
+            }
         }
         
         protected virtual void Start()
@@ -750,9 +772,9 @@ namespace Battlehub.RTCommon
             {
                 m_dragDrop.Reset();
             }
-            if (m_instance == this)
+            if (((object)Instance) == this)
             {
-                m_instance = null;
+                Instance = null;
             }
         }
 
@@ -1131,11 +1153,29 @@ namespace Battlehub.RTCommon
             }
         }
 
-
         public void Close()
         {
             IsOpened = false;
             Destroy(gameObject);
+        }
+
+        public void AddGameObjectToHierarchy(GameObject go, bool scaleStays = true)
+        {
+            if(m_createHierarchyRoot)
+            {
+                GameObject hierarchyRoot = GameObject.FindGameObjectWithTag(ExposeToEditor.HierarchyRootTag);
+                if(hierarchyRoot != null)
+                {
+                    Vector3 localScale = go.transform.localScale;
+
+                    go.transform.SetParent(hierarchyRoot.transform, true);
+
+                    if(scaleStays)
+                    {
+                        go.transform.localScale = localScale;
+                    }
+                }
+            }
         }
     }
 }

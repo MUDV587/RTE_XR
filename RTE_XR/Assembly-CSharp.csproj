@@ -62,135 +62,66 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Battlehub\ObjectToTexture\Scripts\ObjectToTexture.cs" />
-    <Compile Include="Assets\Battlehub\ObjectToTexture\Scripts\TakeSnapshot.cs" />
-    <Compile Include="Assets\Battlehub\ObjectToTexture\Scripts\TextureScale.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\DragDrop.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\DragDropTarget.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\ExposeToEditor.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\GLCamera.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\GLRenderer.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RuntimeGraphics.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RuntimeGraphicsLayer.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\SpriteGizmo.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\SpriteGizmoManager.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\UniversalRenderPipeline\ExecuteCommandBuffersRenderPassFeature.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\InputLow.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\MultitouchEmulator\EmuTouchControl.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\MultitouchEmulator\MultitouchEmulator.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\Pointer.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\RTEBaseInput.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\RuntimeUndoInput.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\VRPointer.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\LockAxes.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RTEBase.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RTEComponent.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RenderPipelineInfo.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RenderTextureCamera.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\ResourcePreviewUtility.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RuntimeObjects.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RuntimeSelection.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RuntimeTools.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RuntimeUndo.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\RuntimeWindow.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\TreeViewDataModel\TreeElement.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\TreeViewDataModel\TreeElementUtility.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\TreeViewDataModel\TreeModel.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Utils\CreateEditor.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Utils\IOC.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Utils\IRTEState.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Utils\Reflection.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Utils\Splash.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\VR\VRInputDevice.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\VR\VRTracker.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\VR\VRTrackerDebugDraw.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Demo\Scripts\DemoEditor.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Demo\Scripts\SimpleEditor.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Outline\Scripts\OutlineEffect.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Outline\Scripts\OutlineManager.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\BaseHandle.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\BaseHandleModel.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\BillboardFacingCamera.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\BoxSelection.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\BoxSelectionRenderer.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\BaseHandleInput.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\BoxSelectionInput.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\PositionHandleInput.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\RuntimeSceneInput.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\RuntimeSceneMobileInput.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\RuntimeSelectionInput.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\RuntimeSelectionInputBase.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\RuntimeToolsInput.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\Input\SceneGizmoInput.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\MouseOrbit.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\PositionHandle.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\PositionHandleModel.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\PrefabSpawnPoint.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RectTool.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RotationHandle.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RotationHandleModel.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RuntimeGrid.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RuntimeHandlesComponent.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RuntimeHandlesHitTester.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RuntimeSceneComponent.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RuntimeSelectionComponent.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\RuntimeSelectionComponentUI.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\ScaleHandle.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\ScaleHandleModel.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\SceneGizmo.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\SceneGrid.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\SelectionGizmo.cs" />
-    <Compile Include="Assets\Battlehub\RTHandles\Scripts\SelectionGizmoModel.cs" />
-    <Compile Include="Assets\Battlehub\RootPath.cs" />
-    <Compile Include="Assets\Battlehub\Utils\ArrayHelper.cs" />
-    <Compile Include="Assets\Battlehub\Utils\BtnRepeat.cs" />
-    <Compile Include="Assets\Battlehub\Utils\CursorHelper.cs" />
-    <Compile Include="Assets\Battlehub\Utils\Dispatcher\Dispatcher.cs" />
-    <Compile Include="Assets\Battlehub\Utils\Dispatcher\DispatcherTest.cs" />
-    <Compile Include="Assets\Battlehub\Utils\EditorStopwatch.cs" />
-    <Compile Include="Assets\Battlehub\Utils\EnumFlagsAttribute.cs" />
-    <Compile Include="Assets\Battlehub\Utils\ExposePropertyAttribute.cs" />
-    <Compile Include="Assets\Battlehub\Utils\GameObjectExtensions.cs" />
-    <Compile Include="Assets\Battlehub\Utils\MathHelper.cs" />
-    <Compile Include="Assets\Battlehub\Utils\PsAutoDestroy.cs" />
-    <Compile Include="Assets\Battlehub\Utils\ReadonlyAttribute.cs" />
-    <Compile Include="Assets\Battlehub\Utils\Run.cs" />
-    <Compile Include="Assets\Battlehub\Utils\StandardMaterialUtils.cs" />
-    <Compile Include="Assets\Battlehub\Utils\Strong.cs" />
-    <Compile Include="Assets\Battlehub\Utils\TextureExtensions.cs" />
-    <Compile Include="Assets\Battlehub\Utils\XmlSerializerExtensions.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Demo\Scripts\Examples\SetGetValueUsageExample.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Demo\Scripts\RTSLDemo.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\AssetBundleLoader.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\AssetDB.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\AssetLibrariesListAsset.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\AssetLibraryAsset.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\AssetLibraryInfo.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\DynamicTypeContracts.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\Internal\FilePathStorage.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\Internal\PersistentClassMapping.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\Internal\PersistentClassMappingsStorage.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentColor.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentComponent.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentGameObject.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentObject.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentQuaternion.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentRuntimeBinaryAsset.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentRuntimePrefab.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentRuntimeScene.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentRuntimeSerializableObject.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentRuntimeTextAsset.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentTransform.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentUnityEventBase.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentVector3.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\MustHavePersistentClasses\PersistentVector4.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\PersistentDescriptor.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\PersistentSurrogate.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\PlayerPrefsStorage.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\Project\Project.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\Project\Storage.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\RTSLDeps.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\Serializer.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\TypeMap.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\TypeModelCreator.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Scripts\UnityObjectFactory.cs" />
     <Compile Include="Assets\RTHandlesURP\Scripts\RenderMeshesCache.cs" />
     <Compile Include="Assets\RTHandlesURP\Scripts\RenderMeshesDemo.cs" />
     <Compile Include="Assets\RTHandlesURP\Scripts\RenderSelection.cs" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\Grid.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\Outline.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\BoxSelectionShader.shader" />
-    <None Include="Assets\Battlehub\RTCommon\Resources\RenderTextureOverlay.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\DepthMaskColorBillboardShader.shader" />
-    <None Include="Assets\Battlehub\Utils\Dispatcher\Dispatcher Documentation.txt" />
-    <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\ArrowShader.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\VertexColorClip.shader" />
-    <None Include="Assets\Battlehub\RTCommon\Resources\MobileDiffuseZTestAlways.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Battlehub\README.txt" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\RTHandlesURP\Outline\OutlineComposite.shader" />
     <None Include="Assets\RTHandlesURP\Outline\OutlineBlur.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\DepthMaskColorShader.shader" />
-    <None Include="Assets\Battlehub\RTCommon\Resources\Billboard.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Fonts\FontLicense!.txt" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\RTHandlesURP\Outline\OutlinePrepass.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\SSCircleShader.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\AxisShader.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\VertexColorBillboard.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\VertexColorClipUsingClipPlane.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\SSQuadShader.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\Shape.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\LineBillboard.shader" />
-    <None Include="Assets\Battlehub\RTCommon\Resources\SpritesZTestAlways.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\QuadShader.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\RTHandlesURP\Outline\Outline.hlsl" />
-    <None Include="Assets\Battlehub\RTHandles\Outline\Resources\UnityOutline.cginc" />
-    <None Include="Assets\Battlehub\RTHandles\Outline\Resources\UnityOutline.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\VertexColor.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\PointBillboard.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.XR.Management">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
     </Reference>
@@ -209,11 +140,20 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.XR.Interaction.Toolkit.Editor">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
@@ -245,14 +185,23 @@
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
@@ -442,6 +391,21 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>H:/UnityEditors/2019.3.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Assets/Battlehub/Deps/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Assets/Battlehub/Deps/protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ookii.Dialogs">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Assets/Battlehub/ThirdParty/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Assets/Battlehub/ThirdParty/StandaloneFileBrowser/Plugins/System.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Assets/Battlehub/ThirdParty/StandaloneFileBrowser/Plugins/System.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>H:/UnityEditors/2019.3.3f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -803,6 +767,92 @@
     <Reference Include="Boo.Lang">
       <HintPath>H:/UnityEditors/2019.3.3f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Battlehub.UIControls.csproj">
+      <Project>{7CA35A8A-4E53-9A26-97CD-DA49DF26393A}</Project>
+      <Name>Battlehub.UIControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.Tools.csproj">
+      <Project>{BE0BD84D-3536-A7AF-45A9-9BA042BBF488}</Project>
+      <Name>Battlehub.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTHandles.csproj">
+      <Project>{680BC22B-5535-EF98-654F-985309BE44A3}</Project>
+      <Name>Battlehub.RTHandles</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTSL.Interface.csproj">
+      <Project>{84284082-4F61-3705-159D-096372A14D00}</Project>
+      <Name>Battlehub.RTSL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="CodeAnalysis.csproj">
+      <Project>{E5CE7134-A450-E88D-84CD-4D804C2C6CEE}</Project>
+      <Name>CodeAnalysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTDemoGame.csproj">
+      <Project>{8E77F59E-6C3B-7EE1-9B2B-E6C95BFB5381}</Project>
+      <Name>Battlehub.RTDemoGame</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTScripting.csproj">
+      <Project>{BCA17081-3D2B-4B68-5C82-4D64379442BD}</Project>
+      <Name>Battlehub.RTScripting</Name>
+    </ProjectReference>
+    <ProjectReference Include="StandaloneFileBrowser.csproj">
+      <Project>{7D26A789-4D12-C368-EC79-F4665B070A05}</Project>
+      <Name>StandaloneFileBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTBuilder.csproj">
+      <Project>{1FEDA89C-F5A0-B3DF-474B-BBD71E3DD321}</Project>
+      <Name>Battlehub.RTBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="HSVPicker.csproj">
+      <Project>{3CA9B36D-DE7E-BF1A-A78F-49ED0BEB0047}</Project>
+      <Name>HSVPicker</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTCommon.csproj">
+      <Project>{8AE2B439-7179-05D8-9BB2-DB3C80296284}</Project>
+      <Name>Battlehub.RTCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="ProBuilderIntegration.csproj">
+      <Project>{3C5A49C2-EC1C-1788-3482-E925DEAD8FE1}</Project>
+      <Name>ProBuilderIntegration</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.Localization.csproj">
+      <Project>{BB2C46AB-D52D-B369-A548-A8EFB201FFB6}</Project>
+      <Name>Battlehub.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTEditor.csproj">
+      <Project>{EBC22289-F384-A522-5237-71AFE415E919}</Project>
+      <Name>Battlehub.RTEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTTerrain.csproj">
+      <Project>{B0879C63-AA26-EA3C-5E9C-CA02AD3533C1}</Project>
+      <Name>Battlehub.RTTerrain</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTMeasurement.csproj">
+      <Project>{FD4EBAB3-CB21-7635-B53E-6735090515D6}</Project>
+      <Name>Battlehub.RTMeasurement</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTGizmos.csproj">
+      <Project>{E8899815-B504-7B3A-84D1-536BE4E76CD4}</Project>
+      <Name>Battlehub.RTGizmos</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.ObjectToTexture.csproj">
+      <Project>{E1758EA8-CFDF-BF18-2F96-F46F03335805}</Project>
+      <Name>Battlehub.ObjectToTexture</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.Utils.csproj">
+      <Project>{DC10DFF2-76BF-8A5D-D103-3CBFA262E4BA}</Project>
+      <Name>Battlehub.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.RTDeformer.csproj">
+      <Project>{8397195A-FF71-0A22-8612-DCF0D850446A}</Project>
+      <Name>Battlehub.RTDeformer</Name>
+    </ProjectReference>
+    <ProjectReference Include="Battlehub.MeshEditor.csproj">
+      <Project>{F3646356-5CCF-33F2-FBDB-07FD3C11F20B}</Project>
+      <Name>Battlehub.MeshEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
