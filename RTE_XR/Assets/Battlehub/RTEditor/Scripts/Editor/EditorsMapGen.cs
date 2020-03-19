@@ -11,8 +11,16 @@ namespace Battlehub.RTEditor
 {
     public static class EditorsMapGen
     {
-        public const string ScriptsPath = @"/" + BHPath.Root + @"/RTEditor_Data/Scripts/Editors";
-        public const string PrefabsPath = @"/" + BHPath.Root + @"/RTEditor_Data/Prefabs/Editors";
+        public static string ScriptsPath
+        {
+            get { return @"/" + BHRoot.Path + @"/RTEditor_Data/Scripts/Editors"; }
+        }
+
+        public static string PrefabsPath
+        {
+            get { return @"/" + BHRoot.Path + @"/RTEditor_Data/Prefabs/Editors"; }
+        }
+
         public const string ScriptName = "EditorsMapAuto.cs";
 
         public static void Generate(EditorDescriptor[] descriptors, MaterialEditorDescriptor[] materialDescriptors)

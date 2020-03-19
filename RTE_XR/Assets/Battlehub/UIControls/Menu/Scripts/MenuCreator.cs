@@ -117,7 +117,7 @@ namespace Battlehub.UIControls.MenuControl
         private void Awake()
         {
             List<Assembly> assemblies = new List<Assembly>();
-            foreach(string assemblyName in BHPath.RootAssemblies)
+            foreach(string assemblyName in BHRoot.Assemblies)
             {
                 var asName = new AssemblyName();
                 asName.Name = assemblyName;

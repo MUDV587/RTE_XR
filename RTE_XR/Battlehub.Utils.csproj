@@ -62,10 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Battlehub\Utils\BHRoot.cs" />
     <Compile Include="Assets\Battlehub\Utils\Dispatcher\Dispatcher.cs" />
     <Compile Include="Assets\Battlehub\Utils\Dispatcher\DispatcherTest.cs" />
     <Compile Include="Assets\Battlehub\Utils\Editor\ReadOnlyPropertyDrawer.cs" />
-    <Compile Include="Assets\Battlehub\Utils\RootPath.cs" />
     <Compile Include="Assets\Battlehub\Utils\Scripts\CursorHelper.cs" />
     <Compile Include="Assets\Battlehub\Utils\Scripts\GameObjectExtensions.cs" />
     <Compile Include="Assets\Battlehub\Utils\Scripts\MathHelper.cs" />

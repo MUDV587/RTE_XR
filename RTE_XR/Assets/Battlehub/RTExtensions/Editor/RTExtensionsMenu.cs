@@ -8,7 +8,10 @@ namespace Battlehub.RTExtensions
 {
     public static class RTExtensionsMenu
     {
-        const string root = BHPath.Root + @"/RTExtensions/";
+        public static string Root
+        {
+            get { return BHRoot.Path + @"/RTExtensions/"; }
+        }
 
         [MenuItem("Tools/Runtime Editor/Create Extensions")]
         public static void CreateRuntimeEditor()
@@ -24,7 +27,7 @@ namespace Battlehub.RTExtensions
 
         public static GameObject InstantiatePrefab(string name)
         {
-            UnityObject prefab = AssetDatabase.LoadAssetAtPath("Assets/" + root + "/" + name, typeof(GameObject));
+            UnityObject prefab = AssetDatabase.LoadAssetAtPath("Assets/" + Root + "/" + name, typeof(GameObject));
             return (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         } 
     }

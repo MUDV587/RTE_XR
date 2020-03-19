@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEngine;
 
 namespace Battlehub.RTSL
 {
@@ -9,7 +8,7 @@ namespace Battlehub.RTSL
     {
         public static string SaveLoadRoot
         {
-            get { return @"/" + BHPath.Root + @"/RTSL"; }
+            get { return @"/" + BHRoot.Path + @"/RTSL"; }
         }
         
         public static string UserRoot
@@ -22,17 +21,17 @@ namespace Battlehub.RTSL
                     string dll = AssetDatabase.FindAssets(TypeModelDll.Replace(".dll", string.Empty)).FirstOrDefault();
                     if(string.IsNullOrEmpty(dll))
                     {
-                        return "/" + BHPath.Root + "/RTSL_Data";
+                        return "/" + BHRoot.Path + "/RTSL_Data";
                     }
                     string path = AssetDatabase.GUIDToAssetPath(dll).Replace(TypeModelDll, "");
                     if(string.IsNullOrEmpty(path))
                     {
-                        return "/" + BHPath.Root + "/RTSL_Data";
+                        return "/" + BHRoot.Path + "/RTSL_Data";
                     }
                     int firstIndex = path.IndexOf("/");
                     if(firstIndex < 0)
                     {
-                        return "/" + BHPath.Root + "/RTSL_Data";
+                        return "/" + BHRoot.Path + "/RTSL_Data";
                     }
 
                     return path.Remove(0, firstIndex + 1);
