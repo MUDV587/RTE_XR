@@ -1,13 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Battlehub.RTCommon
 {
+    public interface IRuntimeGraphicsLayer
+    {
+        void AddRenderers(Renderer[] renderers);
+        void RemoveRenderers(Renderer[] renderers);
+    }
+
     [DefaultExecutionOrder(-55)]
     [RequireComponent(typeof(RuntimeWindow))]
-    public class RuntimeGraphicsLayer : MonoBehaviour
+    public class RuntimeGraphicsLayer : MonoBehaviour, IRuntimeGraphicsLayer
     {
         [SerializeField]
         private Camera m_graphicsLayerCamera;
+
+        [SerializeField]
+        private bool m_useCommandBuffer = true;
 
         private RenderTextureCamera m_renderTextureCamera;
         
@@ -22,6 +33,7 @@ namespace Battlehub.RTCommon
         {
             m_editorWindow = GetComponent<RuntimeWindow>();
             PrepareGraphicsLayerCamera();
+            m_editorWindow.IOCContainer.RegisterFallback<IRuntimeGraphicsLayer>(this);
         }
 
         private void Start()
@@ -91,7 +103,17 @@ namespace Battlehub.RTCommon
             m_graphicsLayerCamera.transform.localScale = Vector3.one;
             m_graphicsLayerCamera.name = "GraphicsLayerCamera";
             m_graphicsLayerCamera.depth = m_editorWindow.Camera.depth + 1;
-            m_graphicsLayerCamera.cullingMask = 1 << (m_editorWindow.Editor.CameraLayerSettings.RuntimeGraphicsLayer + m_editorWindow.Index);
+
+            if (m_useCommandBuffer)
+            {
+                InitializeCommandBuffer(m_graphicsLayerCamera);
+                m_graphicsLayerCamera.cullingMask = 0;
+            }
+            else
+            {
+                m_graphicsLayerCamera.cullingMask = 1 << (m_editorWindow.Editor.CameraLayerSettings.RuntimeGraphicsLayer + m_editorWindow.Index);
+            }
+
 
             m_renderTextureCamera = m_graphicsLayerCamera.GetComponent<RenderTextureCamera>();
             if (m_renderTextureCamera == null)
@@ -188,6 +210,79 @@ namespace Battlehub.RTCommon
             }
 
         }
+
+        #region IRuntimeGraphicsLayer
+        private CommandBuffer m_cmdBuffer;
+        private List<Renderer> m_renderers = new List<Renderer>();
+
+        private void InitializeCommandBuffer(Camera camera)
+        {
+            m_cmdBuffer = new CommandBuffer();
+            m_cmdBuffer.name = "RuntimeGraphicsLayer";
+            camera.AddCommandBuffer(CameraEvent.AfterForwardAlpha, m_cmdBuffer);
+        }
+
+        public void AddRenderers(Renderer[] renderers)
+        {
+            if (m_cmdBuffer == null)
+            {
+                return;
+            }
+
+            foreach(Renderer renderer in renderers)
+            {
+                if(renderer is SkinnedMeshRenderer)
+                {
+                    SkinnedMeshRenderer skinnedMeshRenderer = (SkinnedMeshRenderer)renderer;
+                    skinnedMeshRenderer.forceMatrixRecalculationPerRender = true;
+                }
+
+                if(!renderer.forceRenderingOff)
+                {
+                    renderer.enabled = false;
+                    m_renderers.Add(renderer);
+                    UpdateCommandBuffer();
+                }
+            }
+        }
+
+        public void RemoveRenderers(Renderer[] renderers)
+        {
+            if (m_cmdBuffer == null)
+            {
+                return;
+            }
+
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer is SkinnedMeshRenderer)
+                {
+                    SkinnedMeshRenderer skinnedMeshRenderer = (SkinnedMeshRenderer)renderer;
+                    skinnedMeshRenderer.forceMatrixRecalculationPerRender = false;
+                }
+
+                renderer.enabled = true;
+                m_renderers.Remove(renderer);
+                UpdateCommandBuffer();
+            }
+        }
+
+        private void UpdateCommandBuffer()
+        {
+            m_cmdBuffer.Clear();
+            for(int i = 0; i < m_renderers.Count; ++i)
+            {
+                Renderer renderer = m_renderers[i];
+                Material[] materials = renderer.sharedMaterials;
+                for(int j = 0; j < materials.Length; ++j)
+                {
+                    Material material = materials[j];
+                    m_cmdBuffer.DrawRenderer(renderer, material, j, -1);
+                }
+            }
+        }
+
+        #endregion
     }
 }
 

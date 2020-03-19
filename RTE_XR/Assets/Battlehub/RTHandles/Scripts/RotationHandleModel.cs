@@ -526,6 +526,8 @@ namespace Battlehub.RTHandles
             UpdateCircle(m_inner.sharedMesh, m_innerCircleMesh, m_inner.transform, majorRadius, minorRadius);
             UpdateCircle(m_outer.sharedMesh, m_outerCircleMesh, m_outer.transform, outerRadius, minorRadius);
             UpdateColliders();
+
+            base.UpdateModel();
         }
     }
 

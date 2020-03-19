@@ -58,13 +58,13 @@ namespace Battlehub.RTHandles
         protected override void AwakeOverride()
         {
             base.AwakeOverride();
-            RuntimeGraphicsLayer graphicsLayer = Window.GetComponent<RuntimeGraphicsLayer>();
+            IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
             if (graphicsLayer == null)
             {
                 graphicsLayer = Window.gameObject.AddComponent<RuntimeGraphicsLayer>();
             }
 
-            SetLayer(transform, graphicsLayer.Window.Editor.CameraLayerSettings.RuntimeGraphicsLayer + Window.Index);
+            SetLayer(transform, Window.Editor.CameraLayerSettings.RuntimeGraphicsLayer + Window.Index);
         }
 
         private void SetLayer(Transform t, int layer)
@@ -112,19 +112,34 @@ namespace Battlehub.RTHandles
 
         protected virtual void OnDisable()
         {
-
+            IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
+            if (graphicsLayer != null)
+            {
+                Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
+                graphicsLayer.RemoveRenderers(renderers);
+            }
         }
 
         protected virtual void Update()
         {
-
+            
         }
 
         public virtual void UpdateModel()
         {
-
+            PushUpdatesToGraphicLayer();
         }
 
-     
+        public void PushUpdatesToGraphicLayer()
+        {
+            IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
+            if (graphicsLayer != null)
+            {
+                Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
+                graphicsLayer.RemoveRenderers(renderers);
+                graphicsLayer.AddRenderers(renderers);
+            }
+        }
+
     }
 }
