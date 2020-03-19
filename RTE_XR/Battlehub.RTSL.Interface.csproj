@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Battlehub\RTSL\Interface\Editor\RTSLPath.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\Error.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\IPersistentSurrogate.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\IPlayerPrefsStorage.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="Assets\Battlehub\RTSL\Interface\IUnityObjectFactory.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\ProjectItem.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RTSLIgnore.cs" />
-    <Compile Include="Assets\Battlehub\RTSL\Interface\RTSLPath.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RTSLVersion.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RuntimeBinaryAsset.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RuntimeShaderProfilesAsset.cs" />
