@@ -58,51 +58,17 @@ namespace Battlehub.RTHandles
         protected override void AwakeOverride()
         {
             base.AwakeOverride();
+            SetLayer(transform, Window.Editor.CameraLayerSettings.RuntimeGraphicsLayer + Window.Index);
+        }
+
+    
+        protected virtual void Start()
+        {
             IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
             if (graphicsLayer == null)
             {
                 graphicsLayer = Window.gameObject.AddComponent<RuntimeGraphicsLayer>();
             }
-
-            SetLayer(transform, Window.Editor.CameraLayerSettings.RuntimeGraphicsLayer + Window.Index);
-        }
-
-        private void SetLayer(Transform t, int layer)
-        {
-            t.gameObject.layer = layer;
-            foreach (Transform child in t)
-            {
-                SetLayer(child, layer);
-            }
-        }
-
-        public virtual void SetLock(LockObject lockObj)
-        { 
-            if(lockObj == null)
-            {
-                lockObj = new LockObject();
-            }
-            m_lockObj = lockObj;
-        }
-
-        public virtual void Select(RuntimeHandleAxis axis)
-        {
-            m_selectedAxis = axis;   
-        }
-
-        public virtual void SetScale(Vector3 scale)
-        {
-
-        }
-
-        public virtual RuntimeHandleAxis HitTest(Ray ray, out float distance)
-        {
-            distance = float.PositiveInfinity;
-            return RuntimeHandleAxis.None;
-        }
-
-        protected virtual void Start()
-        {
         }
 
         protected virtual void OnEnable()
@@ -133,12 +99,51 @@ namespace Battlehub.RTHandles
         public void PushUpdatesToGraphicLayer()
         {
             IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
-            if (graphicsLayer != null)
+            if (graphicsLayer != null && gameObject.activeInHierarchy)
             {
-                Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
+                Renderer[] renderers = GetRenderers();
                 graphicsLayer.RemoveRenderers(renderers);
                 graphicsLayer.AddRenderers(renderers);
             }
+        }
+
+        protected virtual Renderer[] GetRenderers()
+        {
+            return gameObject.GetComponentsInChildren<Renderer>(true);
+        }
+
+        private void SetLayer(Transform t, int layer)
+        {
+            t.gameObject.layer = layer;
+            foreach (Transform child in t)
+            {
+                SetLayer(child, layer);
+            }
+        }
+
+        public virtual void SetLock(LockObject lockObj)
+        {
+            if (lockObj == null)
+            {
+                lockObj = new LockObject();
+            }
+            m_lockObj = lockObj;
+        }
+
+        public virtual void Select(RuntimeHandleAxis axis)
+        {
+            m_selectedAxis = axis;
+        }
+
+        public virtual void SetScale(Vector3 scale)
+        {
+
+        }
+
+        public virtual RuntimeHandleAxis HitTest(Ray ray, out float distance)
+        {
+            distance = float.PositiveInfinity;
+            return RuntimeHandleAxis.None;
         }
 
     }

@@ -3,34 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Battlehub.RTCommon;
 
 namespace Battlehub.RTEditor
 {
-    public interface IEditorsMap
-    {
-        Dictionary<Type, IComponentDescriptor> ComponentDescriptors
-        {
-            get;
-        }
-
-        PropertyDescriptor[] GetPropertyDescriptors(Type componentType, ComponentEditor componentEditor = null, object converter = null);
-
-        void RegisterEditor(ComponentEditor editor);
-        void RegisterEditor(PropertyEditor editor);
-        void AddMapping(Type type, Type editorType, bool enabled, bool isPropertyEditor);
-        void AddMapping(Type type, GameObject editor, bool enabled, bool isPropertyEditor);
-        void RemoveMapping(Type type);
-
-        bool IsObjectEditorEnabled(Type type);
-        bool IsPropertyEditorEnabled(Type type, bool strict = false);
-        bool IsMaterialEditorEnabled(Shader shader);
-        GameObject GetObjectEditor(Type type, bool strict = false);
-        GameObject GetPropertyEditor(Type type, bool strict = false);
-        GameObject GetMaterialEditor(Shader shader, bool strict = false);
-        Type[] GetEditableTypes();
-    }
-
-    public partial class EditorsMap : IEditorsMap
+    [DefaultExecutionOrder(-100)]
+    public partial class EditorsMap : MonoBehaviour, IEditorsMap
     {
         private class EditorDescriptor
         {
@@ -58,7 +36,6 @@ namespace Battlehub.RTEditor
             }
         }
 
-
         private GameObject m_defaultMaterialEditor;
         private Dictionary<Shader, MaterialEditorDescriptor> m_materialMap = new Dictionary<Shader, MaterialEditorDescriptor>();
         private Dictionary<Type, EditorDescriptor> m_map = new Dictionary<Type, EditorDescriptor>();
@@ -78,8 +55,10 @@ namespace Battlehub.RTEditor
             set;
         }
 
-        public EditorsMap()
+        private void Awake()
         {
+            IOC.RegisterFallback<IEditorsMap>(this);
+            
             var type = typeof(IComponentDescriptor);
 #if !UNITY_WSA || UNITY_EDITOR
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -115,6 +94,18 @@ namespace Battlehub.RTEditor
             }
 
             LoadMap();
+        }
+
+        private void Start()
+        {
+            GameObject voidComponentEditor = new GameObject("VoidComponentEditor");
+            voidComponentEditor.transform.SetParent(transform, false);
+            VoidComponentEditor = voidComponentEditor.AddComponent<VoidComponentEditor>();
+        }
+
+        private void OnDestroy()
+        {
+            IOC.UnregisterFallback<IEditorsMap>(this);
         }
 
         public PropertyDescriptor[] GetPropertyDescriptors(Type componentType, ComponentEditor componentEditor = null, object converter = null)

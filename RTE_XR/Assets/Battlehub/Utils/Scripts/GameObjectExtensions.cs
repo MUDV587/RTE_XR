@@ -20,8 +20,7 @@ namespace Battlehub.Utils
                 throw new System.InvalidOperationException("Does not work in edit mode");
                 #endif
             }
-            return go.scene.buildIndex < 0;
-            
+            return go.scene.buildIndex < 0 && go.scene.path == null;
         }
 
         public static Bounds CalculateBounds(this GameObject g)

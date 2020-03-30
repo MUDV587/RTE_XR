@@ -74,6 +74,7 @@
     <Compile Include="Assets\Battlehub\RTSL\Interface\RTSLIgnore.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RTSLVersion.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RuntimeBinaryAsset.cs" />
+    <Compile Include="Assets\Battlehub\RTSL\Interface\RuntimeScene.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RuntimeShaderProfilesAsset.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RuntimeShaderUtil.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Interface\RuntimeTextAsset.cs" />

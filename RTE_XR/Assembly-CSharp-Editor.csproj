@@ -62,6 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Battlehub\RTEditor_External\Editor\EditorsMapGen.cs" />
+    <Compile Include="Assets\Battlehub\RTEditor_External\Editor\EditorsMapWindow.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\Editor\RTExtensionsMenu.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Editor\CodeGenTemplates\ParticleSystemModules\PersistentParticleSystemNestedCollisionModule_RTSL_Template.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Editor\CodeGenTemplates\ParticleSystemModules\PersistentParticleSystemNestedCustomDataModule_RTSL_Template.cs" />

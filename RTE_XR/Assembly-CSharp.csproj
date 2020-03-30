@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Battlehub\RTEditor_External\EditorsMap.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Demo\Scripts\Examples\SetGetValueUsageExample.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Demo\Scripts\RTSLDemo.cs" />
     <Compile Include="Assets\Battlehub\RTSL\Scripts\AssetBundleLoader.cs" />
@@ -100,6 +101,8 @@
     <Compile Include="Assets\RTHandlesURP\Scripts\RenderMeshesCache.cs" />
     <Compile Include="Assets\RTHandlesURP\Scripts\RenderMeshesDemo.cs" />
     <Compile Include="Assets\RTHandlesURP\Scripts\RenderSelection.cs" />
+    <Compile Include="Assets\XRInteractionToolkit\DeactivateOnLocomotion.cs" />
+    <Compile Include="Assets\XRInteractionToolkit\ILineRenderableProxy.cs" />
     <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Battlehub\ThirdParty\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Battlehub\README.txt" />

@@ -123,8 +123,6 @@
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Dialogs\SelectObjectDialog.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Dialogs\SettingsComponent.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Dialogs\SettingsDialog.cs" />
-    <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\EditorsMapGen.cs" />
-    <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\EditorsMapWindow.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\RTEAppearanceEditor.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\RuntimeEditorEditor.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\RuntimeEditorMenu.cs" />
@@ -155,9 +153,9 @@
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\ComponentDescriptors\TransformComponentDescriptor.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\ComponentEditor.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\CustomSelectionComponent.cs" />
-    <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\EditorsMap.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\EditorsMapStorage.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\GameObjectEditor.cs" />
+    <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\IEditorsMap.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\MaterialEditor.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\PropertyEditors\ArrayEditor.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\PropertyEditors\BoolEditor.cs" />

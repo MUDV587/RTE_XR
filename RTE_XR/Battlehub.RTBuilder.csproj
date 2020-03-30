@@ -64,6 +64,10 @@
   <ItemGroup>
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\RTSL\Mappings\Editor\RegisterTemplates.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\DuplicateObjectsHandler.cs" />
+    <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\ManualUVEditor.cs" />
+    <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\ManualUVEditorView.cs" />
+    <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\ManualUVRenderer.cs" />
+    <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\ManualUVSceneComponent.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\MaterialPalette.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\MaterialPaletteEditor.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\MaterialPaletteItem.cs" />
@@ -77,14 +81,13 @@
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\RaycastHelper.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\UVAutoEditorPanel.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\UVEditor.cs" />
-    <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\UVManualEditorView.cs" />
-    <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\UVModePanel.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\Wireframe.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\WireframeIndividualObject.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\WireframeMesh.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Scripts\WireframeToggle.cs" />
     <None Include="Assets\Battlehub\RTExtensions\RTBuilder\Resources\RTBuilder.StringResources.en-US.xml" />
     <None Include="Assets\Battlehub\RTExtensions\RTBuilder\Battlehub.RTBuilder.asmdef" />
+    <None Include="Assets\Battlehub\RTExtensions\RTBuilder\Resources\Materials\PBTexturePreview.shader" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
