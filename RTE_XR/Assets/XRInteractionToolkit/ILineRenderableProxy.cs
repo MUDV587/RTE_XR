@@ -8,7 +8,7 @@ namespace Battlehub.XRInteractionToolkit
         private ILineRenderable m_renderable;
 
         [SerializeField]
-        private GameObject m_lineRenderable;
+        private GameObject m_lineRenderable = null;
 
         private void Awake()
         {

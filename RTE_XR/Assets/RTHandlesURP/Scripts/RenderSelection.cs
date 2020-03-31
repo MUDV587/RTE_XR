@@ -1,4 +1,6 @@
 ﻿using Battlehub.RTCommon;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
@@ -6,7 +8,6 @@ using UnityEngine.Rendering.Universal;
 
 namespace Battlehub.RTHandles.URP
 {
-   
     public class RenderSelection : ScriptableRendererFeature
     {
         [System.Serializable]
@@ -17,6 +18,8 @@ namespace Battlehub.RTHandles.URP
             public Material BlurMaterial = null;
             public Material CompositeMaterial = null;
             public Color OutlineColor = new Color32(255, 128, 0, 255);
+            public string MeshesCacheName = "SelectedMeshes";
+            public string RenderersCacheName = "SelectedRenderers";
 
             [Range(0.5f, 10f)]
             public float OutlineStength = 5;
@@ -32,7 +35,8 @@ namespace Battlehub.RTHandles.URP
         {
             public RenderSelectionSettings Settings;
 
-            private IRenderMeshesCache m_cache;
+            private IRenderMeshesCache m_meshesCache;
+            private IRenderersCache m_renderersCache;
                         
             private int m_prepassId;
             private RenderTargetIdentifier m_prepassRT;
@@ -51,7 +55,8 @@ namespace Battlehub.RTHandles.URP
 
             public void Setup(RenderTargetIdentifier camerColorRT)
             {
-                m_cache = IOC.Resolve<IRenderMeshesCache>();
+                m_meshesCache = IOC.Resolve<IRenderMeshesCache>(Settings.MeshesCacheName);
+                m_renderersCache = IOC.Resolve<IRenderersCache>(Settings.RenderersCacheName);
                 m_cameraColorRT = camerColorRT;
             }
 
@@ -69,7 +74,7 @@ namespace Battlehub.RTHandles.URP
 
             public override void Configure(CommandBuffer cmd, RenderTextureDescriptor camDesc)
             {
-                if(m_cache == null)
+                if((m_meshesCache == null || m_meshesCache.IsEmpty) && (m_renderersCache == null || m_renderersCache.IsEmpty))
                 {
                     return;
                 }
@@ -99,20 +104,40 @@ namespace Battlehub.RTHandles.URP
 
             public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
             {
-                if (m_cache == null)
+                if ((m_meshesCache == null || m_meshesCache.IsEmpty) && (m_renderersCache == null || m_renderersCache.IsEmpty))
                 {
                     return;
                 }
 
                 CommandBuffer cmd = CommandBufferPool.Get("RenderSelection");
                 
-                RenderMeshesBatch[] batches = m_cache.Batches;
-                for (int i = 0; i < batches.Length; ++i)
+                if(m_meshesCache != null)
                 {
-                    RenderMeshesBatch batch = batches[i];
-                    for (int j = 0; j < batch.Mesh.subMeshCount; ++j)
+                    IList<RenderMeshesBatch> batches = m_meshesCache.Batches;
+                    for (int i = 0; i < batches.Count; ++i)
                     {
-                        cmd.DrawMeshInstanced(batch.Mesh, j, Settings.PrepassMaterial, 0, batch.Matrices, batch.Matrices.Length);
+                        RenderMeshesBatch batch = batches[i];
+                        for (int j = 0; j < batch.Mesh.subMeshCount; ++j)
+                        {
+                            if(batch.Mesh != null)
+                            {
+                                cmd.DrawMeshInstanced(batch.Mesh, j, Settings.PrepassMaterial, 0, batch.Matrices, batch.Matrices.Length);
+                            }
+                        }
+                    }
+                }
+
+            
+                if(m_renderersCache != null)
+                {
+                    IList<Renderer> renderers = m_renderersCache.Renderers;
+                    for(int i = 0; i < renderers.Count; ++i)
+                    {
+                        Renderer renderer = renderers[i];
+                        if(renderer != null && renderer.enabled && renderer.gameObject.activeSelf)
+                        {
+                            cmd.DrawRenderer(renderer, Settings.PrepassMaterial);
+                        }
                     }
                 }
 
@@ -135,7 +160,7 @@ namespace Battlehub.RTHandles.URP
 
             public override void FrameCleanup(CommandBuffer cmd)
             {
-                if (m_cache == null)
+                if ((m_meshesCache == null || m_meshesCache.IsEmpty) && (m_renderersCache == null || m_renderersCache.IsEmpty))
                 {
                     return;
                 }

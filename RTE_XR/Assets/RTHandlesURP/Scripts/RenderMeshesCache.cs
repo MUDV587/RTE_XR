@@ -4,6 +4,29 @@ using UnityEngine;
 
 namespace Battlehub.RTHandles.URP
 {
+    public interface IRenderMeshesCache
+    {
+        bool AutoRefresh
+        {
+            get;
+            set;
+        }
+
+        bool IsEmpty
+        {
+            get;
+        }
+
+        IList<RenderMeshesBatch> Batches
+        {
+            get;
+        }
+        void Add(Mesh mesh, Transform transform);
+        void Remove(Mesh mesh, Transform transform);
+        void Refresh(int maxBatchSize = 128);
+        void Clear();
+    }
+
     public class RenderMeshesBatch
     {
         public readonly Mesh Mesh;
@@ -42,52 +65,40 @@ namespace Battlehub.RTHandles.URP
         }
     }
 
-    public interface IRenderMeshesCache
-    {
-        Material Material
-        {
-            get;
-        }
-
-        RenderMeshesBatch[] Batches
-        {
-            get;
-        }
-        void Add(Mesh mesh, Transform transform);
-        void Remove(Mesh mesh, Transform transform);
-        void Refresh(int maxBatchSize = 128);
-        void Clear();
-    }
-
     public class RenderMeshesCache : MonoBehaviour, IRenderMeshesCache
     {
-        private RenderMeshesBatch[] m_batches = new RenderMeshesBatch[0];
-        public RenderMeshesBatch[] Batches
+        public bool AutoRefresh
         {
-            get { return m_batches; }
+            get { return enabled; }
+            set { enabled = value; }
         }
 
-        [SerializeField]
-        private Material m_material = null;
-        public Material Material
+        public bool IsEmpty
         {
-            get { return m_material; }
+            get { return m_batches.Count == 0; }
+        }
+
+
+        private readonly List<RenderMeshesBatch> m_batches = new List<RenderMeshesBatch>();
+        public IList<RenderMeshesBatch> Batches
+        {
+            get { return m_batches; }
         }
 
         private Dictionary<Mesh, List<Transform>> m_meshToTransform = new Dictionary<Mesh, List<Transform>>();
         private void Awake()
         {
-            IOC.RegisterFallback<IRenderMeshesCache>(this);
+            IOC.Register<IRenderMeshesCache>(name, this);
         }
 
         private void OnDestroy()
         {
-            IOC.UnregisterFallback<IRenderMeshesCache>(this);
+            IOC.Unregister<IRenderMeshesCache>(name, this);
         }
 
         private void Update()
         {
-            for(int i = 0; i < m_batches.Length; ++i)
+            for(int i = 0; i < m_batches.Count; ++i)
             {
                 m_batches[i].Refresh();
             }
@@ -120,11 +131,13 @@ namespace Battlehub.RTHandles.URP
         public void Clear()
         {
             m_meshToTransform.Clear();
+            m_batches.Clear();
         }
 
         public void Refresh(int maxBatchSize = 128)
         {
-            List<RenderMeshesBatch> batches = new List<RenderMeshesBatch>();
+            m_batches.Clear();
+
             foreach (KeyValuePair<Mesh, List<Transform>> kvp in m_meshToTransform)
             {
                 if(kvp.Key == null)
@@ -133,7 +146,7 @@ namespace Battlehub.RTHandles.URP
                 }
 
                 RenderMeshesBatch batch = new RenderMeshesBatch(kvp.Key);
-                batches.Add(batch);
+                m_batches.Add(batch);
 
                 List<Transform> transforms = kvp.Value;
                 int index = 0;
@@ -142,7 +155,7 @@ namespace Battlehub.RTHandles.URP
                     if (index == maxBatchSize)
                     {
                         batch = new RenderMeshesBatch(kvp.Key);
-                        batches.Add(batch);
+                        m_batches.Add(batch);
                         index = 0;
                     }
 
@@ -150,8 +163,6 @@ namespace Battlehub.RTHandles.URP
                     index++;
                 }
             }
-
-            m_batches = batches.ToArray();
         }
     }
 }
