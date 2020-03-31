@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using UnityEditor;
-using UnityEngine.EventSystems;
 
 using UnityObject = UnityEngine.Object;
 
@@ -32,3 +33,4 @@ namespace Battlehub.RTExtensions
         } 
     }
 }
+#endif

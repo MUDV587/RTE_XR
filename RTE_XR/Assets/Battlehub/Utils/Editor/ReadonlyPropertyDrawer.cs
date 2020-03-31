@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 namespace Battlehub.Utils
@@ -22,3 +23,4 @@ namespace Battlehub.Utils
         }
     }
 }
+#endif

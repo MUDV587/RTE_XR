@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 using System.Linq;
@@ -292,5 +293,5 @@ namespace Battlehub.RTEditor
             EditorGUIUtility.labelWidth = 0;
         }
     }
-
 }
+#endif

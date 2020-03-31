@@ -124,9 +124,7 @@
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Dialogs\SettingsComponent.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Dialogs\SettingsDialog.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\RTEAppearanceEditor.cs" />
-    <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\RuntimeEditorEditor.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\RuntimeEditorMenu.cs" />
-    <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editor\SelectFolderDialog.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\EditorOverride.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\AddComponentControl.cs" />
     <Compile Include="Assets\Battlehub\RTEditor\Scripts\Editors\ColliderEditor.cs" />

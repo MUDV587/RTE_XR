@@ -1,13 +1,9 @@
-﻿using UnityEngine;
-
-using System.Collections;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 namespace Battlehub.Utils
 {
-    /// <summary>
-    /// http://crappycoding.com/2014/12/create-gameobject-image-using-render-textures/
-    /// </summary>
     [CustomEditor(typeof(ObjectToTexture))]
     public class ObjectImageEditor : Editor
     {
@@ -24,3 +20,4 @@ namespace Battlehub.Utils
 
     }
 }
+#endif

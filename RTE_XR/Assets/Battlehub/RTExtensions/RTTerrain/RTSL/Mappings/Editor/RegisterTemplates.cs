@@ -1,4 +1,5 @@
-﻿using Battlehub.RTSL;
+﻿#if UNITY_EDITOR
+using Battlehub.RTSL;
 using UnityEditor;
 
 namespace Battlehub.RTTerrain
@@ -12,3 +13,4 @@ namespace Battlehub.RTTerrain
         }
     }
 }
+#endif

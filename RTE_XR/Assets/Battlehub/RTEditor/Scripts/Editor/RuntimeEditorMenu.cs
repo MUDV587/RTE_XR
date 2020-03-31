@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using UnityEngine.EventSystems;
 
@@ -54,3 +55,4 @@ namespace Battlehub.RTEditor
         } 
     }
 }
+#endif

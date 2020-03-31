@@ -1,6 +1,6 @@
-﻿using Battlehub.RTSL;
+﻿#if UNITY_EDITOR
+using Battlehub.RTSL;
 using UnityEditor;
-using UnityEngine;
 
 namespace Battlehub.RTBuilder
 {
@@ -14,3 +14,4 @@ namespace Battlehub.RTBuilder
         }
     }
 }
+#endif
