@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 
 using Battlehub.RTCommon;
+using System;
 
 namespace Battlehub.RTHandles
 {
-    /// <summary>
-    /// Draws bounding box of selected object
-    /// </summary>
+    [Obsolete]
     public class SelectionGizmo : MonoBehaviour, IGL
     {
         [HideInInspector]

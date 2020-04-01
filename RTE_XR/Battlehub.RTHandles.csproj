@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Battlehub\RTHandles\Demo\Scripts\DemoEditor.cs" />
     <Compile Include="Assets\Battlehub\RTHandles\Demo\Scripts\SimpleEditor.cs" />
+    <Compile Include="Assets\Battlehub\RTHandles\Outline\Scripts\IOutlineManager.cs" />
     <Compile Include="Assets\Battlehub\RTHandles\Outline\Scripts\OutlineEffect.cs" />
     <Compile Include="Assets\Battlehub\RTHandles\Outline\Scripts\OutlineManager.cs" />
     <Compile Include="Assets\Battlehub\RTHandles\Scripts\BaseHandle.cs" />

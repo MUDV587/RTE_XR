@@ -27,7 +27,10 @@ namespace Battlehub.RTHandles.URP
                 }
             }
 
-            m_meshesCache.Refresh();
+            if(m_meshesCache != null)
+            {
+                m_meshesCache.Refresh();
+            }
 
             for (int i = 0; i < m_renderers.Length; ++i)
             {

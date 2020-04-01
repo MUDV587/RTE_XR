@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/RTE_VR.unity
     guid: dfeaecaaa0c24214882eb19bda63ccd1
+  - enabled: 1
+    path: Assets/Battlehub/RTEditor/Demo/RTEditor.unity
+    guid: 4215a0f4652834c40978a0dc505ae257
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2dc06c2fbab0e68408f374c3e44078db,
       type: 2}

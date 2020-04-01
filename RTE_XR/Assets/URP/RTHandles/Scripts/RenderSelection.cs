@@ -136,7 +136,12 @@ namespace Battlehub.RTHandles.URP
                         Renderer renderer = renderers[i];
                         if(renderer != null && renderer.enabled && renderer.gameObject.activeSelf)
                         {
-                            cmd.DrawRenderer(renderer, Settings.PrepassMaterial);
+                            Material[] materials = renderer.sharedMaterials;
+
+                            for(int j = 0; j < materials.Length; ++j)
+                            {
+                                cmd.DrawRenderer(renderer, Settings.PrepassMaterial, j);
+                            }
                         }
                     }
                 }
