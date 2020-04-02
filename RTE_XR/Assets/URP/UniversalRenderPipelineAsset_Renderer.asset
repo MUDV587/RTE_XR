@@ -18,6 +18,11 @@ MonoBehaviour:
     BlurMaterial: {fileID: 2100000, guid: 83801d353f0527248ac77a7c6c361822, type: 2}
     CompositeMaterial: {fileID: 2100000, guid: b1a9df132011e41439c60e3ba885ee04, type: 2}
     OutlineColor: {r: 1, g: 0.5019608, b: 0, a: 1}
+    MeshesCacheName: SelectedMeshes
+    RenderersCacheName: SelectedRenderers
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 31588352
     OutlineStength: 5
     BlurSize: 1
 --- !u!114 &11400000
@@ -34,6 +39,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RendererFeatures:
   - {fileID: -9091675387966045723}
+  - {fileID: 8995506723397198014}
   postProcessData: {fileID: 11400000, guid: 37cc09377b4f9e947bf705db52309eb2, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -56,3 +62,17 @@ MonoBehaviour:
     failOperation: 0
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
+--- !u!114 &8995506723397198014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e0986c3aae1a54bba9399913fb56cd, type: 3}
+  m_Name: ExecuteCommandBuffers
+  m_EditorClassIdentifier: 
+  m_settings:
+    RenderPassEvent: 450

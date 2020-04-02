@@ -8,7 +8,6 @@ namespace Battlehub.RTCommon
     public interface IRuntimeGraphicsLayer
     {
         void BeginRefresh();
-        void Refresh();
         void EndRefresh();
         void AddRenderers(Renderer[] renderers);
         void RemoveRenderers(Renderer[] renderers);
@@ -246,7 +245,7 @@ namespace Battlehub.RTCommon
         {
             m_cmdBuffer = new CommandBuffer();
             m_cmdBuffer.name = "RuntimeGraphicsLayer";
-            camera.AddCommandBuffer(CameraEvent.AfterForwardAlpha, m_cmdBuffer);
+            camera.AddCommandBuffer(CameraEvent.BeforeImageEffects, m_cmdBuffer);
         }
 
         public void BeginRefresh()
@@ -334,7 +333,7 @@ namespace Battlehub.RTCommon
             }
         }
 
-        public void Refresh()
+        private void Refresh()
         {
             m_cmdBuffer.Clear();
             for(int i = 0; i < m_renderers.Count; ++i)

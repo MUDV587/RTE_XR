@@ -2,12 +2,17 @@
 
 namespace Battlehub.RTCommon
 {
-    public class SpriteGizmo : MonoBehaviour, IGL
+    public class SpriteGizmo : RTEComponent
     {
         public Material Material;
+        private static Mesh m_quadMesh;
+        private Vector3 m_position;
+        private Quaternion m_rotation;
+
         [SerializeField, HideInInspector]
         private SphereCollider m_collider;
         private SphereCollider m_destroyedCollider;
+        private IRuntimeGraphicsLayer m_graphicsLayer;
         [SerializeField]
         private float m_scale = 1.0f;
         public float Scale
@@ -19,28 +24,45 @@ namespace Battlehub.RTCommon
                 {
                     m_scale = value;
                     UpdateCollider();
+                    Refresh();
                 }
             }
         }
-
-        private void Awake()
+        protected override void AwakeOverride()
         {
-            if (GLRenderer.Instance == null)
+            if(m_quadMesh == null)
             {
-                GameObject glRenderer = new GameObject();
-                glRenderer.name = "GLRenderer";
-                glRenderer.AddComponent<GLRenderer>();
+                m_quadMesh = RuntimeGraphics.CreateQuadMesh();
             }
-        }     
+
+            base.AwakeOverride();
+            m_graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
+        }
+
+        private void Update()
+        {
+            if(m_position != transform.position || m_rotation != transform.rotation)
+            {
+                m_position = transform.position;
+                m_rotation = transform.rotation;
+                Refresh();
+            }
+        }
+
+        private void Refresh()
+        {
+            m_graphicsLayer.RemoveMesh(m_quadMesh);
+            m_graphicsLayer.AddMesh(m_quadMesh, Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one * m_scale), Material);
+        }
+
+        protected override void OnDestroyOverride()
+        {
+            base.OnDestroyOverride();
+            m_graphicsLayer.RemoveMesh(m_quadMesh);
+        }
 
         private void OnEnable()
         {
-            GLRenderer glRenderer = GLRenderer.Instance;
-            if (glRenderer)
-            {
-                glRenderer.Add(this);
-            }
-
             m_collider = GetComponent<SphereCollider>();
 
             if (m_collider == null || m_collider == m_destroyedCollider)
@@ -60,12 +82,6 @@ namespace Battlehub.RTCommon
 
         private void OnDisable()
         {
-            GLRenderer glRenderer = GLRenderer.Instance;
-            if (glRenderer)
-            {
-                glRenderer.Remove(this);
-            }
-
             if(m_collider != null)
             {
                 Destroy(m_collider);
@@ -82,12 +98,7 @@ namespace Battlehub.RTCommon
             }
         }
 
-
-        void IGL.Draw(int cullingMask, Camera camera)
-        {
-            Material.SetPass(0);
-            RuntimeGraphics.DrawQuad(Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one * m_scale));
-        }
+      
     }
 }
 

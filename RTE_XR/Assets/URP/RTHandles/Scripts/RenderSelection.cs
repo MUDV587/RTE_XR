@@ -20,6 +20,7 @@ namespace Battlehub.RTHandles.URP
             public Color OutlineColor = new Color32(255, 128, 0, 255);
             public string MeshesCacheName = "SelectedMeshes";
             public string RenderersCacheName = "SelectedRenderers";
+            public LayerMask LayerMask = -1;
 
             [Range(0.5f, 10f)]
             public float OutlineStength = 5;
@@ -35,7 +36,7 @@ namespace Battlehub.RTHandles.URP
         {
             public RenderSelectionSettings Settings;
 
-            private IRenderMeshesCache m_meshesCache;
+            private IMeshesCache m_meshesCache;
             private IRenderersCache m_renderersCache;
                         
             private int m_prepassId;
@@ -53,10 +54,10 @@ namespace Battlehub.RTHandles.URP
             private int m_outlineStrengthId;
             private int m_blurDirectionId;
 
-            public void Setup(RenderTargetIdentifier camerColorRT)
+            public void Setup(RenderTargetIdentifier camerColorRT, IMeshesCache meshesCache, IRenderersCache renderersCache)
             {
-                m_meshesCache = IOC.Resolve<IRenderMeshesCache>(Settings.MeshesCacheName);
-                m_renderersCache = IOC.Resolve<IRenderersCache>(Settings.RenderersCacheName);
+                m_meshesCache = meshesCache;
+                m_renderersCache = renderersCache;
                 m_cameraColorRT = camerColorRT;
             }
 
@@ -74,11 +75,7 @@ namespace Battlehub.RTHandles.URP
 
             public override void Configure(CommandBuffer cmd, RenderTextureDescriptor camDesc)
             {
-                if((m_meshesCache == null || m_meshesCache.IsEmpty) && (m_renderersCache == null || m_renderersCache.IsEmpty))
-                {
-                    return;
-                }
-                
+
                 var width = camDesc.width;
                 var height = camDesc.height;
 
@@ -104,11 +101,6 @@ namespace Battlehub.RTHandles.URP
 
             public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
             {
-                if ((m_meshesCache == null || m_meshesCache.IsEmpty) && (m_renderersCache == null || m_renderersCache.IsEmpty))
-                {
-                    return;
-                }
-
                 CommandBuffer cmd = CommandBufferPool.Get("RenderSelection");
                 
                 if(m_meshesCache != null)
@@ -140,7 +132,10 @@ namespace Battlehub.RTHandles.URP
 
                             for(int j = 0; j < materials.Length; ++j)
                             {
-                                cmd.DrawRenderer(renderer, Settings.PrepassMaterial, j);
+                                if(materials[j] != null)
+                                {
+                                    cmd.DrawRenderer(renderer, Settings.PrepassMaterial, j);
+                                }
                             }
                         }
                     }
@@ -165,11 +160,6 @@ namespace Battlehub.RTHandles.URP
 
             public override void FrameCleanup(CommandBuffer cmd)
             {
-                if ((m_meshesCache == null || m_meshesCache.IsEmpty) && (m_renderersCache == null || m_renderersCache.IsEmpty))
-                {
-                    return;
-                }
-
                 cmd.ReleaseTemporaryRT(m_prepassId);
                 cmd.ReleaseTemporaryRT(m_blurredId);
                 cmd.ReleaseTemporaryRT(m_tmpTexId);
@@ -177,6 +167,7 @@ namespace Battlehub.RTHandles.URP
         }
 
         private RenderSelectionPass m_scriptablePass;
+        
         public override void Create()
         {
             m_scriptablePass = new RenderSelectionPass();
@@ -186,9 +177,20 @@ namespace Battlehub.RTHandles.URP
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
-            var src = renderer.cameraColorTarget;
-            m_scriptablePass.Setup(src);
-            renderer.EnqueuePass(m_scriptablePass);
+            if ((renderingData.cameraData.camera.cullingMask & m_settings.LayerMask) != 0)
+            {
+                IMeshesCache meshesCache = IOC.Resolve<IMeshesCache>(m_settings.MeshesCacheName);
+                IRenderersCache renderersCache = IOC.Resolve<IRenderersCache>(m_settings.RenderersCacheName);
+
+                if ((meshesCache == null || meshesCache.IsEmpty) && (renderersCache == null || renderersCache.IsEmpty))
+                {
+                    return;
+                }
+
+                var src = renderer.cameraColorTarget;
+                m_scriptablePass.Setup(src, meshesCache, renderersCache); 
+                renderer.EnqueuePass(m_scriptablePass);
+            }
         }
     }
 

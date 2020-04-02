@@ -31,6 +31,7 @@ namespace Battlehub.RTHandles
         private float m_aspect;
         private Camera m_camera;
         private RenderTextureCamera m_renderTextureCamera;
+        private CommandBuffer m_commandBuffer;
 
         private float m_xAlpha = 1.0f;
         private float m_yAlpha = 1.0f;
@@ -167,7 +168,12 @@ namespace Battlehub.RTHandles
             m_colliders = new[] { m_colliderProj, m_colliderUp, m_colliderDown, m_colliderRight, m_colliderLeft, m_colliderForward, m_colliderBackward };
             DisableColliders();
 
+            m_commandBuffer = new CommandBuffer();
+            m_commandBuffer.name = "SceneGizmoCommandBuffer";
+
             m_camera = GetComponent<Camera>();
+            m_camera.AddCommandBuffer(CameraEvent.BeforeImageEffects, m_commandBuffer);
+            
             m_renderTextureCamera = GetComponent<RenderTextureCamera>();
             if (m_renderTextureCamera == null)
             {
@@ -230,9 +236,9 @@ namespace Battlehub.RTHandles
             {
                 gameObject.AddComponent<SceneGizmoInput>();
             }
-            #if UNITY_2019_1_OR_NEWER
-            RenderPipelineManager.endCameraRendering += OnEndCameraRendering;
-            #endif
+            //#if UNITY_2019_1_OR_NEWER
+            //RenderPipelineManager.endCameraRendering += OnEndCameraRendering;
+            //#endif
         }
 
         protected virtual void Start()
@@ -259,9 +265,14 @@ namespace Battlehub.RTHandles
                     Editor.Tools.ActiveTool = null;
                 }
             }
-            #if UNITY_2019_1_OR_NEWER
-            RenderPipelineManager.endCameraRendering -= OnEndCameraRendering;
-            #endif
+
+            if(m_camera != null)
+            {
+                m_camera.RemoveCommandBuffer(CameraEvent.BeforeImageEffects, m_commandBuffer);
+            }
+            //#if UNITY_2019_1_OR_NEWER
+            //RenderPipelineManager.endCameraRendering -= OnEndCameraRendering;
+            //#endif
         }
 
         protected virtual void OnEnable()
@@ -295,20 +306,20 @@ namespace Battlehub.RTHandles
             IsOrthographic = !Window.Camera.orthographic;
         }
 
-#if UNITY_2019_1_OR_NEWER
-        private void OnEndCameraRendering(ScriptableRenderContext context, Camera camera)
-        {
-            if(m_camera == camera)
-            {
-                Appearance.DoSceneGizmo(camera, GetGizmoPosition(), Quaternion.identity, m_selectedAxis, Size.y * Appearance.SceneGizmoScale / 96, m_textColor, m_xAlpha, m_yAlpha, m_zAlpha);
-            }
-        }
-#endif
+//#if UNITY_2019_1_OR_NEWER
+//        private void OnEndCameraRendering(ScriptableRenderContext context, Camera camera)
+//        {
+//            if(m_camera == camera)
+//            {
+//                Appearance.DoSceneGizmo(camera, GetGizmoPosition(), Quaternion.identity, m_selectedAxis, Size.y * Appearance.SceneGizmoScale / 96, m_textColor, m_xAlpha, m_yAlpha, m_zAlpha);
+//            }
+//        }
+//#endif
 
-        private void OnPostRender()
-        {
-            Appearance.DoSceneGizmo(Camera.current, GetGizmoPosition(), Quaternion.identity, m_selectedAxis, Size.y * Appearance.SceneGizmoScale / 96, m_textColor,  m_xAlpha, m_yAlpha, m_zAlpha);
-        }
+        //private void OnPostRender()
+        //{
+        //    Appearance.DoSceneGizmo(Camera.current, GetGizmoPosition(), Quaternion.identity, m_selectedAxis, Size.y * Appearance.SceneGizmoScale / 96, m_textColor,  m_xAlpha, m_yAlpha, m_zAlpha);
+        //}
 
         private void OnGUI()
         {
@@ -344,6 +355,9 @@ namespace Battlehub.RTHandles
         private void Update()
         {
             Sync();
+
+            m_commandBuffer.Clear();
+            Appearance.DoSceneGizmo(m_commandBuffer, m_camera, GetGizmoPosition(), Quaternion.identity, m_selectedAxis, Size.y * Appearance.SceneGizmoScale / 96, m_textColor, m_xAlpha, m_yAlpha, m_zAlpha);
 
             float delta = Time.deltaTime / m_animationDuration;
             bool updateAlpha = UpdateAlpha(ref m_xAlpha, Vector3.right, delta);

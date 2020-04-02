@@ -21,15 +21,15 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - UIBackground
+  - AllScenesLayer
+  - ExtraLayer
+  - ExtraLayer2
+  - ResourcePreviewLayer
+  - RuntimeGraphicsLayer0
+  - RuntimeGraphicsLayer1
+  - RuntimeGraphicsLayer2
+  - RuntimeGraphicsLayer3
   - 
   - 
   - 

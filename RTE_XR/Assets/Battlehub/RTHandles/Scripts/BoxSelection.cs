@@ -530,9 +530,14 @@ namespace Battlehub.RTHandles
                 cam = m_canvas.worldCamera;
             }
 
-            Vector3 screenPoint = Window.Pointer.ScreenPoint;
-            if (!UseCameraSpace)
+            Vector3 screenPoint;
+            if (UseCameraSpace)
             {
+                screenPoint = Window.Pointer.ScreenPoint;
+            }
+            else
+            {
+                screenPoint = m_window.Editor.Input.GetPointerXY(0);
                 Rect rect = m_windowRectTransform.rect;
 
                 Vector2 min = RectTransformUtility.WorldToScreenPoint(m_windowCanvasCamera, m_windowRectTransform.TransformPoint(rect.min)) + ScreenSpaceMargin;

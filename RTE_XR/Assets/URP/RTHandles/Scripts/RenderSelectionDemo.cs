@@ -10,12 +10,12 @@ namespace Battlehub.RTHandles.URP
         [SerializeField]
         private Renderer[] m_renderers = null;
 
-        private IRenderMeshesCache m_meshesCache;
+        private IMeshesCache m_meshesCache;
         private IRenderersCache m_renderersCache;
         
         private void Start()
         {
-            m_meshesCache = gameObject.GetComponentInChildren<IRenderMeshesCache>();
+            m_meshesCache = gameObject.GetComponentInChildren<IMeshesCache>();
             m_renderersCache = gameObject.GetComponentInChildren<IRenderersCache>();
 
             for(int i = 0; i < m_meshFilters.Length; ++i)

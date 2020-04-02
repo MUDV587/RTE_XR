@@ -2,6 +2,7 @@
 using System.Collections;
 using Battlehub.RTCommon;
 using Battlehub.Utils;
+using UnityEngine.Rendering;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -917,7 +918,7 @@ namespace Battlehub.RTHandles
             }
         }
 
-        public void DoSceneGizmo(Camera camera, Vector3 position, Quaternion rotation, Vector3 selection, float gizmoScale, Color textColor, float xAlpha = 1.0f, float yAlpha = 1.0f, float zAlpha = 1.0f)
+        public void DoSceneGizmo(CommandBuffer cmdBuffer, Camera camera, Vector3 position, Quaternion rotation, Vector3 selection, float gizmoScale, Color textColor, float xAlpha = 1.0f, float yAlpha = 1.0f, float zAlpha = 1.0f)
         {
             float sScale = GetScreenScale(position, camera) * gizmoScale;
             Vector3 screenScale = new Vector3(sScale, sScale, sScale);
@@ -935,8 +936,7 @@ namespace Battlehub.RTHandles
             {
                 if (selection == Vector3.one)
                 {
-                    m_shapesMaterialZTestOffset.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoSelectedCube, Matrix4x4.TRS(position, rotation, screenScale * cubeScale));
+                    cmdBuffer.DrawMesh(SceneGizmoSelectedCube, Matrix4x4.TRS(position, rotation, screenScale * cubeScale), m_shapesMaterialZTestOffset, 0);
                 }
                 else
                 {
@@ -944,91 +944,72 @@ namespace Battlehub.RTHandles
                         (yAlpha == 1.0f || yAlpha == 0.0f) && 
                         (zAlpha == 1.0f || zAlpha == 0.0f))
                     {
-                        m_shapesMaterialZTestOffset.SetPass(0);
-                        Graphics.DrawMeshNow(SceneGizmoSelectedAxis, Matrix4x4.TRS(position, rotation * Quaternion.LookRotation(selection, Vector3.up), screenScale));
+                        cmdBuffer.DrawMesh(SceneGizmoSelectedAxis, Matrix4x4.TRS(position, rotation * Quaternion.LookRotation(selection, Vector3.up), screenScale), m_shapesMaterialZTestOffset, 0);
                     }
                 }
             }
 
             m_shapesMaterialZTest.color = Color.white;
-            m_shapesMaterialZTest.SetPass(0);
-            Graphics.DrawMeshNow(SceneGizmoCube, Matrix4x4.TRS(position, rotation, screenScale * cubeScale));
+            cmdBuffer.DrawMesh(SceneGizmoCube, Matrix4x4.TRS(position, rotation, screenScale * cubeScale), m_shapesMaterialZTest, 0);
             if (xAlpha == 1.0f && yAlpha == 1.0f && zAlpha == 1.0f)
             {
                 m_shapesMaterialZTest3.color = new Color(1, 1, 1, 1);
-                m_shapesMaterialZTest3.SetPass(0);
-                Graphics.DrawMeshNow(SceneGizmoXAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                cmdBuffer.DrawMesh(SceneGizmoXAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest3, 0);
                 m_shapesMaterialZTest4.color = new Color(1, 1, 1, 1);
-                m_shapesMaterialZTest4.SetPass(0);
-                Graphics.DrawMeshNow(SceneGizmoYAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                cmdBuffer.DrawMesh(SceneGizmoYAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest4, 0);
                 m_shapesMaterialZTest2.color = new Color(1, 1, 1, 1);
-                m_shapesMaterialZTest2.SetPass(0);
-                Graphics.DrawMeshNow(SceneGizmoZAxis, Matrix4x4.TRS(position, rotation, screenScale));
-
+                cmdBuffer.DrawMesh(SceneGizmoZAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest2, 0);
             }
             else
             {
                 if (xAlpha < 1)
                 {
                     m_shapesMaterialZTest3.color = new Color(1, 1, 1, yAlpha);
-                    m_shapesMaterialZTest3.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoYAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoYAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest3, 0);
 
                     m_shapesMaterialZTest4.color = new Color(1, 1, 1, zAlpha);
-                    m_shapesMaterialZTest4.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoZAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoZAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest4, 0);
                     
                     m_shapesMaterialZTest2.color = new Color(1, 1, 1, xAlpha);
-                    m_shapesMaterialZTest2.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoXAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoXAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest2, 0);
                    
                 }
                 else if (yAlpha < 1)
                 {
                     m_shapesMaterialZTest4.color = new Color(1, 1, 1, zAlpha);
-                    m_shapesMaterialZTest4.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoZAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoZAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest4, 0);
                     
                     m_shapesMaterialZTest2.color = new Color(1, 1, 1, xAlpha);
-                    m_shapesMaterialZTest2.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoXAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoXAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest2, 0);
 
                     m_shapesMaterialZTest3.color = new Color(1, 1, 1, yAlpha);
-                    m_shapesMaterialZTest3.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoYAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoYAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest3, 0);
                 }
                 else
                 {
                     m_shapesMaterialZTest2.color = new Color(1, 1, 1, xAlpha);
-                    m_shapesMaterialZTest2.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoXAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoXAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest2, 0);
 
                     m_shapesMaterialZTest3.color = new Color(1, 1, 1, yAlpha);
-                    m_shapesMaterialZTest3.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoYAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoYAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest3, 0);
                     
                     m_shapesMaterialZTest4.color = new Color(1, 1, 1, zAlpha);
-                    m_shapesMaterialZTest4.SetPass(0);
-                    Graphics.DrawMeshNow(SceneGizmoZAxis, Matrix4x4.TRS(position, rotation, screenScale));
+                    cmdBuffer.DrawMesh(SceneGizmoZAxis, Matrix4x4.TRS(position, rotation, screenScale), m_shapesMaterialZTest4, 0);
                 }
             }
 
             Color c = textColor;
             m_xMaterial.color = new Color(c.r, c.b, c.g, xAlpha);
-            m_xMaterial.SetPass(0);
-            DragSceneGizmoAxis(camera, position, rotation, Vector3.right, gizmoScale, billboardScale, billboardOffset, sScale);
+            DragSceneGizmoAxis(cmdBuffer, m_xMaterial, camera, position, rotation, Vector3.right, gizmoScale, billboardScale, billboardOffset, sScale);
             
             m_yMaterial.color = new Color(c.r, c.b, c.g, yAlpha);
-            m_yMaterial.SetPass(0);
-            DragSceneGizmoAxis(camera, position, rotation, Vector3.up, gizmoScale, billboardScale, billboardOffset, sScale);
+            DragSceneGizmoAxis(cmdBuffer, m_yMaterial, camera, position, rotation, Vector3.up, gizmoScale, billboardScale, billboardOffset, sScale);
 
             m_zMaterial.color = new Color(c.r, c.b, c.g, zAlpha);
-            m_zMaterial.SetPass(0);
-            DragSceneGizmoAxis(camera, position, rotation, Forward, gizmoScale, billboardScale, billboardOffset, sScale);
-
+            DragSceneGizmoAxis(cmdBuffer, m_zMaterial, camera, position, rotation, Forward, gizmoScale, billboardScale, billboardOffset, sScale);
         }
 
-        private void DragSceneGizmoAxis(Camera camera, Vector3 position, Quaternion rotation, Vector3 axis, float gizmoScale, float billboardScale, float billboardOffset, float sScale)
+        private void DragSceneGizmoAxis(CommandBuffer cmdBuffer, Material material, Camera camera, Vector3 position, Quaternion rotation, Vector3 axis, float gizmoScale, float billboardScale, float billboardOffset, float sScale)
         {
             Vector3 reflectionOffset;
 
@@ -1062,7 +1043,7 @@ namespace Battlehub.RTHandles
             Vector3 pos = position + (axis + reflectionOffset) * billboardOffset * sScale;
             float scale = GetScreenScale(pos, camera) * gizmoScale;
             Vector3 scaleVector = new Vector3(scale, scale, scale);
-            Graphics.DrawMeshNow(SceneGizmoQuad, Matrix4x4.TRS(pos, rotation, scaleVector * billboardScale));
+            cmdBuffer.DrawMesh(SceneGizmoQuad, Matrix4x4.TRS(pos, rotation, scaleVector * billboardScale), material, 0);
         }
 
         public static float GetGridFarPlane(Camera camera)

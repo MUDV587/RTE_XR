@@ -838,6 +838,26 @@ PrefabInstance:
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1398855389555426053, guid: 4c109d3ea16741141a43286324be75c4,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398855389555426053, guid: 4c109d3ea16741141a43286324be75c4,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398855389555426053, guid: 4c109d3ea16741141a43286324be75c4,
+        type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398855389555426053, guid: 4c109d3ea16741141a43286324be75c4,
+        type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1398855390221720317, guid: 4c109d3ea16741141a43286324be75c4,
         type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState

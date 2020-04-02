@@ -72,7 +72,6 @@
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RuntimeGraphicsLayer.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\SpriteGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\SpriteGizmoManager.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\UniversalRenderPipeline\ExecuteCommandBuffersRenderPassFeature.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\InputLow.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\Pointer.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\RTEBaseInput.cs" />
