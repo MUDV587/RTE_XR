@@ -1,59 +1,70 @@
-﻿using UnityEngine;
-using UnityEngine.Rendering;
+﻿using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 namespace Battlehub.RTCommon
 {
     public class ExecuteCommandBuffers : ScriptableRendererFeature
     {
-        [System.Serializable]
-        public class Settings
+        private class RendererPass : ScriptableRenderPass
         {
-            public RenderPassEvent RenderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
-        }
+            private CameraEvent m_cameraEvent;
 
-        [SerializeField]
-        public Settings m_settings = new Settings();
-
-        class RendererPass : ScriptableRenderPass
-        {
-            public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
+            public RendererPass(CameraEvent cameraEvent)
             {
-               
+                m_cameraEvent = cameraEvent;
             }
 
             public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
             {
                 if (renderingData.cameraData.camera.commandBufferCount > 0)
                 {
-                    CommandBuffer[] cmdBuffer = renderingData.cameraData.camera.GetCommandBuffers(CameraEvent.BeforeImageEffects);
+                    CommandBuffer[] cmdBuffer = renderingData.cameraData.camera.GetCommandBuffers(m_cameraEvent);
                     for(int i = 0; i < cmdBuffer.Length; ++i)
                     {
                         context.ExecuteCommandBuffer(cmdBuffer[i]);
                     }
                 }
             }
-
-            public override void FrameCleanup(CommandBuffer cmd)
-            {
-            }
         }
 
-        RendererPass m_ScriptablePass;
+        private RendererPass[] m_scriptablePasses;
 
         public override void Create()
         {
-            m_ScriptablePass = new RendererPass();
-
-            // Configures where the render pass should be injected.
-            m_ScriptablePass.renderPassEvent = m_settings.RenderPassEvent;
+            m_scriptablePasses = new[]
+            {
+                CreatePass(CameraEvent.BeforeImageEffects),
+                CreatePass(CameraEvent.AfterImageEffects),
+                CreatePass(CameraEvent.AfterForwardAlpha)
+            };
         }
 
-        // Here you can inject one or multiple render passes in the renderer.
-        // This method is called when setting up the renderer once per-camera.
+        private RendererPass CreatePass(CameraEvent camEvent)
+        {
+            return new RendererPass(camEvent) { renderPassEvent = ToRenderPassEvent(camEvent) };
+        }
+
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
-            renderer.EnqueuePass(m_ScriptablePass);
+            for(int i = 0; i < m_scriptablePasses.Length; ++i)
+            {
+                renderer.EnqueuePass(m_scriptablePasses[i]);
+            }  
+        }
+
+        public RenderPassEvent ToRenderPassEvent(CameraEvent cameraEvent)
+        {
+            switch(cameraEvent)
+            {
+                case CameraEvent.BeforeImageEffects:
+                    return RenderPassEvent.BeforeRenderingPostProcessing;
+                case CameraEvent.AfterImageEffects:
+                    return RenderPassEvent.AfterRenderingPostProcessing;
+                case CameraEvent.AfterForwardAlpha:
+                    return RenderPassEvent.AfterRenderingTransparents;
+                default:
+                    throw new System.NotImplementedException();
+            }
         }
     }
 }

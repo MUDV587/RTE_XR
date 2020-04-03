@@ -68,6 +68,10 @@
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\ExposeToEditor.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\GLCamera.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\GLRenderer.cs" />
+    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\MeshesCache.cs" />
+    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RTECamera.cs" />
+    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RTEGraphics.cs" />
+    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RenderersCache.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RuntimeGraphics.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RuntimeGraphicsLayer.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\SpriteGizmo.cs" />

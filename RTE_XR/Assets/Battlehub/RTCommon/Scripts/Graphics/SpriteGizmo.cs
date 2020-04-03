@@ -2,17 +2,17 @@
 
 namespace Battlehub.RTCommon
 {
-    public class SpriteGizmo : RTEComponent
+    public class SpriteGizmo : MonoBehaviour
     {
-        public Material Material;
-        private static Mesh m_quadMesh;
+        public Mesh Mesh;
+
         private Vector3 m_position;
         private Quaternion m_rotation;
 
         [SerializeField, HideInInspector]
         private SphereCollider m_collider;
         private SphereCollider m_destroyedCollider;
-        private IRuntimeGraphicsLayer m_graphicsLayer;
+
         [SerializeField]
         private float m_scale = 1.0f;
         public float Scale
@@ -24,43 +24,10 @@ namespace Battlehub.RTCommon
                 {
                     m_scale = value;
                     UpdateCollider();
-                    Refresh();
                 }
             }
         }
-        protected override void AwakeOverride()
-        {
-            if(m_quadMesh == null)
-            {
-                m_quadMesh = RuntimeGraphics.CreateQuadMesh();
-            }
-
-            base.AwakeOverride();
-            m_graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
-        }
-
-        private void Update()
-        {
-            if(m_position != transform.position || m_rotation != transform.rotation)
-            {
-                m_position = transform.position;
-                m_rotation = transform.rotation;
-                Refresh();
-            }
-        }
-
-        private void Refresh()
-        {
-            m_graphicsLayer.RemoveMesh(m_quadMesh);
-            m_graphicsLayer.AddMesh(m_quadMesh, Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one * m_scale), Material);
-        }
-
-        protected override void OnDestroyOverride()
-        {
-            base.OnDestroyOverride();
-            m_graphicsLayer.RemoveMesh(m_quadMesh);
-        }
-
+        
         private void OnEnable()
         {
             m_collider = GetComponent<SphereCollider>();
@@ -97,8 +64,6 @@ namespace Battlehub.RTCommon
                 m_collider.radius = 0.25f * m_scale;
             }
         }
-
-      
     }
 }
 

@@ -3,11 +3,22 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Battlehub.RTHandles.URP
+namespace Battlehub.RTCommon
 {
+
+    public enum CacheRefreshMode
+    {
+        Manual,
+        OnTransformChange,
+        Always,
+    }
+
+
     public interface IMeshesCache
     {
-        bool AutoRefresh
+        event Action Refreshed;
+
+        CacheRefreshMode RefreshMode
         {
             get;
             set;
@@ -30,7 +41,7 @@ namespace Battlehub.RTHandles.URP
         void SetMaterial(Mesh mesh, Material material);
         void Remove(Mesh mesh, Transform transform);
 
-        void Refresh(int maxBatchSize = 128);
+        void Refresh(bool batchesOnly = false, int maxBatchSize = 128);
         void Clear();
     }
 
@@ -60,12 +71,15 @@ namespace Battlehub.RTHandles.URP
 
     public class MeshesCache : MonoBehaviour, IMeshesCache
     {
+        public event Action Refreshed;
+
         public class RenderTransformedMeshesBatch : RenderMeshesBatch
         {
             public readonly List<Transform> Transforms = new List<Transform>();
 
             public RenderTransformedMeshesBatch(Mesh mesh, Material material) : base(mesh, material, new Matrix4x4[0])
             {
+
             }
 
             public override void Refresh()
@@ -91,10 +105,18 @@ namespace Battlehub.RTHandles.URP
             }
         }
 
-        public bool AutoRefresh
+        private CacheRefreshMode m_refreshMode;
+        public CacheRefreshMode RefreshMode
         {
-            get { return enabled; }
-            set { enabled = value; }
+            get
+            {
+                return m_refreshMode;
+            }
+            set
+            {
+                m_refreshMode = value;
+                enabled = m_refreshMode != CacheRefreshMode.Manual;
+            }
         }
 
         public bool IsEmpty
@@ -109,10 +131,13 @@ namespace Battlehub.RTHandles.URP
             get { return m_batches; }
         }
 
+        private List<Transform> m_transforms = new List<Transform>();
         private Dictionary<Mesh, Tuple<Material, List<Transform>>> m_meshToData = new Dictionary<Mesh, Tuple<Material, List<Transform>>>();
         private readonly Dictionary<Mesh, RenderMeshesBatch> m_meshToBatch = new Dictionary<Mesh, RenderMeshesBatch>();
         private void Awake()
         {
+            enabled = m_refreshMode != CacheRefreshMode.Manual;
+
             IOC.Register<IMeshesCache>(name, this);
         }
 
@@ -123,9 +148,20 @@ namespace Battlehub.RTHandles.URP
 
         private void Update()
         {
-            for(int i = 0; i < m_batches.Count; ++i)
+            if(m_refreshMode == CacheRefreshMode.Always)
             {
-                m_batches[i].Refresh();
+                Refresh(true);
+            }
+            else
+            {
+                for (int i = 0; i < m_transforms.Count; ++i)
+                {
+                    if (m_transforms[i].hasChanged)
+                    {
+                        Refresh(true);
+                        break;
+                    }
+                }
             }
         }
 
@@ -147,6 +183,8 @@ namespace Battlehub.RTHandles.URP
                 data = new Tuple<Material, List<Transform>>(null, new List<Transform>());
                 m_meshToData.Add(mesh, data);
             }
+
+            m_transforms.Add(transform);
             data.Item2.Add(transform);
         }
 
@@ -161,6 +199,7 @@ namespace Battlehub.RTHandles.URP
             if (m_meshToData.TryGetValue(mesh, out data))
             {
                 data.Item2.Remove(transform);
+                m_transforms.Remove(transform);
                 if (data.Item2.Count == 0)
                 {
                     m_meshToData.Remove(mesh);
@@ -174,8 +213,14 @@ namespace Battlehub.RTHandles.URP
             m_batches.Clear();
         }
 
-        public void Refresh(int maxBatchSize = 128)
+        public void Refresh(bool batchesOnly = false, int maxBatchSize = 128)
         {
+            if(batchesOnly)
+            {
+                RefreshBatches();
+                return;
+            }
+
             m_batches.Clear();
 
             foreach (KeyValuePair<Mesh, Tuple<Material, List<Transform>>> kvp in m_meshToData)
@@ -213,6 +258,21 @@ namespace Battlehub.RTHandles.URP
                 }
 
                 m_batches.Add(kvp.Value);
+            }
+
+            RefreshBatches();
+        }
+
+        private void RefreshBatches()
+        {
+            for (int i = 0; i < m_batches.Count; ++i)
+            {
+                m_batches[i].Refresh();
+            }
+
+            if (Refreshed != null)
+            {
+                Refreshed();
             }
         }
     }

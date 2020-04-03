@@ -101,12 +101,10 @@
     <Compile Include="Assets\URP\RTCommon\Scripts\RuntimeGraphicsLayerURP.cs" />
     <Compile Include="Assets\URP\RTEditor\Scripts\URPInit.cs" />
     <Compile Include="Assets\URP\RTHandles\Scripts\ExecuteCommandBuffers.cs" />
-    <Compile Include="Assets\URP\RTHandles\Scripts\MeshesCache.cs" />
     <Compile Include="Assets\URP\RTHandles\Scripts\OutlineManagerURP.cs" />
     <Compile Include="Assets\URP\RTHandles\Scripts\RenderGraphics.cs" />
     <Compile Include="Assets\URP\RTHandles\Scripts\RenderSelection.cs" />
     <Compile Include="Assets\URP\RTHandles\Scripts\RenderSelectionDemo.cs" />
-    <Compile Include="Assets\URP\RTHandles\Scripts\RenderersCache.cs" />
     <Compile Include="Assets\XRInteractionToolkit\DeactivateOnLocomotion.cs" />
     <Compile Include="Assets\XRInteractionToolkit\ILineRenderableProxy.cs" />
     <Compile Include="Assets\XRInteractionToolkit\MoveBackProvider.cs" />

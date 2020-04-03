@@ -136,10 +136,10 @@ namespace Battlehub.RTCommon
                 {
                     ResetCullingMask();
 
-                    GLCamera glCamera = m_camera.GetComponent<GLCamera>();
-                    if(glCamera != null)
+                    IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
+                    if(graphics != null)
                     {
-                        Destroy(glCamera);
+                        graphics.UnregisterCamera(m_camera);
                     }
                 }
 
@@ -149,12 +149,11 @@ namespace Battlehub.RTCommon
                     SetCullingMask();
                     if (WindowType == RuntimeWindowType.Scene)
                     {
-                        GLCamera glCamera = m_camera.GetComponent<GLCamera>();
-                        if (!glCamera)
+                        IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
+                        if (graphics != null)
                         {
-                            glCamera = m_camera.gameObject.AddComponent<GLCamera>();
+                            graphics.RegisterCamera(m_camera);
                         }
-                        glCamera.CullingMask = 1 << (Editor.CameraLayerSettings.RuntimeGraphicsLayer + m_index);
                     }
                 }
             }
@@ -182,6 +181,7 @@ namespace Battlehub.RTCommon
         {
             get { return m_pointer; }
         }
+
 
         protected override void AwakeOverride()
         {
@@ -268,12 +268,11 @@ namespace Battlehub.RTCommon
                 SetCullingMask();
                 if (WindowType == RuntimeWindowType.Scene)
                 {
-                    GLCamera glCamera = m_camera.GetComponent<GLCamera>();
-                    if (!glCamera)
+                    IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
+                    if (graphics != null)
                     {
-                        glCamera = m_camera.gameObject.AddComponent<GLCamera>();
+                        graphics.RegisterCamera(m_camera);
                     }
-                    glCamera.CullingMask = 1 << (Editor.CameraLayerSettings.RuntimeGraphicsLayer + m_index);
                 }
             }
 
@@ -293,6 +292,14 @@ namespace Battlehub.RTCommon
             if (m_camera != null)
             {
                 ResetCullingMask();
+                if (WindowType == RuntimeWindowType.Scene)
+                {
+                    IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
+                    if (graphics != null)
+                    {
+                        graphics.UnregisterCamera(m_camera);
+                    }
+                }
             }
         }
 
