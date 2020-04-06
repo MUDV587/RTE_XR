@@ -8,6 +8,11 @@ namespace Battlehub.RTMeasurement
     {
         [SerializeField]
         private bool m_metric = true;
+        public bool Metric
+        {
+            get { return m_metric; }
+            set { m_metric = value; }
+        }
 
         protected List<Vector3> m_points = new List<Vector3>();
         

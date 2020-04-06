@@ -21,6 +21,8 @@ namespace Battlehub.RTCommon
         {
             get;
         }
+
+        void Destroy();
     }
 
     public class RTECamera : MonoBehaviour, IRTECamera
@@ -54,6 +56,11 @@ namespace Battlehub.RTCommon
         {
             get { return m_meshesCache; }
             set { m_meshesCache = value; }
+        }
+
+        public void Destroy()
+        {
+            Destroy(this);
         }
 
         private void Start()

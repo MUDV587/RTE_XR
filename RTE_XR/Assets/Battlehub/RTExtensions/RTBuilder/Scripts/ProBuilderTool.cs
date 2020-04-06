@@ -1664,13 +1664,13 @@ namespace Battlehub.RTBuilder
                 PBAutoUnwrapSettings settings = m_autoUVEditor.GetSettings(selection);
                 m_uv.CopyFrom(settings);
 
-                if (UVEditingMode)
-                {
-                    LockAxes lockAxes = m_pivot.gameObject.GetComponent<LockAxes>();
-                    lockAxes.PositionX = lockAxes.PositionY = !HasSelectedFaces;
-                    lockAxes.ScaleX = lockAxes.ScaleY = !HasSelectedFaces;
-                    lockAxes.RotationZ = !HasSelectedFaces;
-                }
+                //if (UVEditingMode)
+                //{
+                //    LockAxes lockAxes = m_pivot.gameObject.GetComponent<LockAxes>();
+                //    lockAxes.PositionX = lockAxes.PositionY = !HasSelectedFaces;
+                //    lockAxes.ScaleX = lockAxes.ScaleY = !HasSelectedFaces;
+                //    lockAxes.RotationZ = !HasSelectedFaces;
+                //}
             }
 
             if (SelectionChanged != null)

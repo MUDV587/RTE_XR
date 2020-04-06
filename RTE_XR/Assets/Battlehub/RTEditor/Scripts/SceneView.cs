@@ -9,8 +9,7 @@ namespace Battlehub.RTEditor
         {
             ActivateOnAnyKey = true;
             WindowType = RuntimeWindowType.Scene;
-            base.AwakeOverride();
-            
+            base.AwakeOverride();   
         }
 
         protected virtual void Start()
@@ -24,6 +23,18 @@ namespace Battlehub.RTEditor
             {
                 gameObject.AddComponent<SceneViewImpl>();
             }
+        }
+
+        protected override void SetCullingMask(Camera camera)
+        {
+            CameraLayerSettings settings = Editor.CameraLayerSettings;
+            camera.cullingMask &= (settings.RaycastMask | 1 << settings.AllScenesLayer);
+        }
+
+        protected override void ResetCullingMask(Camera camera)
+        {
+            CameraLayerSettings settings = Editor.CameraLayerSettings;
+            camera.cullingMask |= ~(settings.RaycastMask | 1 << settings.AllScenesLayer);
         }
     }
 }

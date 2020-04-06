@@ -64,11 +64,11 @@ namespace Battlehub.RTHandles
             m_commandBuffer.name = "SceneGrid Command Buffer";
             if(RenderPipelineInfo.Type == RPType.Standard)
             {
-                Window.Camera.AddCommandBuffer(CameraEvent.BeforeImageEffects, m_commandBuffer);
+                Window.Camera.AddCommandBuffer(CameraEvent.AfterForwardAlpha, m_commandBuffer);
             }
             else
             {
-                Window.Camera.AddCommandBuffer(CameraEvent.BeforeImageEffects, m_commandBuffer);
+                Window.Camera.AddCommandBuffer(CameraEvent.AfterForwardAlpha, m_commandBuffer);
             }
             
             Rebuild();

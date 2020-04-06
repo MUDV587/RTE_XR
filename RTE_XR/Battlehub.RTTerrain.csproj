@@ -97,7 +97,6 @@
     <Compile Include="Assets\Battlehub\RTExtensions\RTTerrain\Scripts\TerrainSettings.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTTerrain\Scripts\TerrainToolState.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTTerrain\Scripts\TerrainView.cs" />
-    <None Include="Assets\Battlehub\RTExtensions\RTTerrain\Prefabs\Materials\ProjectorShader.shader" />
     <None Include="Assets\Battlehub\RTExtensions\RTTerrain\Resources\RTTerrain.StringResources.en-US.xml" />
     <None Include="Assets\Battlehub\RTExtensions\RTTerrain\Battlehub.RTTerrain.asmdef" />
     <None Include="Assets\Battlehub\RTExtensions\RTTerrain\Prefabs\Materials\TerrainHandleShader.shader" />

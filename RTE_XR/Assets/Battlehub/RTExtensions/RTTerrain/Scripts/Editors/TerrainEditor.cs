@@ -303,19 +303,25 @@ namespace Battlehub.RTTerrain
             {
                 if(m_selectedPaintTool != value)
                 {
-                    UpdateProjectorState(EditorType.Paint_Terrain);
-
-                    for (int i = 0; i < m_paintTools.Length; ++i)
-                    {
-                        m_paintTools[i].SetActive(false);
-                    }
-
                     m_selectedPaintTool = value;
-                    m_paintTools[(int)m_selectedPaintTool].SetActive(true);
+
+                    UpdatePaintToolVisibility();
 
                     PlayerPrefs.SetInt("TerrainEditor.SelectedPaintTool", (int)m_selectedPaintTool);
                 }
             }
+        }
+
+        public void UpdatePaintToolVisibility()
+        {
+            UpdateProjectorState(EditorType.Paint_Terrain);
+
+            for (int i = 0; i < m_paintTools.Length; ++i)
+            {
+                m_paintTools[i].SetActive(false);
+            }
+
+            m_paintTools[(int)SelectedPaintTool].SetActive(true);
         }
 
         private IRTE m_editor;
@@ -378,6 +384,7 @@ namespace Battlehub.RTTerrain
         private void Start()
         {
             SelectedPaintTool = (PaintTool)PlayerPrefs.GetInt("TerrainEditor.SelectedPaintTool", (int)PaintTool.Raise_Or_Lower_Terrain);
+            UpdatePaintToolVisibility();
             if (m_paintToolSelector != null)
             {
                 m_paintToolSelector.Init(this, this, Strong.PropertyInfo((TerrainEditor x) => x.SelectedPaintTool), null, m_localization.GetString("ID_RTTerrain_TerrainEditor_Tool", "Tool:"), null, null, null, false);

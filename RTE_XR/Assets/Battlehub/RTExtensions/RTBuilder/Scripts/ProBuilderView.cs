@@ -305,7 +305,10 @@ namespace Battlehub.RTBuilder
             UpdateFlagsAndDataBindVisible();
             if(m_isProBuilderMeshSelected)
             {
-                StartCoroutine(CoUpdateFlagsAndDataBindVisible());
+                if(gameObject.activeSelf)
+                {
+                    StartCoroutine(CoUpdateFlagsAndDataBindVisible());
+                }
             }
         }
 

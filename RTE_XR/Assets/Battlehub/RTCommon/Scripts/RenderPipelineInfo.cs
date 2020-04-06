@@ -16,7 +16,7 @@ namespace Battlehub.RTCommon
 
     public static class RenderPipelineInfo 
     {
-        public static bool ForceUseRenderTextures = true;
+        public static bool ForceUseRenderTextures = false;
         public static bool UseRenderTextures
         {
             get { return Type != RPType.Standard || ForceUseRenderTextures; }

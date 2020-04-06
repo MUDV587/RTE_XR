@@ -71,9 +71,9 @@
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\MeshesCache.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RTECamera.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RTEGraphics.cs" />
+    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RTEGraphicsLayer.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RenderersCache.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RuntimeGraphics.cs" />
-    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RuntimeGraphicsLayer.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\SpriteGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\SpriteGizmoManager.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Input\InputLow.cs" />
@@ -104,10 +104,9 @@
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\VR\VRTracker.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\VR\VRTrackerDebugDraw.cs" />
     <None Include="Assets\Battlehub\RTCommon\Resources\RenderTextureOverlay.shader" />
-    <None Include="Assets\Battlehub\RTCommon\Resources\MobileDiffuseZTestAlways.shader" />
     <None Include="Assets\Battlehub\RTCommon\Resources\Billboard.shader" />
     <None Include="Assets\Battlehub\RTCommon\Battlehub.RTCommon.asmdef" />
-    <None Include="Assets\Battlehub\RTCommon\Resources\SpritesZTestAlways.shader" />
+    <None Include="Assets\Battlehub\RTCommon\Resources\SceenSpaceDecal.shader" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>

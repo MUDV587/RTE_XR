@@ -107,11 +107,6 @@ namespace Battlehub.RTCommon
                 m_camera.rect = new Rect(0, 0, 1, 1);
             }
 
-            if(RenderPipelineInfo.Type != RPType.Standard)
-            {
-                m_camera.allowMSAA = m_allowMSAA;
-            }
-
             GameObject outputGo = null;
             if (m_output == null)
             {
@@ -219,7 +214,12 @@ namespace Battlehub.RTCommon
             int sizeX;
             int sizeY;
 
-            if (RenderPipelineInfo.Type != RPType.Standard)
+            if (m_fullscreen)
+            {
+                sizeX = Screen.width;
+                sizeY = Screen.height;
+            }
+            else
             {
                 Rect rect = m_output.rectTransform.rect;
 
@@ -227,23 +227,6 @@ namespace Battlehub.RTCommon
                 sizeX = Mathf.RoundToInt(size.x);
                 sizeY = Mathf.RoundToInt(size.y);
             }
-            else
-            {
-                if (m_fullscreen)
-                {
-                    sizeX = Screen.width;
-                    sizeY = Screen.height;
-                }
-                else
-                {
-                    Rect rect = m_output.rectTransform.rect;
-
-                    Vector2 size = rect.size * ((m_canvasScaler != null) ? m_canvasScaler.scaleFactor : 1);
-                    sizeX = Mathf.RoundToInt(size.x);
-                    sizeY = Mathf.RoundToInt(size.y);
-                }
-            }
-
             ResizeRenderTexture(sizeX, sizeY);
         }
 
@@ -271,43 +254,32 @@ namespace Battlehub.RTCommon
 
         public void ResizeOutput()
         {
-            if(m_output == null)
+            if (m_output == null)
             {
                 return;
             }
 
-            if (RenderPipelineInfo.Type != RPType.Standard)
+            if (m_fullscreen)
             {
-                if(m_camera == null)
+                if (m_canvas.renderMode == RenderMode.ScreenSpaceOverlay)
                 {
-                    return;
+                    if (m_camera == null)
+                    {
+                        return;
+                    }
+                    m_output.uvRect = m_camera.rect;
                 }
-                m_output.uvRect = m_camera.rect;
-            }
-            else
-            {
-                if (m_fullscreen)
+                else
                 {
-                    if (m_canvas.renderMode == RenderMode.ScreenSpaceOverlay)
-                    {
-                        if (m_camera == null)
-                        {
-                            return;
-                        }
-                        m_output.uvRect = m_camera.rect;
-                    }
-                    else
-                    {
-                        Vector2 p0;
-                        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_outputRoot, Vector2.zero, m_canvas.worldCamera, out p0);
+                    Vector2 p0;
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(m_outputRoot, Vector2.zero, m_canvas.worldCamera, out p0);
 
-                        Vector2 p1;
-                        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_outputRoot, new Vector2(Screen.width, Screen.height), m_canvas.worldCamera, out p1);
+                    Vector2 p1;
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(m_outputRoot, new Vector2(Screen.width, Screen.height), m_canvas.worldCamera, out p1);
 
-                        m_output.rectTransform.anchoredPosition = p0;
-                        m_output.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Abs(p1.x - p0.x));
-                        m_output.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Abs(p1.y - p0.y));
-                    }
+                    m_output.rectTransform.anchoredPosition = p0;
+                    m_output.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Abs(p1.x - p0.x));
+                    m_output.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Abs(p1.y - p0.y));
                 }
             }
 

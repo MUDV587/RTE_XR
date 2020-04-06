@@ -131,19 +131,20 @@ namespace Battlehub.RTCommon
             get { return m_batches; }
         }
 
+        private class PRS
+        {
+            public Vector3 Position;
+            public Quaternion Rotation;
+            public Vector3 LocalScale;
+        }
+
+        private List<PRS> m_prs = new List<PRS>();
         private List<Transform> m_transforms = new List<Transform>();
         private Dictionary<Mesh, Tuple<Material, List<Transform>>> m_meshToData = new Dictionary<Mesh, Tuple<Material, List<Transform>>>();
         private readonly Dictionary<Mesh, RenderMeshesBatch> m_meshToBatch = new Dictionary<Mesh, RenderMeshesBatch>();
         private void Awake()
         {
             enabled = m_refreshMode != CacheRefreshMode.Manual;
-
-            IOC.Register<IMeshesCache>(name, this);
-        }
-
-        private void OnDestroy()
-        {
-            IOC.Unregister<IMeshesCache>(name, this);
         }
 
         private void Update()
@@ -156,8 +157,13 @@ namespace Battlehub.RTCommon
             {
                 for (int i = 0; i < m_transforms.Count; ++i)
                 {
-                    if (m_transforms[i].hasChanged)
+                    Transform t = m_transforms[i];
+                    PRS prs = m_prs[i];
+                    if (prs.Position != t.position || prs.Rotation != t.rotation || prs.LocalScale != t.localScale)
                     {
+                        prs.Position = t.position;
+                        prs.Rotation = t.rotation;
+                        prs.LocalScale = t.localScale;
                         Refresh(true);
                         break;
                     }
@@ -185,6 +191,7 @@ namespace Battlehub.RTCommon
             }
 
             m_transforms.Add(transform);
+            m_prs.Add(new PRS { Position = Vector3.one * float.NaN });
             data.Item2.Add(transform);
         }
 
@@ -199,7 +206,9 @@ namespace Battlehub.RTCommon
             if (m_meshToData.TryGetValue(mesh, out data))
             {
                 data.Item2.Remove(transform);
-                m_transforms.Remove(transform);
+                int index = m_transforms.IndexOf(transform);
+                m_transforms.RemoveAt(index);
+                m_prs.RemoveAt(index);
                 if (data.Item2.Count == 0)
                 {
                     m_meshToData.Remove(mesh);

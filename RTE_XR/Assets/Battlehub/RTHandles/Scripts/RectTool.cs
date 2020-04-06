@@ -17,6 +17,19 @@ namespace Battlehub.RTHandles
         private TextMeshPro m_txtSize2 = null;
         [SerializeField]
         private bool m_metric = true;
+        public bool Metric
+        {
+            get { return m_metric; }
+            set
+            {
+                if (m_metric != value)
+                {
+                    m_metric = value;
+                    UpdateText();
+                }
+            }
+        }
+
 
         private MeshFilter m_lines;
         private MeshRenderer m_linesRenderer;
@@ -246,11 +259,12 @@ namespace Battlehub.RTHandles
             RecalculateBoundsAndRebuild();
             m_connectedTools.Add(this);
 
-            IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
-            if(graphicsLayer != null)
+            IRTECamera camera = Window.IOCContainer.Resolve<IRTECamera>();
+            if(camera != null)
             {
                 Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
-                graphicsLayer.AddRenderers(renderers);
+                camera.RenderersCache.Add(renderers, false, true);
+                camera.RenderersCache.Refresh();
             }
         }
 
@@ -259,11 +273,12 @@ namespace Battlehub.RTHandles
             base.OnDisableOverride();
             m_connectedTools.Remove(this);
 
-            IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
-            if (graphicsLayer != null)
+            IRTECamera camera = Window.IOCContainer.Resolve<IRTECamera>();
+            if (camera != null)
             {
                 Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
-                graphicsLayer.RemoveRenderers(renderers);
+                camera.RenderersCache.Remove(renderers);
+                camera.RenderersCache.Refresh();
             }
         }
 

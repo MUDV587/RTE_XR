@@ -87,6 +87,7 @@ namespace Battlehub.RTMeasurement
         private TextMeshProUGUI m_output = null;
 
         private ISelectionComponentState m_selectionComponentState;
+        private ISettingsComponent m_settingsComponent;
 
         protected override void OnEditorExist()
         {
@@ -95,6 +96,12 @@ namespace Battlehub.RTMeasurement
 
             m_editor = IOC.Resolve<IRuntimeEditor>();
             m_editor.Tools.ToolChanged += OnToolChanged;
+
+            m_settingsComponent = IOC.Resolve<ISettingsComponent>();
+            if(m_settingsComponent != null)
+            {
+                m_settingsComponent.SystemOfMeasurementChanged += OnSystemOfMeasurementChanged;
+            }
 
             if(m_distanceTool == null)
             {
@@ -131,6 +138,11 @@ namespace Battlehub.RTMeasurement
             {
                 m_editor.Tools.ToolChanged -= OnToolChanged;
             }
+
+            if (m_settingsComponent != null)
+            {
+                m_settingsComponent.SystemOfMeasurementChanged -= OnSystemOfMeasurementChanged;
+            }
         }
 
         protected override void OnDestroy()
@@ -140,6 +152,10 @@ namespace Battlehub.RTMeasurement
             if (m_editor != null)
             {
                 m_editor.Tools.ToolChanged -= OnToolChanged;
+            }
+            if (m_settingsComponent != null)
+            {
+                m_settingsComponent.SystemOfMeasurementChanged -= OnSystemOfMeasurementChanged;
             }
         }
 
@@ -180,6 +196,11 @@ namespace Battlehub.RTMeasurement
         private void OnToolChanged()
         {
             Current = MeasurementToolType.None;
+        }
+
+        private void OnSystemOfMeasurementChanged()
+        {
+            m_distanceTool.Metric = m_settingsComponent.SystemOfMeasurement == SystemOfMeasurement.Metric;
         }
     }
 

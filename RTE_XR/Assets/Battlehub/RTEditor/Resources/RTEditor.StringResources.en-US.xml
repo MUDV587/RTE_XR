@@ -432,8 +432,11 @@
 		<StringResource id="ID_RTEditor_SettingsDialog_UISettings" value="UI Settings"/>
 		<StringResource id="ID_RTEditor_SettingsDialog_SceneSettings" value="Scene Settings"/>
 		<StringResource id="ID_RTEditor_SettingsDialog_SceneNavigationSettings" value="Scene Navigation Settings"/>
+    <StringResource id="ID_RTEditor_SettingsDialog_SystemOfMeasurement" value="System Of Measurement"/>
+    <StringResource id="ID_RTEditor_SettingsDialog_MeasurementSettings" value="Measurement Settings"/>
+    
 
-		<!-- GameObjectCmd -->
+    <!-- GameObjectCmd -->
 		<StringResource id="ID_RTEditor_GameObjectCmd_Empty" value="Empty"/>
 		<StringResource id="ID_RTEditor_GameObjectCmd_DirectionalLight" value="Directional Light"/>
 		<StringResource id="ID_RTEditor_GameObjectCmd_PointLight" value="Point Light"/>

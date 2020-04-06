@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Battlehub.RTCommon;
+using UnityEngine;
 
 namespace Battlehub.RTEditor.URP
 {
@@ -13,6 +14,17 @@ namespace Battlehub.RTEditor.URP
         {
             base.OnEditorExist();
             m_instance = Instantiate(m_prefab, transform, false);
+            m_instance.name = m_prefab.name;
+
+            //IRTEAppearance appearance = IOC.Resolve<IRTEAppearance>();
+            //Canvas backgroundCanvas = appearance.UIBackgroundScaler.GetComponent<Canvas>();
+            //Canvas foregroundCanvas = appearance.UIForegroundScaler.GetComponent<Canvas>();
+
+            //if(backgroundCanvas.worldCamera != null && foregroundCanvas.worldCamera != null)
+            //{
+            //    ICameraUtility cameraUtility = IOC.Resolve<ICameraUtility>();
+            //    cameraUtility.Stack(backgroundCanvas.worldCamera, foregroundCanvas.worldCamera);
+            //}
         }
 
         protected override void OnEditorClosed()

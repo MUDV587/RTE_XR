@@ -100,6 +100,11 @@ namespace Battlehub.RTMeasurement
                 return;
             }
 
+            if(Editor.ActiveWindow != Window)
+            {
+                return;
+            }
+
             if(CancelAction())
             {
                 Editor.Tools.Current = RuntimeTool.Move;

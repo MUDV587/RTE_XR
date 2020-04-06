@@ -54,6 +54,13 @@ namespace Battlehub.RTHandles
 
         private void Start()
         {
+            if (RenderPipelineInfo.Type != RPType.Standard)
+            {
+                //Debug.Log("OutlineManager is not supported");
+                Destroy(this);
+                return;
+            }
+
             m_outlineEffect =  Camera.gameObject.AddComponent<OutlineEffect>();
 
             m_editor = IOC.Resolve<IRTE>();
@@ -65,16 +72,6 @@ namespace Battlehub.RTHandles
             if(rteComponent != null)
             {
                 m_sceneWindow = rteComponent.Window;
-                //if(m_sceneWindow != null)
-                //{
-                //    m_sceneWindow.IOCContainer.RegisterFallback<IOutlineManager>(this);
-                //}
-            }
-
-            if(RenderPipelineInfo.Type != RPType.Standard)
-            {
-                Debug.Log("OutlineManager is not supported");
-                Destroy(this);
             }
         }
 
@@ -94,11 +91,6 @@ namespace Battlehub.RTHandles
             {
                 Destroy(m_outlineEffect);
             }
-
-            //if (m_sceneWindow != null)
-            //{
-            //    m_sceneWindow.IOCContainer.UnregisterFallback<IOutlineManager>(this);
-            //}
         }
 
         private void OnRuntimeEditorSelectionChanged(Object[] unselectedObject)

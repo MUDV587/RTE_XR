@@ -6,6 +6,12 @@ using UnityEngine;
 
 namespace Battlehub.RTEditor
 {
+    public enum SystemOfMeasurement
+    {
+        Metric,
+        Imperial
+    }
+
     [Serializable]
     public struct InspectorSettings
     {
@@ -128,6 +134,13 @@ namespace Battlehub.RTEditor
         }
 
         bool ConstantZoomSpeed
+        {
+            get;
+            set;
+        }
+
+        event Action SystemOfMeasurementChanged;
+        SystemOfMeasurement SystemOfMeasurement
         {
             get;
             set;
@@ -330,7 +343,6 @@ namespace Battlehub.RTEditor
             }
         }
 
-
         [SerializeField]
         private float m_zoomSpeedDefault = 5.0f;
         public float ZoomSpeed
@@ -357,6 +369,27 @@ namespace Battlehub.RTEditor
                 foreach (IRuntimeSceneComponent sceneComponent in m_sceneComponents.Values)
                 {
                     sceneComponent.ConstantZoomSpeed = value;
+                }
+            }
+        }
+
+
+        public event Action SystemOfMeasurementChanged;
+        [SerializeField]
+        private SystemOfMeasurement m_systemOfMeasurementDefault = SystemOfMeasurement.Metric;
+        public SystemOfMeasurement SystemOfMeasurement
+        {
+            get { return (SystemOfMeasurement)GetInt("SystemOfMeasurement", (int)m_systemOfMeasurementDefault); }
+            set
+            {
+                SetInt("SystemOfMeasurement", (int)value);
+                foreach (IRuntimeSceneComponent sceneComponent in m_sceneComponents.Values)
+                {
+                    sceneComponent.RectTool.Metric = SystemOfMeasurement == SystemOfMeasurement.Metric;
+                }
+                if(SystemOfMeasurementChanged != null)
+                {
+                    SystemOfMeasurementChanged();
                 }
             }
         }
@@ -399,6 +432,7 @@ namespace Battlehub.RTEditor
                     m_sceneComponents.Add(windowTransform, sceneComponent);
                     ApplySettings(sceneComponent);
                 }
+
             }
         }
 
@@ -443,6 +477,8 @@ namespace Battlehub.RTEditor
             sceneComponent.FreeMovementSmoothSpeed = FreeMovementSmoothSpeed;
             sceneComponent.ZoomSpeed = ZoomSpeed;
             sceneComponent.ConstantZoomSpeed = ConstantZoomSpeed;
+
+            sceneComponent.RectTool.Metric = SystemOfMeasurement == SystemOfMeasurement.Metric;
         }
 
         private void ApplySettings()
@@ -469,12 +505,13 @@ namespace Battlehub.RTEditor
             DeleteKey("FreeMovementSmoothSpeed");
             DeleteKey("ZoomSpeed");
             DeleteKey("ConstantZoomSpeed");
+            DeleteKey("SystemOfMeasurement");
 
-            if(ResetToDefaultsEvent != null)
+            if (ResetToDefaultsEvent != null)
             {
                 ResetToDefaultsEvent(this, EventArgs.Empty);
             }
-            
+
             ApplySettings();
         }
 

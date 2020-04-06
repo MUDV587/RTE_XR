@@ -49,6 +49,7 @@ namespace Battlehub.RTHandles.URP
         private void Start()
         {
             m_cache = GetComponentInChildren<IRenderersCache>();
+            IOC.Register("SelectedRenderers", m_cache);
 
             m_editor = IOC.Resolve<IRTE>();
 
@@ -73,6 +74,8 @@ namespace Battlehub.RTHandles.URP
             {
                 m_selectionOverride.SelectionChanged -= OnSelectionChanged;
             }
+
+            IOC.Unregister("SelectedRenderers", m_cache);
         }
 
         private void OnRuntimeEditorSelectionChanged(Object[] unselectedObject)

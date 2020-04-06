@@ -119,7 +119,6 @@ namespace Battlehub.RTHandles.URP
                     }
                 }
 
-            
                 if(m_renderersCache != null)
                 {
                     IList<Renderer> renderers = m_renderersCache.Renderers;
@@ -181,7 +180,7 @@ namespace Battlehub.RTHandles.URP
             {
                 IMeshesCache meshesCache = IOC.Resolve<IMeshesCache>(m_settings.MeshesCacheName);
                 IRenderersCache renderersCache = IOC.Resolve<IRenderersCache>(m_settings.RenderersCacheName);
-
+                
                 if ((meshesCache == null || meshesCache.IsEmpty) && (renderersCache == null || renderersCache.IsEmpty))
                 {
                     return;

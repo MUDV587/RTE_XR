@@ -57,6 +57,12 @@ namespace Battlehub.RTEditor
         private BoolEditor m_constantZoomSpeedEditor = null;
 
         [SerializeField]
+        private HeaderLabel m_measurementHeader = null;
+
+        [SerializeField]
+        private EnumEditor m_measurementSystemEditor = null;
+
+        [SerializeField]
         private Transform m_panel = null;
 
         private List<GameObject> m_customSettings = new List<GameObject>();
@@ -116,6 +122,11 @@ namespace Battlehub.RTEditor
             if (m_sceneNavigationSettingsHeader != null)
             {
                 m_sceneNavigationSettingsHeader.Init(null, null, null, null, m_localization.GetString("ID_RTEditor_SettingsDialog_SceneNavigationSettings", "Scene Navigation Settings"));
+            }
+
+            if(m_measurementHeader != null)
+            {
+                m_measurementHeader.Init(null, null, null, null, m_localization.GetString("ID_RTEditor_SettingsDialog_MeasurementSettings", "Measurement Settings"));
             }
 
             if (m_isGridVisibleEditor != null)
@@ -200,6 +211,11 @@ namespace Battlehub.RTEditor
             if(m_constantZoomSpeedEditor != null)
             {
                 m_constantZoomSpeedEditor.Init(m_settings, m_settings, Strong.PropertyInfo((ISettingsComponent x) => x.ConstantZoomSpeed), null, m_localization.GetString("ID_RTEditor_SettingsDialog_ConstantZoomSpeed", "Constant Zoom Speed"));
+            }
+
+            if(m_measurementSystemEditor != null)
+            {
+                m_measurementSystemEditor.Init(m_settings, Strong.PropertyInfo((ISettingsComponent x) => x.SystemOfMeasurement), m_localization.GetString("ID_RTEditor_SettingsDialog_SystemOfMeasurement", "System Of Measurement"));
             }
 
             m_customSettings.Clear();

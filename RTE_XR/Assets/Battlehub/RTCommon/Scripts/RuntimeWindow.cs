@@ -41,8 +41,21 @@ namespace Battlehub.RTCommon
     {
         public event Action CameraResized;
 
+        //[SerializeField]
+        //private bool m_canResizeCamera = true;
+        //public bool CanResizeCamera
+        //{
+        //    get { return m_canResizeCamera; }
+        //    set { m_canResizeCamera = value; }
+        //}
+
         [SerializeField]
-        private bool m_resizeCamera = true;
+        private bool m_forceUseRenderTextures = false;
+        protected bool ForceUseRenderTextures
+        {
+            get { return m_forceUseRenderTextures; }
+            set { m_forceUseRenderTextures = value; }
+        }
 
         [SerializeField]
         private bool m_activateOnAnyKey = false;
@@ -95,14 +108,6 @@ namespace Battlehub.RTCommon
             set { m_depth = value; }
         }
 
-        [SerializeField]
-        private bool m_forceUseRenderTextures = false;
-        protected bool ForceUseRenderTextures
-        {
-            get { return m_forceUseRenderTextures; }
-            set { m_forceUseRenderTextures = value; }
-        }
-
         private Vector3 m_position;
         private Rect m_rect;
         private RectTransform m_rectTransform;
@@ -136,11 +141,8 @@ namespace Battlehub.RTCommon
                 {
                     ResetCullingMask();
 
-                    IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
-                    if(graphics != null)
-                    {
-                        graphics.UnregisterCamera(m_camera);
-                    }
+                    UnregisterGraphicsCamera();
+                    DestroyGraphicsCamera();
                 }
 
                 m_camera = value;
@@ -149,12 +151,9 @@ namespace Battlehub.RTCommon
                     SetCullingMask();
                     if (WindowType == RuntimeWindowType.Scene)
                     {
-                        IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
-                        if (graphics != null)
-                        {
-                            graphics.RegisterCamera(m_camera);
-                        }
+                        RegisterGraphicsCamera();
                     }
+                    CreateGraphicsCamera();
                 }
             }
         }
@@ -174,14 +173,12 @@ namespace Battlehub.RTCommon
             }
         }
 
-
         [SerializeField]
         private Pointer m_pointer;
         public virtual Pointer Pointer
         {
             get { return m_pointer; }
         }
-
 
         protected override void AwakeOverride()
         {
@@ -268,12 +265,9 @@ namespace Battlehub.RTCommon
                 SetCullingMask();
                 if (WindowType == RuntimeWindowType.Scene)
                 {
-                    IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
-                    if (graphics != null)
-                    {
-                        graphics.RegisterCamera(m_camera);
-                    }
+                    RegisterGraphicsCamera();
                 }
+                CreateGraphicsCamera();
             }
 
             Editor.RegisterWindow(this);
@@ -294,12 +288,49 @@ namespace Battlehub.RTCommon
                 ResetCullingMask();
                 if (WindowType == RuntimeWindowType.Scene)
                 {
-                    IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
-                    if (graphics != null)
-                    {
-                        graphics.UnregisterCamera(m_camera);
-                    }
+                    UnregisterGraphicsCamera();
                 }
+                DestroyGraphicsCamera();
+            }
+        }
+
+        private void RegisterGraphicsCamera()
+        {
+            IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
+            if (graphics != null)
+            {
+                graphics.RegisterCamera(m_camera);
+            }
+        }
+
+        private void CreateGraphicsCamera()
+        {
+            IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
+            if (graphics != null)
+            {
+                IRTECamera rteCamera = graphics.CreateCamera(m_camera);
+                IOCContainer.RegisterFallback(rteCamera);
+            }
+        }
+
+        private void UnregisterGraphicsCamera()
+        {
+            IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
+            if (graphics != null)
+            {
+                graphics.UnregisterCamera(m_camera);
+            }
+        }
+
+        private void DestroyGraphicsCamera()
+        {
+            IRTEGraphics graphics = IOC.Resolve<IRTEGraphics>();
+            if (graphics != null)
+            {
+                IRTECamera camera = IOCContainer.Resolve<IRTECamera>();
+                IOCContainer.UnregisterFallback(camera);
+
+                camera.Destroy();
             }
         }
 
@@ -400,38 +431,39 @@ namespace Battlehub.RTCommon
 
         public virtual void HandleResize()
         {
-            if (m_camera != null && m_rectTransform != null && m_resizeCamera)
+            if (m_camera == null)
             {
-                if(RenderPipelineInfo.Type != RPType.Standard)
+                return;
+            }
+            if (m_rectTransform != null)
+            {
+                if (m_canvas.renderMode == RenderMode.ScreenSpaceOverlay)
                 {
-                    m_camera.rect = new Rect(0, 0, 1, 1);
+                    Vector3[] corners = new Vector3[4];
+                    m_rectTransform.GetWorldCorners(corners);
+                    ResizeCamera(new Rect(corners[0], new Vector2(corners[2].x - corners[0].x, corners[1].y - corners[0].y)));
                 }
-                else
+                else if (m_canvas.renderMode == RenderMode.ScreenSpaceCamera)
                 {
-                    if (m_canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+                    if (m_canvas.worldCamera != Camera)
                     {
                         Vector3[] corners = new Vector3[4];
                         m_rectTransform.GetWorldCorners(corners);
-                        ResizeCamera(new Rect(corners[0], new Vector2(corners[2].x - corners[0].x, corners[1].y - corners[0].y)));
-                    }
-                    else if (m_canvas.renderMode == RenderMode.ScreenSpaceCamera)
-                    {
-                        if (m_canvas.worldCamera != Camera)
-                        {
-                            Vector3[] corners = new Vector3[4];
-                            m_rectTransform.GetWorldCorners(corners);
 
-                            corners[0] = RectTransformUtility.WorldToScreenPoint(m_canvas.worldCamera, corners[0]);
-                            corners[1] = RectTransformUtility.WorldToScreenPoint(m_canvas.worldCamera, corners[1]);
-                            corners[2] = RectTransformUtility.WorldToScreenPoint(m_canvas.worldCamera, corners[2]);
-                            corners[3] = RectTransformUtility.WorldToScreenPoint(m_canvas.worldCamera, corners[3]);
+                        corners[0] = RectTransformUtility.WorldToScreenPoint(m_canvas.worldCamera, corners[0]);
+                        corners[1] = RectTransformUtility.WorldToScreenPoint(m_canvas.worldCamera, corners[1]);
+                        corners[2] = RectTransformUtility.WorldToScreenPoint(m_canvas.worldCamera, corners[2]);
+                        corners[3] = RectTransformUtility.WorldToScreenPoint(m_canvas.worldCamera, corners[3]);
 
-                            Vector2 size = new Vector2(corners[2].x - corners[0].x, corners[1].y - corners[0].y);
-                            ResizeCamera(new Rect(corners[0], size));
-                        }
+                        Vector2 size = new Vector2(corners[2].x - corners[0].x, corners[1].y - corners[0].y);
+                        ResizeCamera(new Rect(corners[0], size));
                     }
                 }
             }
+            //else
+            //{
+            //    m_camera.rect = new Rect(0, 0, 1, 1);
+            //}
         }
 
         protected virtual void ResizeCamera(Rect pixelRect)
@@ -459,7 +491,7 @@ namespace Battlehub.RTCommon
         protected virtual void SetCullingMask(Camera camera)
         {
             CameraLayerSettings settings = Editor.CameraLayerSettings;
-            camera.cullingMask &= ~((((1 << settings.MaxGraphicsLayers) - 1) << settings.RuntimeGraphicsLayer) | (1 << settings.ExtraLayer) | (1 << settings.ExtraLayer2));
+            camera.cullingMask &= settings.RaycastMask;
         }
 
         protected virtual void ResetCullingMask()
@@ -470,7 +502,7 @@ namespace Battlehub.RTCommon
         protected virtual void ResetCullingMask(Camera camera)
         {
             CameraLayerSettings settings = Editor.CameraLayerSettings;
-            camera.cullingMask |= ((((1 << settings.MaxGraphicsLayers) - 1) << settings.RuntimeGraphicsLayer) | (1 << settings.AllScenesLayer) | (1 << settings.ExtraLayer) | (1 << settings.ExtraLayer2));
+            camera.cullingMask |= ~settings.RaycastMask;
         }
 
     }

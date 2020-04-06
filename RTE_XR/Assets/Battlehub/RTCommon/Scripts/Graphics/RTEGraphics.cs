@@ -6,6 +6,8 @@ namespace Battlehub.RTCommon
 {
     public interface IRTEGraphics
     {
+        IRTECamera CreateCamera(Camera camera);
+        
         void RegisterCamera(Camera camera);
         void UnregisterCamera(Camera camera);
 
@@ -16,6 +18,7 @@ namespace Battlehub.RTCommon
         void Destroy(IMeshesCache cache);
     }
 
+    [DefaultExecutionOrder(-60)]
     public class RTEGraphics : MonoBehaviour, IRTEGraphics
     {
         private void Awake()
@@ -28,6 +31,20 @@ namespace Battlehub.RTCommon
             IOC.UnregisterFallback<IRTEGraphics>(this);
         }
 
+        public IRTECamera CreateCamera(Camera camera)
+        {
+            RenderersCache renderersCache = camera.gameObject.AddComponent<RenderersCache>();
+            MeshesCache meshesCache = camera.gameObject.AddComponent<MeshesCache>();
+            meshesCache.RefreshMode = CacheRefreshMode.Manual;
+
+            RTECamera rteCamera = camera.gameObject.AddComponent<RTECamera>();
+            rteCamera.RenderersCache = renderersCache;
+            rteCamera.MeshesCache = meshesCache;
+
+            rteCamera.Event = CameraEvent.AfterImageEffects;
+            return rteCamera;
+        }
+    
         private class Data
         {
             public MonoBehaviour MonoBehaviour;

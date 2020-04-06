@@ -18,7 +18,10 @@ namespace Battlehub.RTCommon
             get;
         }
 
-        void Add(Renderer renderer);
+        void Add(Renderer[] renderers, bool forceRender = true, bool forceMatrixRecalculationPerRender = false);
+        void Remove(Renderer[] renderers);
+
+        void Add(Renderer renderer, bool forceRender = true, bool forceMatrixRecalcuationPerRender = false);
         void Remove(Renderer renderer);
         void Refresh();
         void Clear();
@@ -40,17 +43,23 @@ namespace Battlehub.RTCommon
             get { return m_renderers; }
         }
 
-        private void Awake()
+        public void Add(Renderer[] renderers, bool forceRender = true, bool forceMatrixRecalculationPerRender = false)
         {
-            IOC.Register<IRenderersCache>(name, this);
+            for(int i = 0; i < renderers.Length; ++i)
+            {
+                Add(renderers[i], forceRender, forceMatrixRecalculationPerRender);
+            }
         }
 
-        private void OnDestroy()
+        public void Remove(Renderer[] renderers)
         {
-            IOC.Unregister<IRenderersCache>(name, this);
+            for (int i = 0; i < renderers.Length; ++i)
+            {
+                Remove(renderers[i]);
+            }
         }
 
-        public void Add(Renderer renderer)
+        public void Add(Renderer renderer, bool forceRender = true, bool forceMatrixRecalcuationPerRender = false)
         {
             bool isRendererEnabled = renderer.enabled;
             bool forceMatrixRecalculation = false;
@@ -59,15 +68,25 @@ namespace Battlehub.RTCommon
             {
                 SkinnedMeshRenderer skinnedMeshRenderer = (SkinnedMeshRenderer)renderer;
                 forceMatrixRecalculation = skinnedMeshRenderer.forceMatrixRecalculationPerRender;
-                skinnedMeshRenderer.forceMatrixRecalculationPerRender = true;
+                if(forceMatrixRecalcuationPerRender)
+                {
+                    skinnedMeshRenderer.forceMatrixRecalculationPerRender = true;
+                }
             }
 
-            if (!renderer.forceRenderingOff)
+            if (forceRender)
             {
-                renderer.enabled = false;
+                m_renderers.Add(renderer);
+            }
+            else
+            {
+                if (!renderer.forceRenderingOff)
+                {
+                    renderer.enabled = false;
+                    m_renderers.Add(renderer);
+                }
             }
 
-            m_renderers.Add(renderer);
             m_settingsBackup.Add(new Tuple<bool, bool>(isRendererEnabled, forceMatrixRecalculation));
         }
 

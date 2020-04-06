@@ -31,7 +31,7 @@ namespace Battlehub.RTBuilder
         private Material m_verticesMaterial;
         private Mesh m_edgesMesh;
         private Mesh m_verticesMesh;
-        private IRuntimeGraphicsLayer m_graphicsLayer;
+        private IRTEGraphicsLayer m_graphicsLayer;
 
         private Color[] m_vertexColors = new Color[0];
         public Color[] VertexColors
@@ -141,8 +141,7 @@ namespace Battlehub.RTBuilder
         protected override void AwakeOverride()
         {
             base.AwakeOverride();
-            m_graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
-
+            
             string vertShader = PBBuiltinMaterials.geometryShadersSupported ?
                 PBBuiltinMaterials.pointShader :
                 PBBuiltinMaterials.dotShader;
@@ -159,14 +158,22 @@ namespace Battlehub.RTBuilder
             
             m_verticesMesh = new Mesh { name = "UVVertices" };
             m_edgesMesh = new Mesh { name = "UVEdges" };
+
+            m_graphicsLayer = Window.IOCContainer.Resolve<IRTEGraphicsLayer>();
+            m_graphicsLayer.Camera.MeshesCache.RefreshMode = CacheRefreshMode.Always;
         }
+
+        //private void Start()
+        //{
+        
+        //}
 
         private void OnDestroy()
         {
             if (m_graphicsLayer != null)
             {
-                m_graphicsLayer.RemoveMesh(m_verticesMesh);
-                m_graphicsLayer.RemoveMesh(m_edgesMesh);
+                m_graphicsLayer.Camera.MeshesCache.RemoveBatch(m_verticesMesh);
+                m_graphicsLayer.Camera.MeshesCache.RemoveBatch(m_edgesMesh);
             }
 
             Destroy(m_verticesMesh);
@@ -243,11 +250,12 @@ namespace Battlehub.RTBuilder
             RefreshVertices(Scale);
             RefreshColors();
 
-            m_graphicsLayer.RemoveMesh(m_verticesMesh);
-            m_graphicsLayer.RemoveMesh(m_edgesMesh);
+            m_graphicsLayer.Camera.MeshesCache.RemoveBatch(m_verticesMesh);
+            m_graphicsLayer.Camera.MeshesCache.RemoveBatch(m_edgesMesh);
 
-            m_graphicsLayer.AddMesh(m_verticesMesh, Matrix4x4.identity, m_verticesMaterial);
-            m_graphicsLayer.AddMesh(m_edgesMesh, Matrix4x4.identity, m_edgesMaterial);
+            m_graphicsLayer.Camera.MeshesCache.AddBatch(m_verticesMesh, m_verticesMaterial, new[] { Matrix4x4.identity });
+            m_graphicsLayer.Camera.MeshesCache.AddBatch(m_edgesMesh, m_edgesMaterial, new[] { Matrix4x4.identity });
+            m_graphicsLayer.Camera.MeshesCache.Refresh();
         }
 
         private void RefreshColors()

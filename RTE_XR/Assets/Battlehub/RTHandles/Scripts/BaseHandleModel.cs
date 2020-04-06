@@ -60,15 +60,10 @@ namespace Battlehub.RTHandles
             base.AwakeOverride();
             SetLayer(transform, Window.Editor.CameraLayerSettings.RuntimeGraphicsLayer + Window.Index);
         }
-
     
         protected virtual void Start()
         {
-            IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
-            if (graphicsLayer == null)
-            {
-                graphicsLayer = Window.gameObject.AddComponent<RuntimeGraphicsLayer>();
-            }
+
         }
 
         protected virtual void OnEnable()
@@ -78,11 +73,11 @@ namespace Battlehub.RTHandles
 
         protected virtual void OnDisable()
         {
-            IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
+            IRTEGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRTEGraphicsLayer>();
             if (graphicsLayer != null)
             {
-                Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
-                graphicsLayer.RemoveRenderers(renderers);
+                graphicsLayer.Camera.RenderersCache.Remove(GetRenderers());
+                graphicsLayer.Camera.RenderersCache.Refresh();
             }
         }
 
@@ -98,12 +93,13 @@ namespace Battlehub.RTHandles
 
         public void PushUpdatesToGraphicLayer()
         {
-            IRuntimeGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRuntimeGraphicsLayer>();
+            IRTEGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRTEGraphicsLayer>();
             if (graphicsLayer != null && gameObject.activeInHierarchy)
             {
                 Renderer[] renderers = GetRenderers();
-                graphicsLayer.RemoveRenderers(renderers);
-                graphicsLayer.AddRenderers(renderers);
+                graphicsLayer.Camera.RenderersCache.Remove(renderers);
+                graphicsLayer.Camera.RenderersCache.Add(renderers, false, true);
+                graphicsLayer.Camera.RenderersCache.Refresh();
             }
         }
 
