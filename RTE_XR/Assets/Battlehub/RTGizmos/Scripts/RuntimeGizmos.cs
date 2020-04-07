@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Battlehub.RTCommon;
+using UnityEngine.Rendering;
 
 namespace Battlehub.RTGizmos
 {
@@ -18,7 +19,7 @@ namespace Battlehub.RTGizmos
         {
             HandlesMaterial = new Material(Shader.Find("Battlehub/RTGizmos/Handles"));
             HandlesMaterial.enableInstancing = true;
-            LinesMaterial = new Material(Shader.Find("Battlehub/RTHandles/VertexColor"));
+            LinesMaterial = new Material(Shader.Find("Battlehub/RTCommon/LineBillboard"));
             LinesMaterial.enableInstancing = true;
             SelectionMaterial = new Material(Shader.Find("Battlehub/RTGizmos/Handles"));
             SelectionMaterial.SetFloat("_Offset", 1);
@@ -196,6 +197,36 @@ namespace Battlehub.RTGizmos
         }
 
 
+        public static void DrawWireCone(CommandBuffer cmdBuffer, float height, float radius, Vector3 position, Quaternion rotation, Vector3 scale, Color color)
+        {
+            Matrix4x4 circleTransform = Matrix4x4.TRS(height * Vector3.forward, Quaternion.identity, Vector3.one);
+            Matrix4x4 objToWorld = Matrix4x4.TRS(position, rotation, scale);
+
+            
+            LinesMaterial.SetPass(0);
+            GL.PushMatrix();
+            GL.MultMatrix(objToWorld);
+
+            GL.Begin(GL.LINES);
+            GL.Color(color);
+            RuntimeGraphics.DrawCircleGL(circleTransform, radius);
+
+            GL.Vertex(Vector3.zero);
+            GL.Vertex(Vector3.forward * height + new Vector3(1, 1, 0).normalized * radius);
+
+            GL.Vertex(Vector3.zero);
+            GL.Vertex(Vector3.forward * height + new Vector3(-1, 1, 0).normalized * radius);
+
+            GL.Vertex(Vector3.zero);
+            GL.Vertex(Vector3.forward * height + new Vector3(-1, -1, 0).normalized * radius);
+
+            GL.Vertex(Vector3.zero);
+            GL.Vertex(Vector3.forward * height + new Vector3(1, -1, 0).normalized * radius);
+
+            GL.End();
+            GL.PopMatrix();
+        }
+
         public static void DrawWireCapsuleGL(int axis, float height, float radius, Vector3 position, Quaternion rotation, Vector3 scale,  Color color)
         {
             Matrix4x4 topCircleTransform;
@@ -236,7 +267,6 @@ namespace Battlehub.RTGizmos
                 capsule2DTransform2 = Matrix4x4.TRS(Vector3.zero, Quaternion.AngleAxis(-90, Vector3.right) * Quaternion.AngleAxis(-90, Vector3.up) , Vector3.one);
             }
             
-
             Matrix4x4 objToWorld = Matrix4x4.TRS(position, rotation, scale);
 
             LinesMaterial.SetPass(0);
@@ -273,8 +303,6 @@ namespace Battlehub.RTGizmos
 
             float radius = 0.25f;
             float length = 1.25f;
-
-            
 
 
             RuntimeGraphics.DrawCircleGL(zTranform, radius);

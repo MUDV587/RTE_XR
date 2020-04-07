@@ -16,7 +16,7 @@ namespace Battlehub.RTCommon
 
     public interface IMeshesCache
     {
-        event Action Refreshed;
+        event Action Refreshing;
 
         CacheRefreshMode RefreshMode
         {
@@ -71,7 +71,7 @@ namespace Battlehub.RTCommon
 
     public class MeshesCache : MonoBehaviour, IMeshesCache
     {
-        public event Action Refreshed;
+        public event Action Refreshing;
 
         public class RenderTransformedMeshesBatch : RenderMeshesBatch
         {
@@ -279,9 +279,9 @@ namespace Battlehub.RTCommon
                 m_batches[i].Refresh();
             }
 
-            if (Refreshed != null)
+            if (Refreshing != null)
             {
-                Refreshed();
+                Refreshing();
             }
         }
     }

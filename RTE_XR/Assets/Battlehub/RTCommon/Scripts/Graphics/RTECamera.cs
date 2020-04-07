@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,6 +7,18 @@ namespace Battlehub.RTCommon
 {
     public interface IRTECamera
     {
+        event Action<IRTECamera> CommandBufferRefresh;
+
+        Camera Camera
+        {
+            get;
+        }
+
+        CommandBuffer CommandBuffer
+        {
+            get;
+        }
+
         CameraEvent Event
         {
             get;
@@ -22,13 +35,25 @@ namespace Battlehub.RTCommon
             get;
         }
 
+        void RefreshCommandBuffer();
         void Destroy();
     }
 
     public class RTECamera : MonoBehaviour, IRTECamera
     {
+        public event Action<IRTECamera> CommandBufferRefresh;
+
         private Camera m_camera;
+        public Camera Camera
+        {
+            get { return m_camera; }
+        }
+        
         private CommandBuffer m_commandBuffer;
+        public CommandBuffer CommandBuffer
+        {
+            get { return m_commandBuffer; }
+        }
 
         [SerializeField]
         private CameraEvent m_cameraEvent = CameraEvent.BeforeImageEffects;
@@ -78,7 +103,7 @@ namespace Battlehub.RTCommon
                 m_meshesCache = gameObject.GetComponent<IMeshesCache>();
             }
             
-            Refresh();
+            RefreshCommandBuffer();
 
             if(m_renderersCache != null)
             {
@@ -87,7 +112,7 @@ namespace Battlehub.RTCommon
 
             if(m_meshesCache != null)
             {
-                m_meshesCache.Refreshed += OnRefresh;
+                m_meshesCache.Refreshing += OnRefresh;
             }
         }
 
@@ -100,7 +125,7 @@ namespace Battlehub.RTCommon
 
             if (m_meshesCache != null)
             {
-                m_meshesCache.Refreshed -= OnRefresh;
+                m_meshesCache.Refreshing -= OnRefresh;
             }
 
             if (m_camera != null)
@@ -111,7 +136,7 @@ namespace Battlehub.RTCommon
 
         private void OnRefresh()
         {
-            Refresh();
+            RefreshCommandBuffer();
         }
 
         private void CreateCommandBuffer()
@@ -135,8 +160,13 @@ namespace Battlehub.RTCommon
             m_commandBuffer = null;
         }
 
-        private void Refresh()
+        public void RefreshCommandBuffer()
         {
+            if(m_commandBuffer == null)
+            {
+                return;
+            }
+
             m_commandBuffer.Clear();
 
             if(m_renderersCache != null)
@@ -190,6 +220,11 @@ namespace Battlehub.RTCommon
                         }
                     }
                 }
+            }
+
+            if(CommandBufferRefresh != null)
+            {
+                CommandBufferRefresh(this);
             }
         }
     }

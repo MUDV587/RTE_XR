@@ -1,14 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Battlehub.RTCommon
 {
-    [Obsolete]
-    public static class RuntimeGraphics
+    public static class GraphicsUtility
     {
         private static Mesh m_quadMesh;
 
-        static RuntimeGraphics()
+        static GraphicsUtility()
         {
             m_quadMesh = CreateQuadMesh();
         }
@@ -135,65 +135,100 @@ namespace Battlehub.RTCommon
             return quadMesh;
         }
 
-        public static void DrawQuad(Matrix4x4 transform)
+        public static Mesh CreateWireCubeMesh()
         {
-            Graphics.DrawMeshNow(m_quadMesh, transform);
+            Mesh mesh = new Mesh();
+            mesh.vertices = new[]
+            {
+                new Vector3(-1, -1, -1),
+                new Vector3(-1, -1,  1),
+                new Vector3(-1,  1, -1),
+                new Vector3(-1,  1,  1),
+                new Vector3( 1, -1, -1),
+                new Vector3( 1, -1,  1),
+                new Vector3( 1,  1, -1),
+                new Vector3( 1,  1,  1),
+            };
+            mesh.SetIndices(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 0, 2, 1, 3, 4, 6, 5, 7, 0, 4, 1, 5, 2, 6, 3, 7 }, MeshTopology.Lines, 0);
+            return mesh;
         }
 
-        public static void DrawCircleGL(Matrix4x4 transform, float radius = 1.0f, int pointsCount = 64)
+        public static Mesh CreateWireCircle(int pointsCount = 64)
         {
-            DrawArcGL(transform, Vector3.zero, radius, pointsCount, 0, Mathf.PI * 2);
+            return CreateWireArcMesh(Vector3.zero, pointsCount, 0, Mathf.PI * 2);
         }
 
-        public static void DrawArcGL(Matrix4x4 transform, Vector3 offset, float radius = 1.0f, int pointsCount = 64, float fromAngle = 0, float toAngle = Mathf.PI * 2)
-        {
+        public static Mesh CreateWireArcMesh(Vector3 offset, int pointsCount = 64, float fromAngle = 0, float toAngle = Mathf.PI * 2)
+        {   
+            Vector3[] vertices = new Vector3[pointsCount + 1];
+
+            List<int> indices = new List<int>();
+            for(int i = 0; i < pointsCount; ++i)
+            {
+                indices.Add(i);
+                indices.Add(i + 1);
+            }
+
             float currentAngle = fromAngle;
             float deltaAngle = toAngle - fromAngle;
             float z = 0.0f;
-            float x = radius * Mathf.Cos(currentAngle);
-            float y = radius * Mathf.Sin(currentAngle);
-            Vector3 prevPoint = transform.MultiplyPoint(new Vector3(x, y, z) + offset);
+            float x = Mathf.Cos(currentAngle);
+            float y = Mathf.Sin(currentAngle);
+
+            Vector3 prevPoint = new Vector3(x, y, z) + offset;
             for (int i = 0; i < pointsCount; i++)
             {
-                GL.Vertex(prevPoint);
+                vertices[i] = prevPoint;
                 currentAngle += deltaAngle / pointsCount;
-                x = radius * Mathf.Cos(currentAngle);
-                y = radius * Mathf.Sin(currentAngle);
-                Vector3 point = transform.MultiplyPoint(new Vector3(x, y, z) + offset);
-                GL.Vertex(point);
+                x = Mathf.Cos(currentAngle);
+                y = Mathf.Sin(currentAngle);
+                Vector3 point = new Vector3(x, y, z) + offset;
+                vertices[i + 1] = point;
                 prevPoint = point;
             }
+
+            Mesh mesh = new Mesh();
+            mesh.vertices = vertices;
+            mesh.SetIndices(indices.ToArray(), MeshTopology.Lines, 0);
+            return mesh;
         }
 
-        public static void DrawWireConeGL(Matrix4x4 transform, Vector3 offset, float radius = 1.0f, float length = 2.0f, int pointsCount = 64, float fromAngle = 0, float toAngle = Mathf.PI * 2)
+        public static Mesh CreateWireCylinder(float radius = 1.0f, float length = 1.0f, int pointsCount = 8, float fromAngle = 0, float toAngle = Mathf.PI * 2)
         {
+            Vector3[] vertices = new Vector3[pointsCount * 2];
+            List<int> indices = new List<int>();
+            for (int i = 0; i < vertices.Length; i += 2)
+            {
+                indices.Add(i);
+                indices.Add(i + 1);
+            }
+
             float currentAngle = fromAngle;
             float deltaAngle = toAngle - fromAngle;
             float z = 0.0f;
 
-            for (int i = 0; i < pointsCount; i++)
+            for (int i = 0; i < vertices.Length; i += 2)
             {
                 float x = radius * Mathf.Cos(currentAngle);
                 float y = radius * Mathf.Sin(currentAngle);
-                Vector3 point = transform.MultiplyPoint(new Vector3(x, y, z) + offset);
-                Vector3 point2 = transform.MultiplyPoint(new Vector3(x, y, z) + offset + Vector3.forward * length);
-                GL.Vertex(point);
-                GL.Vertex(point2);
+                Vector3 point = new Vector3(x, y, z);
+                Vector3 point2 = new Vector3(x, y, z) + Vector3.forward * length;
+                vertices[i] = point;
+                vertices[i + 1] = point2;
                 currentAngle += deltaAngle / pointsCount;
             }
+
+            Mesh mesh = new Mesh();
+            mesh.vertices = vertices;
+            mesh.SetIndices(indices.ToArray(), MeshTopology.Lines, 0);
+            return mesh;
         }
 
-        public static void DrawCapsule2DGL(Matrix4x4 transform, float radius = 1.0f, float height = 1.0f, int pointsCount = 64)
+        public static void DrawMesh(CommandBuffer commandBuffer, Mesh mesh, Matrix4x4 transform, Material material, MaterialPropertyBlock propertyBlock)
         {
-            DrawArcGL(transform, Vector3.up * height / 2, radius,  pointsCount / 2, 0, Mathf.PI);
-            DrawArcGL(transform, Vector3.down * height / 2, radius, pointsCount / 2, Mathf.PI, Mathf.PI * 2);
-
-            GL.Vertex(transform.MultiplyPoint(new Vector3(radius, height / 2, 0)));
-            GL.Vertex(transform.MultiplyPoint(new Vector3(radius, -height / 2, 0)));
-            GL.Vertex(transform.MultiplyPoint(new Vector3(-radius, height / 2, 0)));
-            GL.Vertex(transform.MultiplyPoint(new Vector3(-radius, -height / 2, 0)));
+            commandBuffer.DrawMesh(mesh, transform, material, 0, 0, propertyBlock);
         }
-
+      
         public static Mesh CreateConeMesh(Color color, float scale)
         {
             int segmentsCount = 12;

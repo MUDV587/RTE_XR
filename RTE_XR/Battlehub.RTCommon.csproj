@@ -68,6 +68,7 @@
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\ExposeToEditor.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\GLCamera.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\GLRenderer.cs" />
+    <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\GraphicsUtility.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\MeshesCache.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RTECamera.cs" />
     <Compile Include="Assets\Battlehub\RTCommon\Scripts\Graphics\RTEGraphics.cs" />
@@ -106,6 +107,7 @@
     <None Include="Assets\Battlehub\RTCommon\Resources\RenderTextureOverlay.shader" />
     <None Include="Assets\Battlehub\RTCommon\Resources\Billboard.shader" />
     <None Include="Assets\Battlehub\RTCommon\Battlehub.RTCommon.asmdef" />
+    <None Include="Assets\Battlehub\RTCommon\Resources\LineBillboard.shader" />
     <None Include="Assets\Battlehub\RTCommon\Resources\SceenSpaceDecal.shader" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

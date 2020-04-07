@@ -71,6 +71,7 @@
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\CapsuleGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\ConeGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\DirectionalLightGizmo.cs" />
+    <Compile Include="Assets\Battlehub\RTGizmos\Scripts\GizmoUtility.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\Input\BaseGizmoInput.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\LightGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\PointLightGizmo.cs" />

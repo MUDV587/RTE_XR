@@ -71,19 +71,16 @@ namespace Battlehub.RTGizmos
             return true;
         }
 
-
-        protected override void DrawOverride(Camera camera)
+        protected override void OnCommandBufferRefresh(IRTECamera camera)
         {
-            base.DrawOverride(camera);
+            base.OnCommandBufferRefresh(camera);
 
-            RuntimeGizmos.DrawConeHandles(Target.TransformPoint(Vector3.forward * Height), Target.rotation, Scale, HandlesColor);
-            RuntimeGizmos.DrawWireConeGL(Height, Radius, Target.position, Target.rotation, Vector3.one, LineColor);
-
+            GizmoUtility.DrawConeHandles(camera.CommandBuffer, Target.TransformPoint(Vector3.forward * Height), Target.rotation, Scale, LineProperties);
+            GizmoUtility.DrawWireCone(camera.CommandBuffer, Height, Radius, Target.position, Target.rotation, Vector3.one, LineProperties);
             if (IsDragging)
             {
-                RuntimeGizmos.DrawSelection(Target.TransformPoint(Vector3.forward * Height + Vector3.Scale(HandlesPositions[DragIndex], Scale)), Target.rotation, Scale, SelectionColor);
+                GizmoUtility.DrawSelection(camera.CommandBuffer, Target.TransformPoint(Vector3.forward * Height + Vector3.Scale(HandlesPositions[DragIndex], Scale)), Target.rotation, Scale, SelectionProperties);
             }
         }
     }
-
 }
