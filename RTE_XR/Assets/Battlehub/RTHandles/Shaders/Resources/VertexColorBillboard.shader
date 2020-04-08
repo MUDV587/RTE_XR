@@ -44,23 +44,6 @@
 				UNITY_TRANSFER_INSTANCE_ID(input, output);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
-				/*
-				float3 worldPos = mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xyz;
-				float3 dist = _WorldSpaceCameraPos - worldPos;
-				float angle = atan2(dist.x, dist.z);
-
-				float3x3 rotMatrix;
-				float cosinus = cos(angle);
-				float sinus = sin(angle);
-
-				rotMatrix[0].xyz = float3(cosinus, 0, sinus);
-				rotMatrix[1].xyz = float3(0, 1, 0);
-				rotMatrix[2].xyz = float3(-sinus, 0, cosinus);
-
-				float4 newPos = float4(mul(rotMatrix, input.vertex * float4(1, 1, 0, 0)), 1);
-				output.pos = mul(UNITY_MATRIX_VP, mul(unity_ObjectToWorld, newPos));
-				*/
-
 				float scaleX = length(mul(unity_ObjectToWorld, float4(1.0, 0.0, 0.0, 0.0)));
 				float scaleY = length(mul(unity_ObjectToWorld, float4(0.0, 1.0, 0.0, 0.0)));
 				output.pos = mul(UNITY_MATRIX_P,

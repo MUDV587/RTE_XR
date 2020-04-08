@@ -53,7 +53,7 @@ namespace Battlehub.Spline3
         {            
             if(m_lineMaterial == null)
             {
-                m_lineMaterial = new Material(Shader.Find("Hidden/RTHandles/LineBillboard"));
+                m_lineMaterial = new Material(Shader.Find("Battlehub/RTCommon/LineBillboard"));
                 m_lineMaterial.SetFloat("_Scale", 0.9f);
                 m_lineMaterial.SetColor("_Color", Color.white);
                 m_lineMaterial.SetInt("_HandleZTest", (int)CompareFunction.Always);
@@ -61,7 +61,7 @@ namespace Battlehub.Spline3
 
             if(m_normalMaterial == null)
             {
-                m_normalMaterial = new Material(Shader.Find("Hidden/RTHandles/LineBillboard"));
+                m_normalMaterial = new Material(Shader.Find("Battlehub/RTCommon/LineBillboard"));
                 m_normalMaterial.SetFloat("_Scale", 0.9f);
                 m_normalMaterial.SetColor("_Color", Color.white);
                 m_normalMaterial.SetInt("_HandleZTest", (int)CompareFunction.Always);

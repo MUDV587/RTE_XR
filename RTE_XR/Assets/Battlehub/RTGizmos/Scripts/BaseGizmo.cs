@@ -266,24 +266,30 @@ namespace Battlehub.RTGizmos
                         m_prevScale = transform.localScale;
 
                         m_rteCamera.RefreshCommandBuffer();
-                    }
-
-                    if(m_refreshOnCameraChanged)
-                    {
-                        Camera camera = m_rteCamera.Camera;
-                        if (m_prevCamPosition != camera.transform.position || m_prevCamRotation != camera.transform.rotation || m_prevOrthographic != camera.orthographic)
-                        {
-                            m_prevCamPosition = camera.transform.position;
-                            m_prevCamRotation = camera.transform.rotation;
-                            m_prevOrthographic = camera.orthographic;
-
-                            m_rteCamera.RefreshCommandBuffer();
-                        }
-                    }   
+                    }  
                 }
             }
 
             UpdateOverride();
+        }
+
+        private void LateUpdate()
+        {
+            if (!m_isDragging)
+            {
+                if (m_rteCamera != null && m_refreshOnCameraChanged)
+                {
+                    Camera camera = m_rteCamera.Camera;
+                    if (m_prevCamPosition != camera.transform.position || m_prevCamRotation != camera.transform.rotation || m_prevOrthographic != camera.orthographic)
+                    {
+                        m_prevCamPosition = camera.transform.position;
+                        m_prevCamRotation = camera.transform.rotation;
+                        m_prevOrthographic = camera.orthographic;
+
+                        m_rteCamera.RefreshCommandBuffer();
+                    }
+                }
+            }
         }
 
         protected override void AwakeOverride()
@@ -372,12 +378,6 @@ namespace Battlehub.RTGizmos
         protected virtual void OnDrop()
         {
 
-        }
-
-        [System.Obsolete]
-        protected virtual void DrawOverride(Camera camera)
-        {
-            
         }
 
         protected virtual void OnCommandBufferRefresh(IRTECamera camera)

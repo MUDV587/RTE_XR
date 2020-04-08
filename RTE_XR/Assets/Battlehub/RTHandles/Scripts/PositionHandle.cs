@@ -886,11 +886,6 @@ namespace Battlehub.RTHandles
             }
         }
 
-        protected override void DrawOverride(Camera camera)
-        {
-            Appearance.DoPositionHandle(camera, Position, Rotation, SelectedAxis, IsInVertexSnappingMode || Editor.Tools.IsSnapping, LockObject);
-        }
-
         private void SnapActiveTargetsToGrid()
         {
             float gridSize = SizeOfGrid;
@@ -909,6 +904,12 @@ namespace Battlehub.RTHandles
                 activeTransform.position += offset;
             }
         }
-    }
 
+        protected override void OnCommandBufferRefresh(IRTECamera camera)
+        {
+            base.OnCommandBufferRefresh(camera);
+
+            //Appearance.DoPositionHandle(camera, Position, Rotation, SelectedAxis, IsInVertexSnappingMode || Editor.Tools.IsSnapping, LockObject);
+        }
+    }
 }

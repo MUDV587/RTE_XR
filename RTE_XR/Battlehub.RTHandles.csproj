@@ -110,6 +110,7 @@
     <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\ArrowShader.shader" />
     <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\VertexColorClip.shader" />
     <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\DepthMaskColorShader.shader" />
+    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\LineBillboardBillboard.shader" />
     <None Include="Assets\Battlehub\RTHandles\Fonts\FontLicense!.txt" />
     <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\SSCircleShader.shader" />
     <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\AxisShader.shader" />
@@ -117,11 +118,11 @@
     <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\VertexColorClipUsingClipPlane.shader" />
     <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\SSQuadShader.shader" />
     <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\Shape.shader" />
-    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\LineBillboard.shader" />
     <None Include="Assets\Battlehub\RTHandles\Prefabs\Models\Materials\Shaders\QuadShader.shader" />
     <None Include="Assets\Battlehub\RTHandles\Outline\Resources\UnityOutline.cginc" />
     <None Include="Assets\Battlehub\RTHandles\Outline\Resources\UnityOutline.shader" />
     <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\VertexColor.shader" />
+    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\LineBillboardClip.shader" />
     <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\PointBillboard.shader" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>H:/Development/Github/RTE_XR/RTE_XR/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

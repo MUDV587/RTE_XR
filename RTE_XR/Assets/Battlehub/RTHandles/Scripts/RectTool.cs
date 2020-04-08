@@ -219,7 +219,7 @@ namespace Battlehub.RTHandles
 
             m_linesRenderer = lines.AddComponent<MeshRenderer>();
 
-            Material lineMaterial = new Material(Shader.Find("Hidden/RTHandles/LineBillboard"));
+            Material lineMaterial = new Material(Shader.Find("Battlehub/RTCommon/LineBillboard"));
             lineMaterial.SetFloat("_Scale", 1.0f);
             lineMaterial.SetColor("_Color", Color.white);
             lineMaterial.SetInt("_HandleZTest", (int)CompareFunction.Always);
@@ -890,12 +890,12 @@ namespace Battlehub.RTHandles
         {
             if (m_txtSize1 != null)
             {
-                m_txtSize1.fontSize = RuntimeGraphics.GetScreenScale(m_txtSize1.transform.position, Window.Camera) * 1.7f;
+                m_txtSize1.fontSize = GraphicsUtility.GetScreenScale(m_txtSize1.transform.position, Window.Camera) * 1.7f;
             }
 
             if (m_txtSize2 != null)
             {
-                m_txtSize2.fontSize = RuntimeGraphics.GetScreenScale(m_txtSize2.transform.position, Window.Camera) * 1.7f;
+                m_txtSize2.fontSize = GraphicsUtility.GetScreenScale(m_txtSize2.transform.position, Window.Camera) * 1.7f;
             }
         }
 

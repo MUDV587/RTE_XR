@@ -153,12 +153,12 @@ namespace Battlehub.RTCommon
             return mesh;
         }
 
-        public static Mesh CreateWireCircle(int pointsCount = 64)
+        public static Mesh CreateWireCircle(float radius = 1, int pointsCount = 64)
         {
-            return CreateWireArcMesh(Vector3.zero, pointsCount, 0, Mathf.PI * 2);
+            return CreateWireArcMesh(Vector3.zero, radius, pointsCount, 0, Mathf.PI * 2);
         }
 
-        public static Mesh CreateWireArcMesh(Vector3 offset, int pointsCount = 64, float fromAngle = 0, float toAngle = Mathf.PI * 2)
+        public static Mesh CreateWireArcMesh(Vector3 offset, float radius = 1, int pointsCount = 64, float fromAngle = 0, float toAngle = Mathf.PI * 2)
         {   
             Vector3[] vertices = new Vector3[pointsCount + 1];
 
@@ -172,16 +172,16 @@ namespace Battlehub.RTCommon
             float currentAngle = fromAngle;
             float deltaAngle = toAngle - fromAngle;
             float z = 0.0f;
-            float x = Mathf.Cos(currentAngle);
-            float y = Mathf.Sin(currentAngle);
+            float x = Mathf.Cos(currentAngle) * radius;
+            float y = Mathf.Sin(currentAngle) * radius;
 
             Vector3 prevPoint = new Vector3(x, y, z) + offset;
             for (int i = 0; i < pointsCount; i++)
             {
                 vertices[i] = prevPoint;
                 currentAngle += deltaAngle / pointsCount;
-                x = Mathf.Cos(currentAngle);
-                y = Mathf.Sin(currentAngle);
+                x = Mathf.Cos(currentAngle) * radius;
+                y = Mathf.Sin(currentAngle) * radius;
                 Vector3 point = new Vector3(x, y, z) + offset;
                 vertices[i + 1] = point;
                 prevPoint = point;

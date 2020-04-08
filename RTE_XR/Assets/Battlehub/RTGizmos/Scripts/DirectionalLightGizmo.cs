@@ -19,7 +19,7 @@ namespace Battlehub.RTGizmos
             base.AwakeOverride();
             RefreshOnCameraChanged = true;
         }
-
+ 
         protected override void OnCommandBufferRefresh(IRTECamera camera)
         {
             base.OnCommandBufferRefresh(camera);
