@@ -309,7 +309,16 @@ namespace Battlehub.RTHandles
             }
             else
             {
-                SetCameraPosition(Window.Camera.transform.position, true);
+                if(m_xCollider != null)
+                {
+                    m_prevCameraPosition = Window.Camera.transform.position;
+                    int index = SetCameraPosition(m_prevCameraPosition, true);
+                    if (index >= 0)
+                    {
+                        UpdateColliders(index);
+                        m_prevIndex = index;
+                    }
+                }
             }
 
             m_ssQuadRenderer.forceRenderingOff = !m_vertexSnappingModeArrows.activeSelf;

@@ -227,7 +227,7 @@ namespace Battlehub.RTCommon
             {
                 if(Editor.IsVR)
                 {
-                    m_pointer = gameObject.AddComponent<VRPointer>();
+                    //m_pointer = gameObject.AddComponent<VRPointer>();
                 }
                 else
                 {

@@ -102,7 +102,7 @@ namespace Battlehub.RTCommon
                 return;
             }
 
-            m_registered[type] = new Tuple<Mesh, Material>(RuntimeGraphics.CreateQuadMesh(), material);
+            m_registered[type] = new Tuple<Mesh, Material>(GraphicsUtility.CreateQuad(), material);
         }
 
         public void Refresh()
@@ -165,7 +165,7 @@ namespace Battlehub.RTCommon
                 Material material = Resources.Load<Material>(kvp.Value);
                 if (material != null)
                 {
-                    m_typeToMeshAndMaterial.Add(kvp.Key, new Tuple<Mesh, Material>(RuntimeGraphics.CreateQuadMesh(), material));
+                    m_typeToMeshAndMaterial.Add(kvp.Key, new Tuple<Mesh, Material>(GraphicsUtility.CreateQuad(), material));
                 }
             }
 

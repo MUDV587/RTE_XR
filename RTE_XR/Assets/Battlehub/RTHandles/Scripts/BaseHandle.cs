@@ -567,7 +567,7 @@ namespace Battlehub.RTHandles
                 m_input.Handle = this;
             }
 
-            IRTEGraphicsLayer graphicsLayer = IOC.Resolve<IRTEGraphicsLayer>();
+            IRTEGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRTEGraphicsLayer>();
             if (graphicsLayer != null)
             {
                 m_rteCamera = graphicsLayer.Camera;

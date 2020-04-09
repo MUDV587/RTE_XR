@@ -259,12 +259,12 @@ namespace Battlehub.RTHandles
             RecalculateBoundsAndRebuild();
             m_connectedTools.Add(this);
 
-            IRTECamera camera = Window.IOCContainer.Resolve<IRTECamera>();
-            if(camera != null)
+            IRTEGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRTEGraphicsLayer>();
+            if(graphicsLayer != null)
             {
                 Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
-                camera.RenderersCache.Add(renderers, false, true);
-                camera.RenderersCache.Refresh();
+                graphicsLayer.Camera.RenderersCache.Add(renderers, false, true);
+                graphicsLayer.Camera.RenderersCache.Refresh();
             }
         }
 
@@ -273,12 +273,12 @@ namespace Battlehub.RTHandles
             base.OnDisableOverride();
             m_connectedTools.Remove(this);
 
-            IRTECamera camera = Window.IOCContainer.Resolve<IRTECamera>();
-            if (camera != null)
+            IRTEGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRTEGraphicsLayer>();
+            if (graphicsLayer != null)
             {
                 Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(true);
-                camera.RenderersCache.Remove(renderers);
-                camera.RenderersCache.Refresh();
+                graphicsLayer.Camera.RenderersCache.Remove(renderers);
+                graphicsLayer.Camera.RenderersCache.Refresh();
             }
         }
 

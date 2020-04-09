@@ -9,20 +9,13 @@
 
 	SubShader
 	{
-		Tags
-		{
-			"RenderType" = "Geometry"
-			"Queue" = "Geometry"
-			"DisableBatching" = "True"
-			"ForceNoShadowCasting" = "True"
-			"IgnoreProjector" = "True"
-		}
+		Tags{ "Queue" = "Transparent"  "RenderType" = "Transparent" "DisableBatching" = "True" "ForceNoShadowCasting" = "True" "IgnoreProjector" = "True" }
 
+		Blend SrcAlpha OneMinusSrcAlpha
 		Lighting Off
 		ZTest[_HandleZTest]
 		ZWrite On
 		Cull Off
-		Blend Off
 		Offset -1, -1
 
 		Pass

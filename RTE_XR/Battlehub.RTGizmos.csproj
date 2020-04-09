@@ -75,7 +75,6 @@
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\Input\BaseGizmoInput.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\LightGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\PointLightGizmo.cs" />
-    <Compile Include="Assets\Battlehub\RTGizmos\Scripts\RuntimeGizmos.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\SkinnedMeshRendererGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\SphereColliderGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTGizmos\Scripts\SphereGizmo.cs" />

@@ -43,8 +43,8 @@ namespace Battlehub.RTGizmos
         protected override void AwakeOverride()
         {
             base.AwakeOverride();
-            m_coneHandlesPositions = RuntimeGizmos.GetConeHandlesPositions();
-            m_coneHandesNormals = RuntimeGizmos.GetConeHandlesNormals();
+            m_coneHandlesPositions = GizmoUtility.GetConeHandlesPositions();
+            m_coneHandesNormals = GizmoUtility.GetConeHandlesNormals();
         }
 
         protected override bool OnDrag(int index, Vector3 offset)

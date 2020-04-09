@@ -575,8 +575,6 @@ namespace Battlehub.RTCommon
 
         protected virtual void BuildUp(GameObject editor)
         {
-            editor.AddComponent<GLRenderer>();
-
             GameObject ui = new GameObject("UI");
             ui.transform.SetParent(editor.transform);
 
@@ -643,7 +641,7 @@ namespace Battlehub.RTCommon
 
             if (IsVR)
             {
-                gameObject.AddComponent<VRTracker>();
+                //gameObject.AddComponent<VRTracker>();
             }
             else
             {
@@ -727,8 +725,8 @@ namespace Battlehub.RTCommon
         {
             if (IsVR)
             {
-                IVRTracker tracker = IOC.Resolve<IVRTracker>();
-                m_input = new InputLowVR(tracker);
+               // IVRTracker tracker = IOC.Resolve<IVRTracker>();
+               // m_input = new InputLowVR(tracker);
             }
             else
             {

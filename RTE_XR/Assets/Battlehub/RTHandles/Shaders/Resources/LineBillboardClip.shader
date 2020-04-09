@@ -9,20 +9,13 @@
 
 	SubShader
 	{
-		Tags
-		{
-			"RenderType" = "Geometry"
-			"Queue" = "Geometry"
-			"DisableBatching" = "True"
-			"ForceNoShadowCasting" = "True"
-			"IgnoreProjector" = "True"
-		}
+		Tags{ "Queue" = "Transparent"  "RenderType" = "Transparent" "DisableBatching" = "True" "ForceNoShadowCasting" = "True" "IgnoreProjector" = "True" }
 
+		Blend SrcAlpha OneMinusSrcAlpha
 		Lighting Off
 		ZTest[_HandleZTest]
 		ZWrite On
 		Cull Off
-		Blend Off
 		Offset -1, -1
 
 		Pass
@@ -56,10 +49,8 @@
 				UNITY_DEFINE_INSTANCED_PROP(float4, _Color)
 			UNITY_INSTANCING_BUFFER_END(Props)
 
-			// Is the camera in orthographic mode? (1 yes, 0 no)
 			#define ORTHO (1 - UNITY_MATRIX_P[3][3])
 
-			// How far to pull vertices towards camera in orthographic mode
 			const float ORTHO_CAM_OFFSET = .0001;
 			float _Scale;
 
@@ -92,10 +83,8 @@
 				o.norm = mul((float3x3)UNITY_MATRIX_V, worldNorm);
 				o.pos = float4(UnityObjectToViewPos(v.vertex.xyz), 1);
 
-				// pull closer to camera and into clip space
 				o.pos *= .99;
 				o.pos = mul(UNITY_MATRIX_P, o.pos);
-				// convert clip -> ndc -> screen, build billboards in geo shader, then screen -> ndc -> clip
 				o.pos = ClipToScreen(o.pos);
 				o.color = v.color;
 				return o;

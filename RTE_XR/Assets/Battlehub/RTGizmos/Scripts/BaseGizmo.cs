@@ -148,7 +148,7 @@ namespace Battlehub.RTGizmos
                 }
             }
 
-            IRTEGraphicsLayer graphicsLayer = IOC.Resolve<IRTEGraphicsLayer>();
+            IRTEGraphicsLayer graphicsLayer = Window.IOCContainer.Resolve<IRTEGraphicsLayer>();
             if (graphicsLayer != null)
             {
                 m_rteCamera = graphicsLayer.Camera;
@@ -295,8 +295,8 @@ namespace Battlehub.RTGizmos
         protected override void AwakeOverride()
         {
             base.AwakeOverride();
-            m_handlesPositions = RuntimeGizmos.GetHandlesPositions();
-            m_handlesNormals = RuntimeGizmos.GetHandlesNormals();
+            m_handlesPositions = GizmoUtility.GetHandlesPositions();
+            m_handlesNormals = GizmoUtility.GetHandlesNormals();
 
             m_lineProperties = new MaterialPropertyBlock();
             m_handleProperties = new MaterialPropertyBlock();

@@ -73,7 +73,6 @@
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Integration\Scripts\PBElementSelection.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Integration\Scripts\PBFaceEditor.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Integration\Scripts\PBFaceSelection.cs" />
-    <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Integration\Scripts\PBHandles.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Integration\Scripts\PBMaterialEditor.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Integration\Scripts\PBMath.cs" />
     <Compile Include="Assets\Battlehub\RTExtensions\RTBuilder\Integration\Scripts\PBMesh.cs" />
