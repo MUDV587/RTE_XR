@@ -244,6 +244,12 @@ namespace Battlehub.RTBuilder
 
         private bool IsDepthTestEnabled(RuntimeWindow window)
         {
+
+#warning Implement for URP AND HDRP
+            if (RenderPipelineInfo.Type != RPType.Standard)
+            {
+                return false;
+            }
             return window.GetComponentInChildren<Wireframe>(true) == null;
         }
 
