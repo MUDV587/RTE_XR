@@ -22,6 +22,7 @@ namespace Battlehub.RTHandles
         private Transform[] m_snapTargets;
         private Bounds[] m_snapTargetsBounds;
         private ExposeToEditor[] m_allExposedToEditor;
+        private MaterialPropertyBlock[] m_propertyBlocks;
 
         public override float SizeOfGrid
         {
@@ -93,6 +94,12 @@ namespace Battlehub.RTHandles
         protected override void AwakeOverride()
         {
             base.AwakeOverride();
+
+            m_propertyBlocks = new MaterialPropertyBlock[11];
+            for(int i = 0; i < m_propertyBlocks.Length; ++i)
+            {
+                m_propertyBlocks[i] = new MaterialPropertyBlock();
+            }
         }
 
         protected override void OnEnableOverride()
@@ -909,7 +916,7 @@ namespace Battlehub.RTHandles
         {
             base.OnCommandBufferRefresh(camera);
 
-            //Appearance.DoPositionHandle(camera, Position, Rotation, SelectedAxis, IsInVertexSnappingMode || Editor.Tools.IsSnapping, LockObject);
+            Appearance.DoPositionHandle(camera.CommandBuffer, m_propertyBlocks, camera.Camera, Position, Rotation, SelectedAxis, IsInVertexSnappingMode || Editor.Tools.IsSnapping, LockObject);
         }
     }
 }

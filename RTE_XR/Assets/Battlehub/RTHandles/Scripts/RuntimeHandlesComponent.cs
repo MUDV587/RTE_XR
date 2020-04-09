@@ -148,6 +148,9 @@ namespace Battlehub.RTHandles
         protected Mesh DisabledArrowY;
         protected Mesh DisabledArrowX;
         protected Mesh DisabledArrowZ;
+        protected Mesh Quads;
+        protected Mesh WireQuads;
+        protected Mesh Quad;
 
         protected Mesh SelectionCube;
         protected Mesh DisabledCube;
@@ -182,6 +185,7 @@ namespace Battlehub.RTHandles
         protected Material m_yMaterial;
         protected Material m_zMaterial;
         protected Material m_gridMaterial;
+        protected Material m_unlitColorMaterial;
 
         private static RuntimeHandlesComponent m_instance;
         public static void InitializeIfRequired(ref RuntimeHandlesComponent handles)
@@ -267,13 +271,13 @@ namespace Battlehub.RTHandles
 
             m_shapesMaterialZTest = new Material(Shader.Find("Battlehub/RTHandles/Shape"));
             m_shapesMaterialZTest.color = new Color(1, 1, 1, 0);
-            m_shapesMaterialZTest.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
+            m_shapesMaterialZTest.SetFloat("_ZTest", (float)CompareFunction.LessEqual);
             m_shapesMaterialZTest.SetFloat("_ZWrite", 1.0f);
             m_shapesMaterialZTest.enableInstancing = true;
 
             m_shapesMaterialZTestOffset = new Material(Shader.Find("Battlehub/RTHandles/Shape"));
             m_shapesMaterialZTestOffset.color = new Color(1, 1, 1, 1);
-            m_shapesMaterialZTestOffset.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
+            m_shapesMaterialZTestOffset.SetFloat("_ZTest", (float)CompareFunction.LessEqual);
             m_shapesMaterialZTestOffset.SetFloat("_ZWrite", 1.0f);
             m_shapesMaterialZTestOffset.SetFloat("_OFactors", -1.0f);
             m_shapesMaterialZTestOffset.SetFloat("_OUnits", -1.0f);
@@ -281,19 +285,19 @@ namespace Battlehub.RTHandles
 
             m_shapesMaterialZTest2 = new Material(Shader.Find("Battlehub/RTHandles/Shape"));
             m_shapesMaterialZTest2.color = new Color(1, 1, 1, 0);
-            m_shapesMaterialZTest2.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
+            m_shapesMaterialZTest2.SetFloat("_ZTest", (float)CompareFunction.LessEqual);
             m_shapesMaterialZTest2.SetFloat("_ZWrite", 1.0f);
             m_shapesMaterialZTest2.enableInstancing = true;
 
             m_shapesMaterialZTest3 = new Material(Shader.Find("Battlehub/RTHandles/Shape"));
             m_shapesMaterialZTest3.color = new Color(1, 1, 1, 0);
-            m_shapesMaterialZTest3.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
+            m_shapesMaterialZTest3.SetFloat("_ZTest", (float)CompareFunction.LessEqual);
             m_shapesMaterialZTest3.SetFloat("_ZWrite", 1.0f);
             m_shapesMaterialZTest3.enableInstancing = true;
 
             m_shapesMaterialZTest4 = new Material(Shader.Find("Battlehub/RTHandles/Shape"));
             m_shapesMaterialZTest4.color = new Color(1, 1, 1, 0);
-            m_shapesMaterialZTest4.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
+            m_shapesMaterialZTest4.SetFloat("_ZTest", (float)CompareFunction.LessEqual);
             m_shapesMaterialZTest4.SetFloat("_ZWrite", 1.0f);
             m_shapesMaterialZTest4.enableInstancing = true;
 
@@ -312,13 +316,16 @@ namespace Battlehub.RTHandles
 
             m_gridMaterial = new Material(Shader.Find("Battlehub/RTHandles/Grid"));
             m_gridMaterial.color = Colors.GridColor;
-            m_gridMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Never);
+            m_gridMaterial.SetFloat("_ZTest", (float)CompareFunction.Never);
             m_gridMaterial.enableInstancing = true;
+
+            m_unlitColorMaterial = new Material(Shader.Find("Battlehub/RTHandles/UnlitColor"));
+            m_unlitColorMaterial.enableInstancing = true;
 
             Axes = CreateAxes();
 
-            Mesh selectionArrowMesh = GraphicsUtility.CreateConeMesh(m_colors.SelectionColor, m_handleScale);
-            Mesh disableArrowMesh = GraphicsUtility.CreateConeMesh(m_colors.DisabledColor, m_handleScale);
+            Mesh selectionArrowMesh = GraphicsUtility.CreateCone(m_colors.SelectionColor, m_handleScale);
+            Mesh disableArrowMesh = GraphicsUtility.CreateCone(m_colors.DisabledColor, m_handleScale);
 
             CombineInstance yArrow = new CombineInstance();
             yArrow.mesh = selectionArrowMesh;
@@ -333,7 +340,7 @@ namespace Battlehub.RTHandles
             DisabledArrowY.CombineMeshes(new[] { yArrow }, true);
             DisabledArrowY.RecalculateNormals();
 
-            yArrow.mesh = GraphicsUtility.CreateConeMesh(m_colors.YColor, m_handleScale);
+            yArrow.mesh = GraphicsUtility.CreateCone(m_colors.YColor, m_handleScale);
             yArrow.transform = Matrix4x4.TRS(Vector3.up * m_handleScale, Quaternion.identity, Vector3.one);
             ArrowY = new Mesh();
             ArrowY.CombineMeshes(new[] { yArrow }, true);
@@ -352,7 +359,7 @@ namespace Battlehub.RTHandles
             DisabledArrowX.CombineMeshes(new[] { xArrow }, true);
             DisabledArrowX.RecalculateNormals();
 
-            xArrow.mesh = GraphicsUtility.CreateConeMesh(m_colors.XColor, m_handleScale);
+            xArrow.mesh = GraphicsUtility.CreateCone(m_colors.XColor, m_handleScale);
             xArrow.transform = Matrix4x4.TRS(Vector3.right * m_handleScale, Quaternion.AngleAxis(-90, Vector3.forward), Vector3.one);
             ArrowX = new Mesh();
             ArrowX.CombineMeshes(new[] { xArrow }, true);
@@ -373,25 +380,29 @@ namespace Battlehub.RTHandles
             DisabledArrowZ.CombineMeshes(new[] { zArrow }, true);
             DisabledArrowZ.RecalculateNormals();
 
-            zArrow.mesh = GraphicsUtility.CreateConeMesh(m_colors.ZColor, m_handleScale);
+            zArrow.mesh = GraphicsUtility.CreateCone(m_colors.ZColor, m_handleScale);
             zArrow.transform = Matrix4x4.TRS(zAxis, zRotation, Vector3.one);
             ArrowZ = new Mesh();
             ArrowZ.CombineMeshes(new[] { zArrow }, true);
             ArrowZ.RecalculateNormals();
 
-            yArrow.mesh = GraphicsUtility.CreateConeMesh(m_colors.YColor, m_handleScale);
-            xArrow.mesh = GraphicsUtility.CreateConeMesh(m_colors.XColor, m_handleScale);
-            zArrow.mesh = GraphicsUtility.CreateConeMesh(m_colors.ZColor, m_handleScale);
+            yArrow.mesh = GraphicsUtility.CreateCone(m_colors.YColor, m_handleScale);
+            xArrow.mesh = GraphicsUtility.CreateCone(m_colors.XColor, m_handleScale);
+            zArrow.mesh = GraphicsUtility.CreateCone(m_colors.ZColor, m_handleScale);
             Arrows = new Mesh();
             Arrows.CombineMeshes(new[] { yArrow, xArrow, zArrow }, true);
             Arrows.RecalculateNormals();
 
-            SelectionCube = GraphicsUtility.CreateCubeMesh(m_colors.SelectionColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
-            DisabledCube = GraphicsUtility.CreateCubeMesh(m_colors.DisabledColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
-            CubeX = GraphicsUtility.CreateCubeMesh(m_colors.XColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
-            CubeY = GraphicsUtility.CreateCubeMesh(m_colors.YColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
-            CubeZ = GraphicsUtility.CreateCubeMesh(m_colors.ZColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
-            CubeUniform = GraphicsUtility.CreateCubeMesh(m_colors.AltColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
+            Quad = GraphicsUtility.CreateWireQuad(0.2f, 0.2f);
+            Quads = CreatePositionHandleQuads();
+            WireQuads = CreatePositionHandleWireQuads();
+
+            SelectionCube = GraphicsUtility.CreateCube(m_colors.SelectionColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
+            DisabledCube = GraphicsUtility.CreateCube(m_colors.DisabledColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
+            CubeX = GraphicsUtility.CreateCube(m_colors.XColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
+            CubeY = GraphicsUtility.CreateCube(m_colors.YColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
+            CubeZ = GraphicsUtility.CreateCube(m_colors.ZColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
+            CubeUniform = GraphicsUtility.CreateCube(m_colors.AltColor, Vector3.zero, m_handleScale, 0.1f, 0.1f, 0.1f);
 
             WireCircle = GraphicsUtility.CreateWireCircle();
             WireCircle11 = GraphicsUtility.CreateWireCircle(1.1f);
@@ -400,9 +411,9 @@ namespace Battlehub.RTHandles
             SceneGizmoXAxis = CreateSceneGizmoAxis(m_colors.XColor, m_colors.AltColor, Quaternion.AngleAxis(-90, Vector3.forward));
             SceneGizmoYAxis = CreateSceneGizmoAxis(m_colors.YColor, m_colors.AltColor, Quaternion.identity);
             SceneGizmoZAxis = CreateSceneGizmoAxis(m_colors.ZColor, m_colors.AltColor, zRotation);
-            SceneGizmoCube = GraphicsUtility.CreateCubeMesh(m_colors.AltColor, Vector3.zero, 1);
-            SceneGizmoSelectedCube = GraphicsUtility.CreateCubeMesh(m_colors.SelectionColor, Vector3.zero, 1);
-            SceneGizmoQuad = GraphicsUtility.CreateQuadMesh();
+            SceneGizmoCube = GraphicsUtility.CreateCube(m_colors.AltColor, Vector3.zero, 1);
+            SceneGizmoSelectedCube = GraphicsUtility.CreateCube(m_colors.SelectionColor, Vector3.zero, 1);
+            SceneGizmoQuad = GraphicsUtility.CreateQuad();
         }
 
 
@@ -418,6 +429,9 @@ namespace Battlehub.RTHandles
             if (DisabledArrowY != null) Destroy(DisabledArrowY);
             if (DisabledArrowX != null) Destroy(DisabledArrowX);
             if (DisabledArrowZ != null) Destroy(DisabledArrowZ);
+            if (Quad != null) Destroy(Quad);
+            if (WireQuads != null) Destroy(WireQuads);
+            if (Quads != null) Destroy(Quads);
 
             if (SelectionCube != null) Destroy(SelectionCube);
             if (DisabledCube != null) Destroy(DisabledCube);
@@ -452,12 +466,13 @@ namespace Battlehub.RTHandles
             if (m_yMaterial != null) Destroy(m_yMaterial);
             if (m_zMaterial != null) Destroy(m_zMaterial);
             if (m_gridMaterial != null) Destroy(m_gridMaterial);
+            if (m_unlitColorMaterial != null) Destroy(m_unlitColorMaterial);
         }
         
         private static Mesh CreateSceneGizmoHalfAxis(Color color, Quaternion rotation)
         {
             const float scale = 0.1f;
-            Mesh cone1 = GraphicsUtility.CreateConeMesh(color, 1);
+            Mesh cone1 = GraphicsUtility.CreateCone(color, 1);
 
             CombineInstance cone1Combine = new CombineInstance();
             cone1Combine.mesh = cone1;
@@ -479,8 +494,8 @@ namespace Battlehub.RTHandles
         private static Mesh CreateSceneGizmoAxis(Color axisColor, Color altColor, Quaternion rotation)
         {
             const float scale = 0.1f;
-            Mesh cone1 = GraphicsUtility.CreateConeMesh(axisColor, 1);
-            Mesh cone2 = GraphicsUtility.CreateConeMesh(altColor, 1);
+            Mesh cone1 = GraphicsUtility.CreateCone(axisColor, 1);
+            Mesh cone2 = GraphicsUtility.CreateCone(altColor, 1);
 
             CombineInstance cone1Combine = new CombineInstance();
             cone1Combine.mesh = cone1;
@@ -526,6 +541,65 @@ namespace Battlehub.RTHandles
             return mesh;
         }
 
+        private Mesh CreatePositionHandleWireQuads()
+        {
+            Vector3 x = Vector3.right;
+            Vector3 y = Vector3.up;
+            Vector3 z = Vector3.forward;
+
+            Vector3 xy = x + y;
+            Vector3 xz = x + z;
+            Vector3 yz = y + z;
+
+            Mesh mesh = new Mesh();
+            mesh.subMeshCount = 3;
+            mesh.vertices = new[]
+            {
+                Vector3.zero,
+                x,
+                y,
+                z,
+                xy,
+                xz,
+                yz,
+            };
+            mesh.SetIndices(new[] { 0, 2, 2, 4, 4, 1, 1, 0 }, MeshTopology.Lines, 0);
+            mesh.SetIndices(new[] { 0, 1, 1, 5, 5, 3, 3, 0 }, MeshTopology.Lines, 1);
+            mesh.SetIndices(new[] { 0, 3, 3, 6, 6, 2, 2, 0 }, MeshTopology.Lines, 2);
+
+            return mesh;
+        }
+
+        private Mesh CreatePositionHandleQuads()
+        {
+            Vector3 x = Vector3.right;
+            Vector3 y = Vector3.up;
+            Vector3 z = Vector3.forward;
+
+            Vector3 xy = x + y;
+            Vector3 xz = x + z;
+            Vector3 yz = y + z;
+
+            Mesh mesh = new Mesh();
+            mesh.subMeshCount = 3;
+            mesh.vertices = new[]
+            {
+                Vector3.zero,
+                x,
+                y,
+                z,
+                xy,
+                xz,
+                yz,
+            };
+            mesh.SetIndices(new[] { 0, 2, 4, 1 }, MeshTopology.Quads, 0);
+            mesh.SetIndices(new[] { 0, 1, 5, 3 }, MeshTopology.Quads, 1);
+            mesh.SetIndices(new[] { 0, 3, 6, 2 }, MeshTopology.Quads, 2);
+
+            return mesh;
+        }
+
+   
         public static float GetScreenScale(Vector3 position, Camera camera)
         {
             return GraphicsUtility.GetScreenScale(position, camera);
@@ -570,7 +644,7 @@ namespace Battlehub.RTHandles
             RuntimeHandleAxis selectedAxis = RuntimeHandleAxis.None, bool snapMode = false, LockObject lockObject = null)
         {
             float screenScale = GetScreenScale(position, camera);
-            Matrix4x4 transform = Matrix4x4.TRS(position, rotation, new Vector3(screenScale, screenScale, screenScale));
+            Matrix4x4 transform = Matrix4x4.TRS(position, rotation, new Vector3(screenScale, screenScale, screenScale) * m_handleScale);
 
             bool xLocked = lockObject != null && lockObject.PositionX;
             bool yLocked = lockObject != null && lockObject.PositionY;
@@ -578,222 +652,135 @@ namespace Battlehub.RTHandles
 
             DoAxes(commandBuffer, propertyBlocks, transform, selectedAxis, xLocked, yLocked, zLocked);
 
-            const float s = 0.2f;
-            Vector3 x = Vector3.right * s;
-            Vector3 y = Vector3.up * s;
-            Vector3 z = Vector3.forward * s;
-
             if (snapMode)
             {
-                GL.End();
 
-                m_linesBillboardMaterial.SetPass(0);
-                GL.PushMatrix();
-                GL.MultMatrix(transform);
-                GL.Begin(GL.LINES);
-
-                if(selectedAxis == RuntimeHandleAxis.Snap)
+                if (selectedAxis == RuntimeHandleAxis.Snap)
                 {
-                    GL.Color(m_colors.SelectionColor);
+                    propertyBlocks[4].SetColor("_Color", m_colors.SelectionColor);
                 }
                 else
                 {
-                    GL.Color(m_colors.AltColor);
+                    propertyBlocks[4].SetColor("_Color", m_colors.AltColor);
                 }
-                
-                float s2 = s / 2 * m_handleScale;
-                Vector3 p0 = new Vector3( s2,  s2, 0);
-                Vector3 p1 = new Vector3( s2, -s2, 0);
-                Vector3 p2 = new Vector3(-s2, -s2, 0);
-                Vector3 p3 = new Vector3(-s2,  s2, 0);
 
-                GL.Vertex(p0);
-                GL.Vertex(p1);
-                GL.Vertex(p1);
-                GL.Vertex(p2);
-                GL.Vertex(p2);
-                GL.Vertex(p3);
-                GL.Vertex(p3);
-                GL.Vertex(p0);
-
-                GL.End();
-                GL.PopMatrix();
+                commandBuffer.DrawMesh(Quad, transform, m_linesBillboardMaterial, 0, 0, propertyBlocks[4]);
             }
             else
             {
-                if(PositionHandleArrowOnly)
-                {
-                    GL.End();
-                }
-                else
+                if(!PositionHandleArrowOnly)
                 {
                     Vector3 toCam = transform.inverse.MultiplyVector(camera.transform.position - position);
 
-                    float fx = Mathf.Sign(Vector3.Dot(toCam, x)) * m_handleScale;
-                    float fy = Mathf.Sign(Vector3.Dot(toCam, y)) * m_handleScale;
-                    float fz = Mathf.Sign(Vector3.Dot(toCam, z)) * m_handleScale;
+                    Matrix4x4 quadTransform = Matrix4x4.TRS(Vector3.zero, Quaternion.identity,
+                        new Vector3(
+                            Mathf.Sign(Vector3.Dot(toCam, Vector3.right)) * 0.2f, 
+                            Mathf.Sign(Vector3.Dot(toCam, Vector3.up)) * 0.2f, 
+                            Mathf.Sign(Vector3.Dot(toCam, Vector3.forward)) * 0.2f));
 
-                    x.x *= fx;
-                    y.y *= fy;
-                    z.z *= fz;
-
-                    Vector3 xy = x + y;
-                    Vector3 xz = x + z;
-                    Vector3 yz = y + z;
-
-                    x = transform.MultiplyPoint(x);
-                    y = transform.MultiplyPoint(y);
-                    z = transform.MultiplyPoint(z);
-                    xy = transform.MultiplyPoint(xy);
-                    xz = transform.MultiplyPoint(xz);
-                    yz = transform.MultiplyPoint(yz);
-
-                    if (!xLocked && !zLocked)
-                    {
-                        GL.Color(selectedAxis != RuntimeHandleAxis.XZ ? m_colors.YColor : m_colors.SelectionColor);
-                        GL.Vertex(position);
-                        GL.Vertex(z);
-                        GL.Vertex(z);
-                        GL.Vertex(xz);
-                        GL.Vertex(xz);
-                        GL.Vertex(x);
-                        GL.Vertex(x);
-                        GL.Vertex(position);
-                    }
+                    Matrix4x4 matrix = transform * quadTransform;
 
                     if (!xLocked && !yLocked)
                     {
-                        GL.Color(selectedAxis != RuntimeHandleAxis.XY ? m_colors.ZColor : m_colors.SelectionColor);
-                        GL.Vertex(position);
-                        GL.Vertex(y);
-                        GL.Vertex(y);
-                        GL.Vertex(xy);
-                        GL.Vertex(xy);
-                        GL.Vertex(x);
-                        GL.Vertex(x);
-                        GL.Vertex(position);
+                        Color32 color = m_colors.ZColor;
+                        color.a = 128;
+                        propertyBlocks[5].SetColor("_Color", selectedAxis != RuntimeHandleAxis.XY ? color : m_colors.SelectionColor);
+                        commandBuffer.DrawMesh(Quads, matrix, m_unlitColorMaterial, 0, 0, propertyBlocks[5]);
+
+                        propertyBlocks[6].SetColor("_Color", selectedAxis != RuntimeHandleAxis.XY ? m_colors.ZColor : m_colors.SelectionColor);
+                        commandBuffer.DrawMesh(WireQuads, matrix, m_linesMaterial, 0, 0, propertyBlocks[6]);
+                    }
+
+                    if (!xLocked && !zLocked)
+                    {
+                        Color32 color = m_colors.YColor;
+                        color.a = 128;
+                        propertyBlocks[7].SetColor("_Color", selectedAxis != RuntimeHandleAxis.XZ ? color : m_colors.SelectionColor);
+                        commandBuffer.DrawMesh(Quads, matrix, m_unlitColorMaterial, 1, 0, propertyBlocks[7]);
+
+                        propertyBlocks[8].SetColor("_Color", selectedAxis != RuntimeHandleAxis.XZ ? m_colors.YColor : m_colors.SelectionColor);
+                        commandBuffer.DrawMesh(WireQuads, matrix, m_linesMaterial, 1, 0, propertyBlocks[8]);
                     }
 
                     if (!yLocked && !zLocked)
                     {
-                        GL.Color(selectedAxis != RuntimeHandleAxis.YZ ? m_colors.XColor : m_colors.SelectionColor);
-                        GL.Vertex(position);
-                        GL.Vertex(y);
-                        GL.Vertex(y);
-                        GL.Vertex(yz);
-                        GL.Vertex(yz);
-                        GL.Vertex(z);
-                        GL.Vertex(z);
-                        GL.Vertex(position);
+                        Color32 color = m_colors.XColor;
+                        color.a = 128;
+                        propertyBlocks[9].SetColor("_Color", selectedAxis != RuntimeHandleAxis.YZ ? color : m_colors.SelectionColor);
+                        commandBuffer.DrawMesh(Quads, matrix, m_unlitColorMaterial, 2, 0, propertyBlocks[9]);
+
+                        propertyBlocks[10].SetColor("_Color", selectedAxis != RuntimeHandleAxis.YZ ? m_colors.XColor : m_colors.SelectionColor);
+                        commandBuffer.DrawMesh(WireQuads, matrix, m_linesMaterial, 2, 0, propertyBlocks[10]);
                     }
-                    GL.End();
-
-
-                    GL.Begin(GL.QUADS);
-
-                    if (!xLocked && !zLocked)
-                    {
-                        Color color = m_colors.YColor;
-                        color.a = 0.5f;
-                        GL.Color(color);
-                        GL.Vertex(position);
-                        GL.Vertex(z);
-                        GL.Vertex(xz);
-                        GL.Vertex(x);
-                    }
-
-                    if (!xLocked && !yLocked)
-                    {
-                        Color color = m_colors.ZColor;
-                        color.a = 0.5f;
-                        GL.Color(color);
-                        GL.Vertex(position);
-                        GL.Vertex(y);
-                        GL.Vertex(xy);
-                        GL.Vertex(x);
-                    }
-
-                    if (!yLocked && !zLocked)
-                    {
-                        Color color = m_colors.XColor;
-                        color.a = 0.5f;
-                        GL.Color(color);
-                        GL.Vertex(position);
-                        GL.Vertex(y);
-                        GL.Vertex(yz);
-                        GL.Vertex(z);
-                    }
-
-                    GL.End();
                 }
+
+              
             }
-           
-            m_shapesMaterial.SetPass(0);
-            if(!xLocked && !yLocked && !zLocked)
+
+            if (!xLocked && !yLocked && !zLocked)
             {
-                Graphics.DrawMeshNow(Arrows, transform);
+                commandBuffer.DrawMesh(Arrows, transform, m_shapesMaterial, 0, 0);
                 if ((selectedAxis & RuntimeHandleAxis.X) != 0)
                 {
-                    Graphics.DrawMeshNow(SelectionArrowX, transform);
+                    commandBuffer.DrawMesh(SelectionArrowX, transform, m_shapesMaterial, 0, 0);
                 }
                 if ((selectedAxis & RuntimeHandleAxis.Y) != 0)
                 {
-                    Graphics.DrawMeshNow(SelectionArrowY, transform);
+                    commandBuffer.DrawMesh(SelectionArrowY, transform, m_shapesMaterial, 0, 0);
                 }
                 if ((selectedAxis & RuntimeHandleAxis.Z) != 0)
                 {
-                    Graphics.DrawMeshNow(SelectionArrowZ, transform);
+                    commandBuffer.DrawMesh(SelectionArrowZ, transform, m_shapesMaterial, 0, 0);
                 }
             }
             else
             {
                 if (xLocked)
                 {
-                    Graphics.DrawMeshNow(DisabledArrowX, transform);
+                    commandBuffer.DrawMesh(DisabledArrowX, transform, m_shapesMaterial, 0, 0);
                 }
                 else
                 {
                     if ((selectedAxis & RuntimeHandleAxis.X) != 0)
                     {
-                        Graphics.DrawMeshNow(SelectionArrowX, transform);
+                        commandBuffer.DrawMesh(SelectionArrowX, transform, m_shapesMaterial, 0, 0);
                     }
                     else
                     {
-                        Graphics.DrawMeshNow(ArrowX, transform);
+                        commandBuffer.DrawMesh(ArrowX, transform, m_shapesMaterial, 0, 0);
                     }
                 }
 
                 if (yLocked)
                 {
-                    Graphics.DrawMeshNow(DisabledArrowY, transform);
+                    commandBuffer.DrawMesh(DisabledArrowY, transform, m_shapesMaterial, 0, 0);
                 }
                 else 
                 {
                     if ((selectedAxis & RuntimeHandleAxis.Y) != 0)
                     {
-                        Graphics.DrawMeshNow(SelectionArrowY, transform);
+                        commandBuffer.DrawMesh(SelectionArrowY, transform, m_shapesMaterial, 0, 0); 
                     }
                     else
                     {
-                        Graphics.DrawMeshNow(ArrowY, transform);
+                        commandBuffer.DrawMesh(ArrowY, transform, m_shapesMaterial, 0, 0);
                     }     
                 }
 
                 if (zLocked)
                 {
-                    Graphics.DrawMeshNow(DisabledArrowZ, transform);
+                    commandBuffer.DrawMesh(DisabledArrowZ, transform, m_shapesMaterial, 0, 0);
                 }
                 else 
                 {
                     if ((selectedAxis & RuntimeHandleAxis.Z) != 0)
                     {
-                        Graphics.DrawMeshNow(SelectionArrowZ, transform);
+                        commandBuffer.DrawMesh(SelectionArrowZ, transform, m_shapesMaterial, 0, 0);
                     }
                     else
                     {
-                        Graphics.DrawMeshNow(ArrowZ, transform);
-                    }
-                        
+                        commandBuffer.DrawMesh(ArrowZ, transform, m_shapesMaterial, 0, 0);
+                    }    
                 }
             }
         }
@@ -886,38 +873,38 @@ namespace Battlehub.RTHandles
             Vector3 zOffset = rotM.MultiplyPoint(Forward) * sScale * m_handleScale;
             if (selectedAxis == RuntimeHandleAxis.X)
             {  
-                commandBuffer.DrawMesh(xLocked ? DisabledCube : SelectionCube, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(yLocked ? DisabledCube : CubeY, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(zLocked ? DisabledCube : CubeZ, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : CubeUniform, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, -1);
+                commandBuffer.DrawMesh(xLocked ? DisabledCube : SelectionCube, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(yLocked ? DisabledCube : CubeY, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(zLocked ? DisabledCube : CubeZ, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : CubeUniform, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, 0);
             }
             else if (selectedAxis == RuntimeHandleAxis.Y)
             {
-                commandBuffer.DrawMesh(xLocked ? DisabledCube : CubeX, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(yLocked ? DisabledCube : SelectionCube, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(zLocked ? DisabledCube : CubeZ, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : CubeUniform, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, -1);
+                commandBuffer.DrawMesh(xLocked ? DisabledCube : CubeX, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(yLocked ? DisabledCube : SelectionCube, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(zLocked ? DisabledCube : CubeZ, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : CubeUniform, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, 0);
             }
             else if (selectedAxis == RuntimeHandleAxis.Z)
             {
-                commandBuffer.DrawMesh(xLocked ? DisabledCube : CubeX, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(yLocked ? DisabledCube : CubeY, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(zLocked ? DisabledCube : SelectionCube, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : CubeUniform, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, -1);
+                commandBuffer.DrawMesh(xLocked ? DisabledCube : CubeX, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(yLocked ? DisabledCube : CubeY, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(zLocked ? DisabledCube : SelectionCube, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : CubeUniform, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, 0);
             }
             else if (selectedAxis == RuntimeHandleAxis.Free)
             {
-                commandBuffer.DrawMesh(xLocked ? DisabledCube : CubeX, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(yLocked ? DisabledCube : CubeY, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(zLocked ? DisabledCube : CubeZ, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : SelectionCube, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, -1);
+                commandBuffer.DrawMesh(xLocked ? DisabledCube : CubeX, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(yLocked ? DisabledCube : CubeY, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(zLocked ? DisabledCube : CubeZ, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : SelectionCube, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, 0);
             }
             else
             {
-                commandBuffer.DrawMesh(xLocked ? DisabledCube : CubeX, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(yLocked ? DisabledCube : CubeY, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(zLocked ? DisabledCube : CubeZ, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, -1);
-                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : CubeUniform, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, -1);
+                commandBuffer.DrawMesh(xLocked ? DisabledCube : CubeX, Matrix4x4.TRS(position + xOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(yLocked ? DisabledCube : CubeY, Matrix4x4.TRS(position + yOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(zLocked ? DisabledCube : CubeZ, Matrix4x4.TRS(position + zOffset, rotation, screenScale), m_shapesMaterial, 0, 0);
+                commandBuffer.DrawMesh(xLocked && yLocked && zLocked ? DisabledCube : CubeUniform, Matrix4x4.TRS(position, rotation, screenScale * 1.35f), m_shapesMaterial, 0, 0);
             }
         }
 

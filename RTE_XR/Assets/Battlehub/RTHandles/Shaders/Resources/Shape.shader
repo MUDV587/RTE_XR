@@ -41,7 +41,6 @@ Shader "Battlehub/RTHandles/Shape" {
 
 			fixed4 _Color;
 
-
 			inline float4 GammaToLinearSpace(float4 sRGB)
 			{
 				if (IsGammaSpace())
@@ -64,7 +63,6 @@ Shader "Battlehub/RTHandles/Shape" {
 				output.color = GammaToLinearSpace(output.color);
 				output.color.a = input.color.a;
 
-				
 				return output;
 			}
 

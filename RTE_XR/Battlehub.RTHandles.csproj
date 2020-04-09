@@ -102,6 +102,7 @@
     <Compile Include="Assets\Battlehub\RTHandles\Scripts\SelectionGizmo.cs" />
     <Compile Include="Assets\Battlehub\RTHandles\Scripts\SelectionGizmoModel.cs" />
     <Compile Include="Assets\Battlehub\RTHandles\Shaders\Editor\BattlehubOutlineEditor.cs" />
+    <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\UnlitColor.shader" />
     <None Include="Assets\Battlehub\RTHandles\Battlehub.RTHandles.asmdef" />
     <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\Grid.shader" />
     <None Include="Assets\Battlehub\RTHandles\Shaders\Resources\Outline.shader" />

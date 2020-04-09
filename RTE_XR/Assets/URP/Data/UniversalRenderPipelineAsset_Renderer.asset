@@ -25,8 +25,8 @@ MonoBehaviour:
   m_Name: UniversalRenderPipelineAsset_Renderer
   m_EditorClassIdentifier: 
   m_RendererFeatures:
-  - {fileID: 5980007832841376359}
   - {fileID: -8697183338222771648}
+  - {fileID: 5980007832841376359}
   postProcessData: {fileID: 11400000, guid: 37cc09377b4f9e947bf705db52309eb2, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}

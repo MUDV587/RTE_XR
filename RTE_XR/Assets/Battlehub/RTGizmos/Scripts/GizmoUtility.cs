@@ -38,8 +38,8 @@ namespace Battlehub.RTGizmos
             ConeHandles = CreateConeHandles(HandleScale);
             Selection = CreateHandlesMesh(HandleScale, new[] { Vector3.zero }, new[] { Vector3.back });
             WireCircle = GraphicsUtility.CreateWireCircle();
-            WireArc1 = GraphicsUtility.CreateWireArcMesh(Vector3.zero, 1, 32, 0, Mathf.PI);
-            WireArc2 = GraphicsUtility.CreateWireArcMesh(Vector3.zero, 1, 32, Mathf.PI, Mathf.PI * 2);
+            WireArc1 = GraphicsUtility.CreateWireArc(Vector3.zero, 1, 32, 0, Mathf.PI);
+            WireArc2 = GraphicsUtility.CreateWireArc(Vector3.zero, 1, 32, Mathf.PI, Mathf.PI * 2);
             WireCube = GraphicsUtility.CreateWireCubeMesh();
             WireCylinder = GraphicsUtility.CreateWireCylinder();
             WireCone = CreateWireConeMesh();

@@ -10,7 +10,7 @@ namespace Battlehub.RTCommon
 
         static GraphicsUtility()
         {
-            m_quadMesh = CreateQuadMesh();
+            m_quadMesh = CreateQuad();
         }
 
         public static float GetScreenScale(Vector3 position, Camera camera)
@@ -32,7 +32,7 @@ namespace Battlehub.RTCommon
             return scale / h * 90;
         }
 
-        public static Mesh CreateCubeMesh(Color color, Vector3 center, float scale, float cubeLength = 1, float cubeWidth = 1, float cubeHeight = 1)
+        public static Mesh CreateCube(Color color, Vector3 center, float scale, float cubeLength = 1, float cubeWidth = 1, float cubeHeight = 1)
         {
             cubeHeight *= scale;
             cubeWidth *= scale;
@@ -99,7 +99,7 @@ namespace Battlehub.RTCommon
             return cubeMesh;
         }
 
-        public static Mesh CreateQuadMesh(float quadWidth = 1, float quadHeight = 1)
+        public static Mesh CreateQuad(float quadWidth = 1, float quadHeight = 1)
         {
             Vector3 vertice_0 = new Vector3(-quadWidth * .5f, -quadHeight * .5f, 0);
             Vector3 vertice_1 = new Vector3(quadWidth * .5f, -quadHeight * .5f, 0);
@@ -135,6 +135,25 @@ namespace Battlehub.RTCommon
             return quadMesh;
         }
 
+        public static Mesh CreateWireQuad(float quadWidth = 1, float quadHeight = 1)
+        {
+            Vector3 vertice_0 = new Vector3(-quadWidth * .5f, -quadHeight * .5f, 0);
+            Vector3 vertice_1 = new Vector3(quadWidth * .5f, -quadHeight * .5f, 0);
+            Vector3 vertice_2 = new Vector3(quadWidth * .5f, quadHeight * .5f, 0);
+            Vector3 vertice_3 = new Vector3(-quadWidth * .5f, quadHeight * .5f, 0);
+            
+            Vector3[] vertices = new[]
+            {
+                vertice_0, vertice_1, vertice_2, vertice_3
+            };
+
+            Mesh quadMesh = new Mesh();
+            quadMesh.vertices = vertices;
+            quadMesh.SetIndices(new[] { 0, 1, 1, 2, 2, 3, 3, 0 }, MeshTopology.Lines, 0);
+            
+            return quadMesh;
+        }
+
         public static Mesh CreateWireCubeMesh()
         {
             Mesh mesh = new Mesh();
@@ -155,10 +174,10 @@ namespace Battlehub.RTCommon
 
         public static Mesh CreateWireCircle(float radius = 1, int pointsCount = 64)
         {
-            return CreateWireArcMesh(Vector3.zero, radius, pointsCount, 0, Mathf.PI * 2);
+            return CreateWireArc(Vector3.zero, radius, pointsCount, 0, Mathf.PI * 2);
         }
 
-        public static Mesh CreateWireArcMesh(Vector3 offset, float radius = 1, int pointsCount = 64, float fromAngle = 0, float toAngle = Mathf.PI * 2)
+        public static Mesh CreateWireArc(Vector3 offset, float radius = 1, int pointsCount = 64, float fromAngle = 0, float toAngle = Mathf.PI * 2)
         {   
             Vector3[] vertices = new Vector3[pointsCount + 1];
 
@@ -229,7 +248,7 @@ namespace Battlehub.RTCommon
             commandBuffer.DrawMesh(mesh, transform, material, 0, 0, propertyBlock);
         }
       
-        public static Mesh CreateConeMesh(Color color, float scale)
+        public static Mesh CreateCone(Color color, float scale)
         {
             int segmentsCount = 12;
             float size = 1.0f / 5;

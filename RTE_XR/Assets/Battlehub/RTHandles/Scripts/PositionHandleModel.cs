@@ -102,7 +102,6 @@ namespace Battlehub.RTHandles
             new Vector3(1, 1, 1)
         };
 
-
         private const float DefaultRadius = 0.05f;
         private const float DefaultLength = 1.0f;
         private const float DefaultArrowRadius = 0.1f;
@@ -299,6 +298,20 @@ namespace Battlehub.RTHandles
         {
             m_normalModeArrows.SetActive(!m_isVertexSnapping);
             m_vertexSnappingModeArrows.SetActive(m_isVertexSnapping && !m_lockObj.IsPositionLocked);
+
+            if(m_vertexSnappingModeArrows.activeSelf)
+            {
+                for (int i = 0; i < m_renderers.Length; ++i)
+                {
+                    m_renderers[i].forceRenderingOff = true;
+                }
+                m_renderers[m_renderers.Length - 1].forceRenderingOff = false;
+            }
+            else
+            {
+                SetCameraPosition(Window.Camera.transform.position, true);
+            }
+
             m_ssQuadRenderer.forceRenderingOff = !m_vertexSnappingModeArrows.activeSelf;
 
             PushUpdatesToGraphicLayer();
@@ -732,7 +745,7 @@ namespace Battlehub.RTHandles
         private Quaternion m_prevRotation;
         private int m_prevIndex = -1;
 
-        public int SetCameraPosition(Vector3 pos)
+        public int SetCameraPosition(Vector3 pos, bool force = false)
         {
             Vector3 toCam = (pos - transform.position).normalized;
             toCam = transform.InverseTransformDirection(toCam);
@@ -796,7 +809,7 @@ namespace Battlehub.RTHandles
                 index = 0;
             }
 
-            if(m_prevIndex == index)
+            if(m_prevIndex == index && !force)
             {
                 return -1;
             }
